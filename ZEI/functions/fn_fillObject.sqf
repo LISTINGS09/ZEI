@@ -48,6 +48,7 @@ _fnc_checkObject = {
 		case "Land_CampingTable_small_F";
 		case "Land_CampingTable_small_white_F": {_offSet = [0]}; 			
 		case "Land_PicnicTable_01_F": { _offSet = [-0.01]};
+		case "Land_WoodenCounter_01_F": {_fromEdge = [0.2,0.2,0.2,0.2]; _offSet = [-0.05,-0.75]};
 	};
 	
 	if (isNil "_offSet") exitWith {};
@@ -113,8 +114,13 @@ switch _mode do {
 	case "init": {
 		_input params [["_logic",objNull,[objNull]],["_isActivated",true,[true]], ["_isCuratorPlaced",false,[true]]];
 						
-		private _objArr = nearestObjects [_logic, ["Thing"], 15, true]; 
+		_fillArea = profileNamespace getVariable ["zei_fillArea",false];
+		_searchRadius = profileNamespace getVariable ["zei_searchRadius",50];
+		
+		private _objArr = nearestObjects [_logic, ["Thing"], _searchRadius, true]; 
 		private _type = _logic getVariable ["fillType","none"];
+		
+		if !(_fillArea) then { _objArr resize 1; };
 		
 		// Delete the module to prevent any dependencies.
 		if (_logic isKindOf "Logic") then {
