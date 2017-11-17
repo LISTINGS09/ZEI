@@ -48,7 +48,7 @@ _fnc_checkObject = {
 		case "Land_CampingTable_small_F";
 		case "Land_CampingTable_small_white_F": {_offSet = [0]}; 			
 		case "Land_PicnicTable_01_F": { _offSet = [-0.01]};
-		case "Land_WoodenCounter_01_F": {_fromEdge = [0.2,0.2,0.2,0.2]; _offSet = [-0.05,-0.75]};
+		case "Land_WoodenCounter_01_F": {_fromEdge = [0.2,0.2,0.2,0.2]; _offSet = [-0.03,-0.77]};
 	};
 	
 	if (isNil "_offSet") exitWith {};
@@ -114,13 +114,16 @@ switch _mode do {
 	case "init": {
 		_input params [["_logic",objNull,[objNull]],["_isActivated",true,[true]], ["_isCuratorPlaced",false,[true]]];
 						
-		_fillArea = profileNamespace getVariable ["zei_fillArea",false];
-		_searchRadius = profileNamespace getVariable ["zei_searchRadius",50];
+		//systemChat format ["VAR: %1 %2 %3 %4",_logic getVariable "fillArea",  _logic getVariable ["searchRadius", _logic getVariable "fillType", _input];
 		
+		private _fillArea = _logic getVariable ["ZEI_fillObjectAny_fillType",false];
+		private _searchRadius = _logic getVariable ["searchRadius",50];
+		private _type = _logic getVariable ["fillType","any"];
 		private _objArr = nearestObjects [_logic, ["Thing"], _searchRadius, true]; 
-		private _type = _logic getVariable ["fillType","none"];
 		
-		if !(_fillArea) then { _objArr resize 1; };
+		if (!_fillArea && count _objArr > 1) then { _objArr resize 1; };
+		
+		//systemChat format["Debug: %1 %2 %3",_objArr];
 		
 		// Delete the module to prevent any dependencies.
 		if (_logic isKindOf "Logic") then {
@@ -128,7 +131,7 @@ switch _mode do {
 		};
 		
 		private _foodItems = ["Land_Orange_01_F","Land_WaterBottle_01_empty_F","Land_WaterBottle_01_full_F","Land_BottlePlastic_V1_F","Land_Can_Rusty_F","Land_Can_V1_F","Land_Can_V2_F","Land_Can_V3_F","Land_TacticalBacon_F","Land_Can_Dented_F","Land_BottlePlastic_V2_F","Land_BakedBeans_F","Land_PowderedMilk_F","Land_RiceBox_F","Land_Tableware_01_stackOfNapkins_F","Land_Tableware_01_cup_F","Land_TinContainer_F"];
-		private _healItems = ["Land_Bandage_F","MedicalGarbage_01_Bandage_F","MedicalGarbage_01_Packaging_F","Land_Bandage_F","MedicalGarbage_01_Injector_F","MedicalGarbage_01_FirstAidKit_F","Land_Antibiotic_F","Land_Bandage_F","Land_DisinfectantSpray_F","Land_HeatPack_F","Land_IntravenBag_01_full_F","Land_Bandage_F","Land_PainKillers_F","Land_VitaminBottle_F","Land_WaterPurificationTablets_F"];
+		private _healItems = ["Item_FirstAidKit","Land_Bandage_F","MedicalGarbage_01_Bandage_F","MedicalGarbage_01_Packaging_F","Land_Bandage_F","MedicalGarbage_01_Injector_F","MedicalGarbage_01_FirstAidKit_F","Land_Antibiotic_F","Land_Bandage_F","Land_DisinfectantSpray_F","Land_HeatPack_F","Land_IntravenBag_01_full_F","Land_Bandage_F","Land_PainKillers_F","Land_VitaminBottle_F","Land_WaterPurificationTablets_F"];
 		private _deskItems = ["Land_FMradio_F","Land_PortableLongRangeRadio_F","Land_Camera_01_F","Land_HandyCam_F","Land_MobilePhone_old_F","Land_MobilePhone_smart_F","Land_Battery_F","Land_File1_F","Land_FilePhotos_F","Land_Notepad_F","Land_PenBlack_F","Land_PenRed_F","Land_PencilBlue_F","Land_PencilGreen_F","Land_PencilRed_F","Land_PensAndPencils_F","Land_Photos_V3_F","Land_Photos_V4_F","Land_Photos_V5_F","Land_Photos_V6_F","Land_Money_F"];
 		private _toolItems = ["Land_Matches_F","Land_ButaneCanister_F","Land_ButaneTorch_F","Land_CanOpener_F","Land_DuctTape_F","Land_DustMask_F","Land_File_F","Land_GasCanister_F","Land_GasCooker_F","Land_Gloves_F","Land_MultiMeter_F","Land_Pliers_F","Land_Rope_01_F","Land_Screwdriver_V2_F","Land_Screwdriver_V1_F","Land_Meter3m_F","Land_Wrench_F"];
 								
@@ -139,6 +142,7 @@ switch _mode do {
 			case "TOOL": { _toolItems };
 			default { _foodItems + _healItems + _deskItems + _toolItems };
 		};
+		
 		if (_isCuratorPlaced) then {
 			{ [_x] call _fnc_checkObject; } forEach _objArr;
 		} else {

@@ -27,8 +27,18 @@ class CfgFactionClasses {
 class CfgVehicles {
 	class Logic;
 	class Module_F: Logic {
+		class AttributesBase {
+			class Default;
+			class Edit;
+			class Combo;
+			class Checkbox;
+			class ModuleDescription;
+		};
+		
 		class ModuleDescription;
 	};
+	
+	
 	
 	class ZEI_CivilianUrban : Module_F {
 		scope = 2;
@@ -40,10 +50,31 @@ class CfgVehicles {
 		isGlobal = 0;
 		isTriggerActivated = 0;
 		is3DEN = 1;
+		curatorInfoType = "RscDisplayAttributeZEI_CivilianUrban";
 
-		class Arguments {};
+		class Attributes: AttributesBase
+		{
+			class searchRadius: Edit
+  			{
+				property = "ZEI_CivilianUrban_searchRadius";
+				displayName = "Search Radius";
+				tooltip = "Meters from a 2D Radius";
+				typeName = "NUMBER";
+				defaultValue = "50";
+			};
+			class fillArea: Checkbox
+  			{
+				property = "ZEI_CivilianUrban_fillArea";
+				displayName = "Fill Area";
+				tooltip = "TRUE = Fill Area  FALSE = Nearest Building in Radius";
+				typeName = "BOOL";
+				defaultValue = "false";
+			};
+			class ModuleDescription: ModuleDescription{}; // Module description should be shown last
+		};
+		
 		class ModuleDescription: ModuleDescription {
-			description = "Fills a building with Civilian objects.";
+			description = "Fills Civilian building(s) with objects.";
 			sync[] = {};
 		};
 	};
@@ -144,12 +175,37 @@ class CfgVehicles {
 		is3DEN = 1;
 		
 		class Arguments {
-            class fillType {
+            class ZEI_fillObjectAny_fillType {
 				displayName = "Fill Type";
 				description = "Items to spawn";
                 typeName = "STRING";
                 defaultValue = "ANY";
             };
+		};
+		class Attributes: AttributesBase
+		{
+			class searchRadius: Edit
+  			{
+				//property = "ZEI_fillObjectAny_searchRadius";
+				displayName = "Search Radius";
+				tooltip = "Meters from a 2D Radius";
+				typeName = "NUMBER";
+				defaultValue = "50";
+			};
+			class fillArea: Checkbox
+  			{
+				//property = "ZEI_fillObjectAny_fillArea";
+				displayName = "Fill Area";
+				tooltip = "TRUE = Fill Area  FALSE = Nearest Building in Radius";
+				typeName = "BOOL";
+				defaultValue = "false";
+			};
+			class ModuleDescription: ModuleDescription{}; // Module description should be shown last
+		};
+		
+		class ModuleDescription: ModuleDescription {
+			description = "Fills a table or shelf with objects.";
+			sync[] = {};
 		};
 	};
 };
