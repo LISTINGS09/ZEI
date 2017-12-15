@@ -96,7 +96,7 @@ _fnc_attachItem = {
 	
 	// Spawn items depending on Zeus/Eden
 	if (is3DEN) then {
-		private _obj = create3DENEntity ["Object", _item, [0,0,0]];
+		private _obj = create3DENEntity ["Object", _item, [0,0,0], true];
 		_obj set3DENAttribute ["position", _pos];
 		_obj set3DENAttribute ["rotation", [ _xRot, _yRot, _forceDir]];
 		_obj set3DENAttribute ["objectIsSimple", true];
