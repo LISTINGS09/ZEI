@@ -19,7 +19,7 @@ if (count (get3DENSelected "object") > 0) then {
 */
 
 _fnc_checkBuilding = {
-	params [["_bld",objNull]];
+	params [["_bld",objNull],["_fillArea",false]];
 	
 	// Skip previously processed houses
 	if (isNull _bld || (_setVar && _bld getVariable ["zei_furnished_civ",false])) exitWith {};
@@ -705,7 +705,10 @@ _fnc_checkBuilding = {
 		};
 
 		default { 
-			systemChat format["[ZEI] Building not found: %1", typeOf _bld]; 
+			// Don't spam messages if there is an area to fill
+			if !_fillArea then {
+				systemChat format["[ZEI] Building not found: %1", typeOf _bld]
+			}; 
 		}; 
 	};
 			
@@ -777,7 +780,7 @@ switch _mode do {
 		
 		private ["_fillArea","_searchRadius","_bldArr","_templates"];
 		
-		systemChat format ["VAR: %1", allVariables _logic];
+		//systemChat format ["VAR: %1", allVariables _logic];
 		
 		_fillArea = _logic getVariable ["fillArea",false];
 		_searchRadius = _logic getVariable ["searchRadius",50];
@@ -798,12 +801,12 @@ switch _mode do {
 		
 		if (_isCuratorPlaced) then {
 			{
-				[_x] call _fnc_checkBuilding;
+				[_x,_fillArea] call _fnc_checkBuilding;
 			} forEach _bldArr;
 		} else {
 			collect3DENHistory {
 				{
-					[_x] call _fnc_checkBuilding;
+					[_x,_fillArea] call _fnc_checkBuilding;
 				} forEach _bldArr;
 			};
 		};
