@@ -10,7 +10,9 @@ switch _mode do {
 		
 		private _fillArea = _logic getVariable ["fillArea",false];
 		private _searchRadius = _logic getVariable ["searchRadius",50];
-		private _bldArr = nearestObjects [_logic, ["Building"], _searchRadius, true]; 
+		private _bldArr = nearestObjects [_logic, ["building"], _searchRadius, true]; 
+		
+		_bldArr = _bldArr select {str (_x buildingPos 0) != "[0,0,0]"};
 		
 		if (!_fillArea && count _bldArr > 1) then { _bldArr resize 1; };
 	
