@@ -715,13 +715,15 @@ _templates append (switch (_bld) do {
 			,[["Land_FoodContainer_01_White_F",[-5.55005,4.51904,-2.36592],-90],["Land_Pallet_vertical_F",[-5.67505,5.14404,-2.36645],-180],["Land_GasTank_02_F",[-10.5276,-0.510254,-2.36166],-270],["Land_FireExtinguisher_F",[-10.5955,-1.32813,-1.55951],-315],["Land_WoodenCrate_01_stack_x5_F",[-3.69043,-1.73535,-2.36425],-105],["Land_Pallets_F",[-4.12085,4.43652,-2.36673],-170],["Land_MetalWire_F",[-10.2795,-3.16504,-1.55951],-75],["Land_Workbench_01_F",[-10.3455,-2.45215,-2.37632],-270],["Land_Gloves_F",[-10.3538,-2.32275,-1.55951],-45],["Land_Saw_F",[-10.4836,-2.69922,-1.55951],-330],["Land_GasCooker_F",[-10.4705,-3.57813,-1.55951],-270],["Land_GasCanister_F",[-10.2473,-3.62988,-1.55951],-60],["Land_WoodenCrate_01_F",[-10.4404,2.6709,-2.3646],0],["Land_Cargo10_brick_red_F",[1.57031,-0.361328,-2.36087],-285],["Land_ButaneTorch_F",[5.84375,3.55469,-1.42541],-330],["Land_VitaminBottle_F",[5.8584,3.92578,-2.10633],-30],["Land_VitaminBottle_F",[5.77002,3.91797,-2.10317],-180],["Land_Matches_F",[5.77002,3.41797,-1.78616],-180],["Land_ButaneCanister_F",[5.89502,3.79297,-1.42681],-255],["Land_ButaneCanister_F",[5.77002,3.91797,-1.42754],-180],["Land_ShelvesWooden_F",[5.76953,3.66846,-2.41698],-180],["Land_Bucket_painted_F",[5.77246,2.97168,-2.41698],-180],["Land_TableDesk_F",[5.98169,2.54102,0.128779],-90],["Land_ChairWood_F",[6.39551,2.43848,0.12994],-90],["Land_PCSet_01_screen_F",[5.86328,2.11865,0.951508],-255],["Land_ChairWood_F",[5.96704,0.248535,0.135748],-195],["Land_ChairWood_F",[6.03955,-0.681152,0.137179],-285],["Land_OfficeCabinet_02_F",[8.07422,-4.59521,0.144179],-90],["Land_OfficeCabinet_02_F",[5.96436,5.20361,0.125192],0]]
 		];
 	};
-	
-	default { 
-		// Don't spam messages if there is an area to fill
-		if (_templates isEqualTo [] && !_fillArea) then {
-			systemChat format ["[ZEI] Civilian Building not found: %1 - We need your help to get a template for this building!", _bld];
-		}; 
-	}; 
+	default {[]};
 });
+
+// Scan for spawnable templates for the current modset
+_templates = _templates select {[_x] call ZEI_fnc_templateCanSpawn};
+
+// Don't spam messages if there is an area to fill
+if (!_fillArea && {_templates isEqualTo []}) then {
+	systemChat format ["[ZEI] Civilian Building not found: %1 - We need your help to get a template/scheme for this building!", _bld];
+}; 
 
 _templates;

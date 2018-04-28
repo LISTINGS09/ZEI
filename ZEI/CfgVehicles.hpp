@@ -22,7 +22,7 @@ class CfgVehicles {
 		//curatorInfoType = "RscDisplayAttributeZEI_Civilian";
 
 		interiorsType = 1; //1 = civilian, 0 = military
-		searchRadius = 50;
+		searchRadius = 40;
 		fillArea = 0; //1 = Fill Area, 0 = Nearest Building in Radius
 	};
 	

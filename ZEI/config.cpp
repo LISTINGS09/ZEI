@@ -43,6 +43,8 @@ class CfgFunctions {
 			class interior {};
 			class milTemplates {};
 			class randomiseObject {};
+			class isVanillaObject {};
+			class templateCanSpawn {};
 		};
 	};
 };
