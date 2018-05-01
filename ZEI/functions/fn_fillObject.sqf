@@ -10,12 +10,12 @@ _fnc_checkObject = {
 	
 	// Set variable to skip future processing.
 	_obj setVariable ["zei_isFilled",true];
-		
+	
 	private ["_offSet"];
 	
-	_fillPercent = 30;
-	_fromEdge = [0.1,0.05,0.1,0.05]; // Indent from XX & YY boundingBox.
-	_itemSpacing = [0.2,0.2]; // Space between items.
+	private _fillPercent = 30;
+	private _fromEdge = [0.1,0.05,0.1,0.05]; // Indent from XX & YY boundingBox.
+	private _itemSpacing = [0.2,0.2]; // Space between items.
 	
 	switch (typeOf _obj) do {
 		case "Land_CashDesk_F": {_fromEdge = [0.2,0.2,0.3,0.05]; _offSet = [-0.27,-0.76,-1.26]};
@@ -113,7 +113,7 @@ _fnc_attachItem = {
 switch _mode do {
 	case "init": {
 		_input params [["_logic",objNull,[objNull]],["_isActivated",true,[true]], ["_isCuratorPlaced",false,[true]]];
-						
+		
 		//systemChat format ["VAR: %1 %2 %3 %4",_logic getVariable "fillArea",  _logic getVariable ["searchRadius", _logic getVariable "fillType", _input];
 		
 		private _fillArea = _logic getVariable ["ZEI_fillObjectAny_fillType",false];
@@ -134,7 +134,7 @@ switch _mode do {
 		private _healItems = ["Item_FirstAidKit","Land_Bandage_F","MedicalGarbage_01_Bandage_F","MedicalGarbage_01_Packaging_F","Land_Bandage_F","MedicalGarbage_01_Injector_F","MedicalGarbage_01_FirstAidKit_F","Land_Antibiotic_F","Land_Bandage_F","Land_DisinfectantSpray_F","Land_HeatPack_F","Land_IntravenBag_01_full_F","Land_Bandage_F","Land_PainKillers_F","Land_VitaminBottle_F","Land_WaterPurificationTablets_F"];
 		private _deskItems = ["Land_FMradio_F","Land_PortableLongRangeRadio_F","Land_Camera_01_F","Land_HandyCam_F","Land_MobilePhone_old_F","Land_MobilePhone_smart_F","Land_Battery_F","Land_File1_F","Land_FilePhotos_F","Land_Notepad_F","Land_PenBlack_F","Land_PenRed_F","Land_PencilBlue_F","Land_PencilGreen_F","Land_PencilRed_F","Land_PensAndPencils_F","Land_Photos_V3_F","Land_Photos_V4_F","Land_Photos_V5_F","Land_Photos_V6_F","Land_Money_F"];
 		private _toolItems = ["Land_Matches_F","Land_ButaneCanister_F","Land_ButaneTorch_F","Land_CanOpener_F","Land_DuctTape_F","Land_DustMask_F","Land_File_F","Land_GasCanister_F","Land_GasCooker_F","Land_Gloves_F","Land_MultiMeter_F","Land_Pliers_F","Land_Rope_01_F","Land_Screwdriver_V2_F","Land_Screwdriver_V1_F","Land_Meter3m_F","Land_Wrench_F"];
-								
+		
 		private _itemArray = switch (toUpper _type) do {
 			case "FOOD": { _foodItems };
 			case "HEAL": { _healItems };
@@ -144,10 +144,10 @@ switch _mode do {
 		};
 		
 		if (_isCuratorPlaced) then {
-			{ [_x] call _fnc_checkObject; } forEach _objArr;
+			{[_x] call _fnc_checkObject} forEach _objArr;
 		} else {
 			collect3DENHistory {
-				{ [_x] call _fnc_checkObject; } forEach _objArr;
+				{[_x] call _fnc_checkObject} forEach _objArr;
 			};
 		};
 	};
