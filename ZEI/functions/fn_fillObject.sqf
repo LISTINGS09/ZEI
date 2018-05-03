@@ -1,15 +1,18 @@
-params [["_mode","",[""]],["_input",[],[[]]]];
+params [
+		["_mode", "", [""]],
+		["_input", [], [[]]]
+	];
 
 // ["init",[(get3DENSelected "object") select 0,true,false]] execVM "fn_fillFood.sqf";
 
 // Checks if the passed object can be decorated or not.
 _fnc_checkObject = {
-	params [["_obj",objNull]];
+	params [["_obj", objNull]];
 	
-	if (_obj getVariable ["zei_isFilled",false]) exitWith {};
+	if (_obj getVariable ["zei_isFilled", false]) exitWith {};
 	
 	// Set variable to skip future processing.
-	_obj setVariable ["zei_isFilled",true];
+	_obj setVariable ["zei_isFilled", true];
 	
 	private ["_offSet"];
 	

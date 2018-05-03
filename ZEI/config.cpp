@@ -45,6 +45,9 @@ class CfgFunctions {
 			class randomiseObject {};
 			class isVanillaObject {};
 			class templateCanSpawn {};
+			class addCustomTemplate {};
+			class debug {};
+			class addCustomHouse {};
 		};
 	};
 };

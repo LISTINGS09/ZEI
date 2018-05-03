@@ -1,6 +1,7 @@
 params [
 		["_bld", objNull],
 		["_fillArea", false],
+		["_isCuratorPlaced", false],
 		["_civilian", true]
 	];
 
@@ -57,12 +58,16 @@ if !(_templates isEqualTo []) then {
 		{ 
 			_x params ["_item", "_offset", "_angle"];		
 			_item = [_item] call ZEI_fnc_randomiseObject;
-			private _obj =  createSimpleObject [_item, AGLtoASL (_bld modelToWorld _offset)];
+			
+			//supersimple test
+			//_item = getText (configfile >> "CfgVehicles" >> _item >> "model");
+			
+			private _obj = createSimpleObject [_item, AGLtoASL (_bld modelToWorld _offset)];
 			_obj setVectorDirAndUp [_direction, _up];
 			_obj setDir ((getDir _bld) - _angle);
 			_lastItem = _obj;
 		} forEach _items;
-	} else {				
+	} else {
 		_bld set3DENAttribute ["allowDamage", false]; // Stop floating items when it's destroyed.
 		
 		{ 
@@ -76,7 +81,5 @@ if !(_templates isEqualTo []) then {
 		} forEach _items;
 	};
 	
-	if (_setVar) then {
-		_bld setVariable ["zei_furnished", _lastItem];
-	};
+	_bld setVariable ["zei_furnished", _lastItem];
 };
