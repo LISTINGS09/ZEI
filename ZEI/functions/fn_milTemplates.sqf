@@ -946,7 +946,7 @@ private _before = count _templates;
 // Scan for spawnable templates for the current modset
 _templates = _templates select {[_x] call ZEI_fnc_templateCanSpawn};
 
-["[ZEI][CIV] templates total: %1 | after filtering: %2", _before, count _templates] call ZEI_fnc_debug;
+["[ZEI][MIL] templates total: %1 | after filtering: %2", _before, count _templates] call ZEI_fnc_debug;
 
 // Don't spam messages if there is an area to fill
 if (!_fillArea && {_templates isEqualTo []}) then {
