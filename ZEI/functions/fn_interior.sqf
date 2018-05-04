@@ -20,7 +20,9 @@ switch _mode do {
 		private _fillArea = getNumber (configFile >> "CfgVehicles" >> _typeLogic >> "fillArea") == 1;
 		private _searchRadius = getNumber (configFile >> "CfgVehicles" >> _typeLogic >> "searchRadius");
 		private _bldArr = nearestObjects [_logic, ["House", "Building"], _searchRadius, true]; 
-		//private _bldArr = _bldArr select {!((_x buildingPos 0) isEqualTo [0,0,0])};
+		
+		if (isNil "ZEI_additionalBuildings") then {ZEI_additionalBuildings = []};
+		private _bldArr = _bldArr select {!((_x buildingPos 0) isEqualTo [0,0,0]) || typeOf _x in ZEI_additionalBuildings};
 		
 		if (!_fillArea && count _bldArr > 1) then {_bldArr resize 1};
 		
@@ -36,12 +38,12 @@ switch _mode do {
 		
 		if (_isCuratorPlaced) then {
 			{
-				[_x, _fillArea, _civilian] call ZEI_fnc_createTemplate;
+				[_x, _fillArea, _isCuratorPlaced, _civilian] call ZEI_fnc_createTemplate;
 			} forEach _bldArr;
 		} else {
 			collect3DENHistory {
 				{
-					[_x, _fillArea, _civilian] call ZEI_fnc_createTemplate;
+					[_x, _fillArea, _isCuratorPlaced, _civilian] call ZEI_fnc_createTemplate;
 				} forEach _bldArr;
 			};
 		};
