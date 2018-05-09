@@ -938,6 +938,27 @@ _templates append (switch (_bld) do {
 			[["Land_BagFence_01_round_green_F",[-1.17285,0,3.74915],-90],["Land_BagFence_01_round_green_F",[-0.0126953,1.09814,3.76693],-180],["Land_BagFence_01_round_green_F",[1.03833,0.0444336,3.76693],-270]]
 		];
 	};
+	
+	
+	// CUP Buildings
+	
+	// Desert
+	case "Land_House_L_1_EP1": { 
+		[
+			[["Land_BagFence_Long_F",[0.508545,-2.99561,2.3573],0],["Land_BagFence_Corner_F",[-1.49146,-2.74561,2.3573],-180],["Land_BagFence_Corner_F",[2.25854,-2.62061,2.3573],-90],["Land_BagFence_Short_F",[-1.86646,0.129395,2.3573],-90],["Land_BagFence_Short_F",[2.50854,0.504395,2.3573],-270],["Land_BagFence_Short_F",[-1.86646,-1.49561,2.3573],-90],["Land_BagFence_Short_F",[2.50854,-1.12061,2.3573],-270],["Land_BagFence_End_F",[-0.991455,2.00439,2.3573],0],["Land_BagFence_End_F",[1.38354,2.00439,2.3573],-180],["Land_BagFence_Corner_F",[-1.61646,1.62939,2.3573],-270],["Land_BagFence_Corner_F",[2.13354,1.75439,2.3573],0]]
+		]
+	};
+	
+	
+	
+	case "Land_House_L_3_EP1";
+	case "Land_House_L_3_H_EP1":	{ 
+		[
+			[["Land_BagFence_Short_F",[-1.44531,0.0126953,2.72142],-270],["Land_BagFence_Long_F",[-7.07031,1.2627,2.72142],-90],["Land_BagFence_Long_F",[-4.82031,-0.862305,2.72142],0],["Land_BagFence_Long_F",[-4.94531,3.6377,2.84642],0],["Land_BagFence_Long_F",[1.30469,-0.862305,2.59642],0],["Land_BagFence_Long_F",[0.929688,3.6377,2.59642],-180],["Land_BagFence_Long_F",[-1.44531,-0.862305,2.59642],0],["Land_BagFence_Long_F",[-2.07031,3.6377,2.72142],0],["Land_BagFence_End_F",[3.30469,2.6377,2.59642],-90],["Land_BagFence_End_F",[-3.07031,-0.862305,2.72142],0],["Land_BagFence_End_F",[-1.44531,3.1377,2.72142],-90],["Land_BagFence_Corner_F",[2.92969,3.3877,2.59641],0],["Land_BagFence_Corner_F",[-6.82031,3.2627,2.72142],-270],["Land_BagFence_Corner_F",[-6.69531,-0.612305,2.72142],-180],["Land_BagFence_Corner_F",[3.05469,-0.487305,2.47141],-90]]
+			,[["Land_BagFence_Short_F",[2.5,3.625,2.59642],0],["Land_BagFence_Short_F",[-1.5,0.125,2.72142],-270],["Land_BagFence_Short_F",[2.5,-0.75,2.59642],0],["Land_BagFence_Short_F",[-2.5,-0.75,3.59642],-180],["Land_BagFence_Long_F",[-4.375,-17.25,2.84642],0],["Land_BagFence_Long_F",[1.5,-17.25,2.59642],-180],["Land_BagFence_Long_F",[-2.75,-0.75,2.84642],-180],["Land_BagFence_Long_F",[0.125,3.625,2.59642],0],["Land_BagFence_Long_F",[-1.5,-17.25,2.72142],0],["Land_BagFence_Long_F",[0.125,-0.75,2.59642],0],["Land_BagFence_Long_F",[-2.75,3.625,2.84642],-180],["Land_BagFence_End_F",[-1.5,-0.5,3.59642],-270],["Land_BagFence_End_F",[3.875,-18.25,2.59642],-90],["Land_BagFence_End_F",[-0.875,-17.75,2.72142],-90],["Land_BagFence_Corner_F",[3.5,-17.5,2.59641],0],["Land_BagFence_Corner_F",[-6.25,-17.625,2.72142],-270],["Land_fortified_nest_small_EP1",[-4.45703,1.32715,2.54642],-90]]
+		]
+	};
+	
 	default {[]};
 });
 
@@ -946,7 +967,7 @@ private _before = count _templates;
 // Scan for spawnable templates for the current modset
 _templates = _templates select {[_x] call ZEI_fnc_templateCanSpawn};
 
-["[ZEI][MIL] templates total: %1 | after filtering: %2", _before, count _templates] call ZEI_fnc_debug;
+["[ZEI][MIL] Templates Total: %1 | After Filtering: %2", _before, count _templates] call ZEI_fnc_debug;
 
 // Don't spam messages if there is an area to fill
 if (!_fillArea && {_templates isEqualTo []}) then {

@@ -9,6 +9,18 @@ class CfgVehicles {
 		};
 	};
 	
+	class ZEI_ObjectSwitch : Module_F {
+		scope = 2;
+		scopeCurator = 2; 
+		displayName = "Object Switch";
+		category = "zei_interiors";
+		function = "ZEI_fnc_objectSwitch";
+		functionPriority = 1;
+		isGlobal = 0;
+		isTriggerActivated = 0;
+		is3DEN = 1;
+	};
+	
 	class ZEI_InteriorBuildingModul_CIV : Module_F {
 		scope = 2;
 		scopeCurator = 2; 
@@ -19,7 +31,6 @@ class CfgVehicles {
 		isGlobal = 0;
 		isTriggerActivated = 0;
 		is3DEN = 1;
-		//curatorInfoType = "RscDisplayAttributeZEI_Civilian";
 
 		interiorsType = 1; //1 = civilian, 0 = military
 		searchRadius = 40;

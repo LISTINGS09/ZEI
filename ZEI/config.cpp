@@ -13,6 +13,7 @@ class CfgPatches {
 		};
 		
 		units[] = {
+			ZEI_ObjectSwitch,
 			ZEI_InteriorBuildingModul_CIV,
 			ZEI_InteriorAreaModul_CIV,
 			ZEI_InteriorBuildingModul_MIL,
@@ -48,9 +49,13 @@ class CfgFunctions {
 			class addCustomTemplate {};
 			class debug {};
 			class addCustomHouse {};
+			class objectSwitch {};
+			class ui_objectSwitch {};
 		};
 	};
 };
 
 #include "CfgFactionClasses.hpp"
 #include "CfgVehicles.hpp"
+#include "ui\defines.hpp"
+#include "ui\dialogs.hpp"

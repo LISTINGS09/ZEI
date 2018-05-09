@@ -20,13 +20,13 @@ switch _mode do {
 			params ["_isCuratorPlaced"];
 			([get3DENMouseOver, curatorMouseOver] select _isCuratorPlaced) params [["_mouseType", ""], ["_mouseObj", objNull]];
 			
-			if (_mouseType != "Object" && {isNull _mouseObj}) exitWith {systemChat "[ZEI][ERROR] You need to drag the module over the building!"};
+			if (_mouseType != "Object" && {isNull _mouseObj}) exitWith {systemChat "[ZEI][ERROR] Module must be placed over a building!"};
 			
 			if (isNil "ZEI_additionalBuildings") then {ZEI_additionalBuildings = []};
 			private _bldArr = [_mouseObj] select {!((_x buildingPos -1) isEqualTo []) || typeOf _x in ZEI_additionalBuildings};
 			
 			// Don't continue if array is empty.
-			if (_bldArr isEqualTo []) exitWith {systemChat "[ZEI] No valid building found. If you really want to use this building you need to"};
+			if (_bldArr isEqualTo []) exitWith {systemChat "[ZEI] No valid building found. "};
 			
 			// Decorate building in Eden, select building then run code below in debug console to generate a template to clipboard.
 			private _keyObj = _bldArr select 0;
@@ -44,10 +44,10 @@ switch _mode do {
 			};
 			_tempArr = _tempArr - [objNull];
 			
-			copyToClipboard format ["%3%1: %2", _keyObjType, _tempArr, ["", "[MODDED] "] select _moddedObjs];
-			systemChat (_keyObjType + " -> is in your clipboard, save it in a file and/or send it to the mod developer!");
-			if (_moddedObjs) then {systemChat "[Warning] Some of the objects are not vanilla objects, this scheme can only be used with the right modset."};
-			if (worldName != "VR") then {systemChat "[WARNING] You didnt capture this template on the VR map. It is really possible that to much or wrong things get captured."};
+			copyToClipboard format ["%3%1: %2", _keyObjType, _tempArr, ["", "[MOD] "] select _moddedObjs];
+			systemChat format["'%1' written to clipboard. Paste and save or send it to the mod developer!", _keyObjType];
+			//if (_moddedObjs) then {systemChat "[WARNING] Non-Vanilla objects used."};
+			if (worldName != "VR") then {systemChat "[WARNING] World is not VR. Positions saved may not be accurate."};
 		};
 	};
 };
