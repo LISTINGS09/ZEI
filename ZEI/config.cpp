@@ -13,16 +13,17 @@ class CfgPatches {
 		};
 		
 		units[] = {
-			ZEI_ObjectSwitch,
-			ZEI_InteriorBuildingModul_CIV,
+			ZEI_GarrisonBuilding,
 			ZEI_InteriorAreaModul_CIV,
-			ZEI_InteriorBuildingModul_MIL,
 			ZEI_InteriorAreaModul_MIL,
-			ZEI_fillObjectFood,
+			ZEI_InteriorBuildingModul_CIV,
+			ZEI_InteriorBuildingModul_MIL,
+			ZEI_ObjectSwitch,
+			ZEI_fillObjectAny,
 			ZEI_fillObjectDesk,
+			ZEI_fillObjectFood,
 			ZEI_fillObjectHeal,
 			ZEI_fillObjectTool,
-			ZEI_fillObjectAny,
 			ZEI_findBPos,
 			ZEI_getBuildingScheme
 		};
@@ -36,20 +37,24 @@ class CfgFunctions {
 		class Interiors {
 			file = "\zei\functions";
 			
+			class addCustomHouse {};
+			class addCustomTemplate {};
 			class civTemplates {};
 			class createTemplate {};
+			class debug {};
 			class fillObject {};
 			class findBPos {};
+			class garrisonBuilding {};
+			class garrisonUnit {};
 			class getBuildingScheme {};
 			class interior {};
-			class milTemplates {};
-			class randomiseObject {};
 			class isVanillaObject {};
-			class templateCanSpawn {};
-			class addCustomTemplate {};
-			class debug {};
-			class addCustomHouse {};
+			class milTemplates {};
 			class objectSwitch {};
+			class randomiseObject {};
+			class templateCanSpawn {};
+			class ui_garrisonBuilding {};
+			class ui_garrisonCombo {};
 			class ui_objectSwitch {};
 		};
 	};

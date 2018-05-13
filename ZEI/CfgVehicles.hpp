@@ -9,6 +9,19 @@ class CfgVehicles {
 		};
 	};
 	
+	class ZEI_GarrisonBuilding : Module_F {
+		scope = 2;
+		scopeCurator = 2; 
+		displayName = "Garrison Building";
+		category = "zei_interiors";
+		function = "ZEI_fnc_GarrisonBuilding";
+		functionPriority = 1;
+		icon = "\a3\Missions_F_Beta\data\img\iconMPTypeDefense_ca.paa";
+		isGlobal = 0;
+		isTriggerActivated = 0;
+		is3DEN = 1;
+	};
+	
 	class ZEI_ObjectSwitch : Module_F {
 		scope = 2;
 		scopeCurator = 2; 
@@ -16,6 +29,7 @@ class CfgVehicles {
 		category = "zei_interiors";
 		function = "ZEI_fnc_objectSwitch";
 		functionPriority = 1;
+		icon = "\a3\Modules_f\data\iconRespawn_ca.paa";
 		isGlobal = 0;
 		isTriggerActivated = 0;
 		is3DEN = 1;

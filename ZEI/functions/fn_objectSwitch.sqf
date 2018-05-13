@@ -14,13 +14,21 @@ switch _mode do {
 		
 		// Need to pass logic pos info to GUI somehow?
 		ZEI_LastPos = getPos _logic;
-		ZEI_LastCurator = _isCuratorPlaced;
 		
-		createDialog "Rsc_ZEI_ObjectSwitch";
+		// Start Display 1701
+		if (_isCuratorPlaced) then { 
+			findDisplay 312 createDisplay "Rsc_ZEI_ObjectSwitch";  // Zeus
+		} else {
+			if (is3DEN) then {
+				findDisplay 313 createDisplay "Rsc_ZEI_ObjectSwitch"; // Eden
+			} else {
+				createDialog "Rsc_ZEI_ObjectSwitch";
+			};
+		};
 		
 		// Delete the module to prevent any dependencies.
 		if (_logic isKindOf "Logic") then {
-			if (_isCuratorPlaced) then {deleteVehicle _logic} else {delete3DENEntities [_logic]};
+			if (is3DEN) then {delete3DENEntities [_logic]} else {deleteVehicle _logic};
 		};
 	};
 };

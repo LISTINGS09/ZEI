@@ -5,7 +5,6 @@ params [
 		
 // Need to pass logic pos info to GUI somehow?
 _pos = missionNamespace getVariable ["ZEI_LastPos", [0,0,0]];
-_isCurator = missionNamespace getVariable ["ZEI_LastCurator", FALSE];
 
 systemChat format["Passed: Type: %1 - Radius: %2 - Pos: %3", _type, _searchRadius, _pos];
 
@@ -82,7 +81,15 @@ if (count _toReplace == 0) exitWith { systemChat "NOTHING TO REPACE!"; };
 
 _count = 0;
 
-if (_isCurator) then {
+if (is3DEN) then {
+	collect3DENHistory {
+		{ 
+			_x params ["_original", "_replacement"];
+			[_original] set3DENObjectType _replacement;
+			_count = _count + 1;
+		} forEach _toReplace;
+	};
+} else {
 	{ 
 		_x params ["_original", "_replacement"];
 		_obj = createVehicle [_replacement, getPosATL _original, [], 0, "CAN_COLLIDE"];
@@ -91,14 +98,6 @@ if (_isCurator) then {
 		deleteVehicle _original;
 		_count = _count + 1;
 	} forEach _toReplace;
-} else {
-	collect3DENHistory {
-		{ 
-			_x params ["_original", "_replacement"];
-			[_original] set3DENObjectType _replacement;
-			_count = _count + 1;
-		} forEach _toReplace;
-	};
 };
 
 systemChat format["Converted %1 Objects", _count];

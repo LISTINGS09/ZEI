@@ -27,8 +27,14 @@ switch _mode do {
 				private _bPos = _bld buildingPos -1;
 				if (count _bPos > 0) then {
 					{					
-						private _obj = create3DENEntity ["Object", "Sign_Arrow_Large_Green_F", _x];
-						_obj set3DENAttribute ["rotation", [0,0,0]];
+						if (surfaceIsWater _x) then {
+							// DOESNT QUITE WORK!
+							private _obj = create3DENEntity ["Object", "Sign_Arrow_Large_Green_F", AGLToASL	_x];
+							_obj set3DENAttribute ["rotation", [ 0, 0, 0]];
+						} else {
+							private _obj = create3DENEntity ["Object", "Sign_Arrow_Large_Green_F", _x];
+							_obj set3DENAttribute ["rotation", [ 0, 0, 0]];
+						};
 					} forEach _bPos;
 				};
 			} forEach _bldArr;
