@@ -32,11 +32,11 @@ switch _mode do {
 			private _keyObj = _bldArr select 0;
 			private _keyObjType = typeOf _keyObj;
 			private _nearObjects = _keyObj nearObjects ((sizeOf _keyObjType) + 2);
-			private _moddedObjs = false;
+			private _mod = "";
 			private _tempArr = _nearObjects apply { 
 				private _xType = typeOf _x;
-				if !(_xType in ["Sign_Arrow_Large_Green_F", "CamCurator", _keyObjType]) then {
-					if !(_xType call ZEI_fnc_isVanillaObject) then {_moddedObjs = true};
+				if !(_xType in ["Sign_Arrow_Large_Green_F", "CamCurator", _keyObjType]) then {	
+					if !(_xType call ZEI_fnc_isVanillaObject) then {_mod = "[MOD] "};
 					[_xType, _keyObj worldToModel (getPosATL _x), round ((getDir _keyObj) - (getDir _x))]
 				} else {
 					objNull
@@ -44,9 +44,9 @@ switch _mode do {
 			};
 			_tempArr = _tempArr - [objNull];
 			
-			copyToClipboard format ["%3%1: %2", _keyObjType, _tempArr, ["", "[MOD] "] select _moddedObjs];
+			copyToClipboard format ["%3%1 %2", _keyObjType, _tempArr, _mod];
+			diag_log text format ["%3%1 %2", _keyObjType, _tempArr, _mod]; // Sometimes too big for clipboard!
 			systemChat format["'%1' written to clipboard. Paste and save or send it to the mod developer!", _keyObjType];
-			//if (_moddedObjs) then {systemChat "[WARNING] Non-Vanilla objects used."};
 			if (worldName != "VR") then {systemChat "[WARNING] World is not VR. Positions saved may not be accurate."};
 		};
 	};

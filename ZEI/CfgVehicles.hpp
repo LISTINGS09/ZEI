@@ -9,6 +9,19 @@ class CfgVehicles {
 		};
 	};
 	
+	class ZEI_DebugBuildings : Module_F {
+		scope = 2;
+		scopeCurator = 2; 
+		displayName = "Buildings Output";
+		category = "zei_interiors_dev";
+		function = "ZEI_fnc_debugBuildings";
+		functionPriority = 1;
+		icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
+		isGlobal = 0;
+		isTriggerActivated = 0;
+		is3DEN = 1;
+	};
+	
 	class ZEI_GarrisonBuilding : Module_F {
 		scope = 2;
 		scopeCurator = 2; 
@@ -16,7 +29,7 @@ class CfgVehicles {
 		category = "zei_interiors";
 		function = "ZEI_fnc_GarrisonBuilding";
 		functionPriority = 1;
-		icon = "\a3\Missions_F_Beta\data\img\iconMPTypeDefense_ca.paa";
+		icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\rifle_ca.paa";
 		isGlobal = 0;
 		isTriggerActivated = 0;
 		is3DEN = 1;
@@ -29,7 +42,7 @@ class CfgVehicles {
 		category = "zei_interiors";
 		function = "ZEI_fnc_objectSwitch";
 		functionPriority = 1;
-		icon = "\a3\Modules_f\data\iconRespawn_ca.paa";
+		icon = "\a3\Modules_f\data\portraitRespawn_ca.paa";
 		isGlobal = 0;
 		isTriggerActivated = 0;
 		is3DEN = 1;
@@ -197,9 +210,10 @@ class CfgVehicles {
 	class ZEI_findBPos : Module_F {
 		scope = 2; 
 		displayName = "Mark Positions";
-		category = "zei_interiors";
+		category = "zei_interiors_dev";
 		function = "ZEI_fnc_findBPos";
 		functionPriority = 1;
+		icon = "\A3\modules_f\data\portraitStrategicMapMission_ca.paa";
 		isGlobal = 0;
 		isTriggerActivated = 0;
 		is3DEN = 1;
@@ -228,10 +242,11 @@ class CfgVehicles {
 	class ZEI_getBuildingScheme : Module_F {
 		scope = 2;
 		scopeCurator = 2;
-		displayName = "Get building scheme";
-		category = "zei_interiors";
+		displayName = "Save Building Scheme";
+		category = "zei_interiors_dev";
 		function = "ZEI_fnc_getBuildingScheme";
 		functionPriority = 1;
+		icon = "\a3\Modules_F\Data\iconSavegame_ca.paa";
 		isGlobal = 0;
 		isTriggerActivated = 0;
 		is3DEN = 1;

@@ -1,8 +1,9 @@
 params [
 		["_bld", objNull],
-		["_fillArea", false],
-		["_isCuratorPlaced", false],
-		["_civilian", true]
+		["_fillArea", FALSE],
+		["_isCuratorPlaced", FALSE],
+		["_civilian", TRUE],
+		["_infoOnly", FALSE]
 	];
 
 // Skip previously processed houses
@@ -15,6 +16,9 @@ if (_civilian) then {
 } else {
 	_templates = [_bld] call ZEI_fnc_milTemplates;
 };
+
+// Return the number of templates only.
+if (_infoOnly) exitWith { count _templates };
 
 // Furnish house if list is assigned and no people inside
 if !(_templates isEqualTo []) then {
@@ -56,7 +60,7 @@ if !(_templates isEqualTo []) then {
 		
 		// TODO: Sort x & y ROT of _bld to object.
 		{ 
-			_x params ["_item", "_offset", "_angle"];		
+			_x params ["_item", "_offset", ["_angle", 0], ["_rotation", [0, 0]]];		
 			_item = [_item] call ZEI_fnc_randomiseObject;
 			
 			//supersimple test
@@ -71,7 +75,7 @@ if !(_templates isEqualTo []) then {
 		_bld set3DENAttribute ["allowDamage", false]; // Stop floating items when it's destroyed.
 		
 		{ 
-			_x params ["_item", "_offset", "_angle"];
+			_x params ["_item", "_offset", ["_angle", 0], ["_rotation", [0, 0]]];
 			_item = [_item] call ZEI_fnc_randomiseObject;
 			private _obj = create3DENEntity ["Object", _item, [0,0,0], true];
 			_obj set3DENAttribute ["position", _bld modelToWorld _offset];

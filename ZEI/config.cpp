@@ -13,6 +13,7 @@ class CfgPatches {
 		};
 		
 		units[] = {
+			ZEI_DebugBuildings,
 			ZEI_GarrisonBuilding,
 			ZEI_InteriorAreaModul_CIV,
 			ZEI_InteriorAreaModul_MIL,
@@ -42,6 +43,7 @@ class CfgFunctions {
 			class civTemplates {};
 			class createTemplate {};
 			class debug {};
+			class debugBuildings {};
 			class fillObject {};
 			class findBPos {};
 			class garrisonBuilding {};

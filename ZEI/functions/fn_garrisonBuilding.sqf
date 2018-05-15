@@ -12,7 +12,7 @@ switch _mode do {
 				["_isCuratorPlaced", false, [true]]
 			];
 				
-		private _bldArr = (nearestObjects [player, ["house"], 200, true]) select {count (_x buildingPos -1) > 0};
+		private _bldArr = (nearestObjects [_logic, ["building"], 200, true]) select {count (_x buildingPos -1) > 0};
 
 		if (count _bldArr > 0) then {
 			ZEI_LastPos = getPos _logic;
