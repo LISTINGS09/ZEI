@@ -22,11 +22,15 @@ switch _mode do {
 			
 			if (_mouseType != "Object" && {isNull _mouseObj}) exitWith {systemChat "[ZEI][ERROR] Module must be placed over a building!"};
 			
-			if (isNil "ZEI_additionalBuildings") then {ZEI_additionalBuildings = []};
-			private _bldArr = [_mouseObj] select {!((_x buildingPos -1) isEqualTo []) || typeOf _x in ZEI_additionalBuildings};
+			private _bldArr = [_mouseObj] select {!((_x buildingPos -1) isEqualTo []) || typeOf _x in (missionNamespace getVariable ["ZEI_additionalBuildings", []])};
 			
 			// Don't continue if array is empty.
-			if (_bldArr isEqualTo []) exitWith {systemChat "[ZEI] No valid building found. "};
+			if (_bldArr isEqualTo [] && inputAction "LookAround" < 1) exitWith {
+				systemChat "[ZEI] No valid building found! Add it to 'ZEI_additionalBuildings' if it has no positions.";
+			};
+			
+			// Array is empty, but 'LookAround' was pressed, force the object.
+			if (_bldArr isEqualTo []) then { _bldArr = [_mouseObj] };
 			
 			// Decorate building in Eden, select building then run code below in debug console to generate a template to clipboard.
 			private _keyObj = _bldArr select 0;
@@ -37,16 +41,27 @@ switch _mode do {
 				private _xType = typeOf _x;
 				if !(_xType in ["Sign_Arrow_Large_Green_F", "CamCurator", _keyObjType]) then {	
 					if !(_xType call ZEI_fnc_isVanillaObject) then {_mod = "[MOD] "};
-					[_xType, _keyObj worldToModel (getPosATL _x), round ((getDir _keyObj) - (getDir _x))]
+					_PB = _x call BIS_fnc_getPitchBank;
+					if (_PB isEqualTo [0,0]) then {
+						[_xType, _keyObj worldToModel (getPosATL _x), round ((getDir _x) - (getDir _keyObj))]
+					} else {
+						[_xType, _keyObj worldToModel (getPosATL _x), round ((getDir _x) - (getDir _keyObj)), _PB]
+					};
 				} else {
 					objNull
 				};
 			};
 			_tempArr = _tempArr - [objNull];
 			
+			// TODO: Add line break when scheme is too large and will break clipboard
+			// _string = "Line 1" + _br + "Line 2";
+			
 			copyToClipboard format ["%3%1 %2", _keyObjType, _tempArr, _mod];
-			diag_log text format ["%3%1 %2", _keyObjType, _tempArr, _mod]; // Sometimes too big for clipboard!
-			systemChat format["'%1' written to clipboard. Paste and save or send it to the mod developer!", _keyObjType];
+			diag_log text format ["%3%1 %2", _keyObjType, _tempArr, _mod];
+			systemChat format["'%1' written to clipboard (%2). Paste and save or send it to the mod developer!", _keyObjType, count _tempArr];
+			if (count _tempArr > 130) then {
+				systemChat format["[WARNING] High number of objects! Not all objects may have been copied due to clipboard limitations."];
+			};
 			if (worldName != "VR") then {systemChat "[WARNING] World is not VR. Positions saved may not be accurate."};
 		};
 	};

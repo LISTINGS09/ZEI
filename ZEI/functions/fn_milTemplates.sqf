@@ -22,6 +22,9 @@ _templates append (switch (_bld) do {
 	// CUP
 	#include "..\templates\mil_cup.sqf"
 	
+	// OTHER
+	#include "..\templates\mil_other.sqf"
+	
 	default {[]};
 });
 

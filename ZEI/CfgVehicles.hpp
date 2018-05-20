@@ -9,12 +9,12 @@ class CfgVehicles {
 		};
 	};
 	
-	class ZEI_DebugBuildings : Module_F {
+	class ZEI_ListBuildings : Module_F {
 		scope = 2;
-		scopeCurator = 2; 
-		displayName = "Buildings Output";
+		scopeCurator = 1; 
+		displayName = "List Buildings";
 		category = "zei_interiors_dev";
-		function = "ZEI_fnc_debugBuildings";
+		function = "ZEI_fnc_listBuildings";
 		functionPriority = 1;
 		icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
 		isGlobal = 0;

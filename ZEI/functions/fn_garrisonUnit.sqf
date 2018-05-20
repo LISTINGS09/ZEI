@@ -100,7 +100,8 @@ _setDirStance = {
 // Spawn items depending on Zeus/Eden
 private _lastItem = objNull; // to track if it was undo in eden
 if is3DEN then {
-	_unit = create3DENEntity ["Object", _type, _pos, TRUE];
+	_unit = create3DENEntity ["Object", _type, [0, 0, 0], TRUE];
+	_unit set3DENAttribute ["position", _x];
 	[_unit, _bld, _enableDS] call _setDirStance;
 } else {
 	private _group = switch _side do { 

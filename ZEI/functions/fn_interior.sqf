@@ -19,20 +19,36 @@ switch _mode do {
 		private _typeLogic = typeOf _logic;
 		private _fillArea = getNumber (configFile >> "CfgVehicles" >> _typeLogic >> "fillArea") == 1;
 		private _searchRadius = getNumber (configFile >> "CfgVehicles" >> _typeLogic >> "searchRadius");
-		private _bldArr = nearestObjects [_logic, ["House", "Building"], _searchRadius, true]; 
-		
-		if (isNil "ZEI_additionalBuildings") then {ZEI_additionalBuildings = []};
-		private _bldArr = _bldArr select {!((_x buildingPos 0) isEqualTo [0,0,0]) || typeOf _x in ZEI_additionalBuildings};
-		
-		if (!_fillArea && count _bldArr > 1) then {_bldArr resize 1};
+		private _bldTmp = nearestObjects [_logic, ["Building"], _searchRadius, true]; 
 		
 		// Delete the module to prevent any dependencies.
 		if (_logic isKindOf "Logic") then {
 			if (_isCuratorPlaced) then {deleteVehicle _logic} else {delete3DENEntities [_logic]};
 		};
 		
-		// Don't continue if array is empty.
-		if (_bldArr isEqualTo []) exitWith {};
+		// Don't continue if no objects were found.
+		if (_bldTmp isEqualTo []) exitWith {
+			systemChat "No objects were found!";
+		};
+		
+		private _bldArr = _bldTmp select {!((_x buildingPos 0) isEqualTo [0,0,0]) || typeOf _x in (missionNamespace getVariable ["ZEI_additionalBuildings", []])};
+		
+		if (!_fillArea && count _bldArr > 1) then {_bldArr resize 1};
+		
+		// Don't continue if array is empty and user isn't pressing alternative option.
+		if (_bldArr isEqualTo [] && (inputAction "lookAround") < 1) exitWith {
+			systemChat "No valid buildings nearby!";
+		};
+		
+		// Array is empty, but 'LookAround' was pressed, force the object.
+		// TODO: Use this as a final option without making the user press anything? (Some CUP buildings have no positions defined)
+		if (_bldArr isEqualTo []) then { 
+			if (!_fillArea) then {
+				_bldArr = _bldTmp; 
+			} else {
+				_bldArr = [_bldTmp select 0];
+			};
+		};
 		
 		private _civilian = getNumber (configFile >> "CfgVehicles" >> _typeLogic >> "interiorsType") == 1;
 		

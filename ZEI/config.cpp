@@ -13,7 +13,7 @@ class CfgPatches {
 		};
 		
 		units[] = {
-			ZEI_DebugBuildings,
+			ZEI_ListBuildings,
 			ZEI_GarrisonBuilding,
 			ZEI_InteriorAreaModul_CIV,
 			ZEI_InteriorAreaModul_MIL,
@@ -37,27 +37,37 @@ class CfgFunctions {
 	class ZEI {
 		class Interiors {
 			file = "\zei\functions";
-			
 			class addCustomHouse {};
 			class addCustomTemplate {};
 			class civTemplates {};
 			class createTemplate {};
 			class debug {};
-			class debugBuildings {};
 			class fillObject {};
 			class findBPos {};
-			class garrisonBuilding {};
-			class garrisonUnit {};
 			class getBuildingScheme {};
 			class interior {};
 			class isVanillaObject {};
 			class milTemplates {};
-			class objectSwitch {};
 			class randomiseObject {};
 			class templateCanSpawn {};
+			class misc_XYRot {};
+		};
+		class objectSwitch {
+			file = "\zei\functions";
+			class objectSwitch {};
+			class ui_objectSwitch {};
+		};
+		class garrisonBuilding {
+			file = "\zei\functions";
+			class garrisonBuilding {};
+			class garrisonUnit {};
 			class ui_garrisonBuilding {};
 			class ui_garrisonCombo {};
-			class ui_objectSwitch {};
+		};
+		class listBuildings {
+			file = "\zei\functions";
+			class listBuildings {};
+			class ui_listBuildings {};
 		};
 	};
 };
@@ -65,4 +75,6 @@ class CfgFunctions {
 #include "CfgFactionClasses.hpp"
 #include "CfgVehicles.hpp"
 #include "ui\defines.hpp"
-#include "ui\dialogs.hpp"
+#include "ui\Rsc_ZEI_GarrisonBuilding.hpp"
+#include "ui\Rsc_ZEI_ObjectSwitch.hpp"
+#include "ui\Rsc_ZEI_ListBuildings.hpp"

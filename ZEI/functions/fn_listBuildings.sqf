@@ -14,12 +14,30 @@ switch _mode do {
 		
 		if (worldName != "VR") exitWith {systemChat "[ERROR] You must be in the VR world to use this module."};
 		
-		// TODO: Add GUI to allow category selection for output of objects in chosen 'editorCategory' and 'editorSubcategory'?
-		// TODO: Remove Ruins?
+		// Start Display 1702
+		if (_isCuratorPlaced) then { 
+			findDisplay 312 createDisplay "Rsc_ZEI_ListBuildings";  // Zeus
+		} else {
+			if (is3DEN) then {
+				findDisplay 313 createDisplay "Rsc_ZEI_ListBuildings"; // Eden
+			} else {
+				createDialog "Rsc_ZEI_ListBuildings";
+			};
+		};
 		
+		// TODO: Add GUI to allow Mark Positions (Y/N), Template Type (Military,Civilian,All), Buildings with No Templates (Y/N)
+		// TODO: Add GUI to allow category selection for output of objects in chosen 'editorCategory' and 'editorSubcategory'?
+		/*if !(getText(configFile >> "CfgVehicles" >> typeOf _nBuilding >> "editorCategory") isEqualTo "" ) then {
+			_EdenCat = getText(configFile >> "CfgEditorCategories" >> getText(configFile >> "CfgVehicles" >> typeOf _nBuilding >> "editorCategory") >> "displayName");
+		};
+
+		if !( getText(configFile >> "CfgVehicles" >> typeOf _nBuilding >> "editorSubcategory" ) isEqualTo "" ) then {
+			_EdenSubCat = getText(configFile >> "CfgEditorSubCategories" >> getText(configFile >> "CfgVehicles" >> typeOf _nBuilding >> "editorSubcategory") >> "displayName");
+		};*/
+		/*		
 		_configs = "configName _x isKindof 'Building' && getNumber (_x >> 'scope') == 2" configClasses (configFile >> "CfgVehicles"); 
 		_classNames = _configs apply {configName _x}; 
-		_classNames = _classNames select {toLower _x find "ruin" < 0};
+		_classNames = _classNames select {toLower _x find "ruin" < 0}; // Remove Ruins
 		 
 		_count = 0;
 		_orgX = 1000; 
@@ -69,7 +87,7 @@ switch _mode do {
 				_count = _count + 1;
 				_posX = _posX + 75; 
 
-				if (_count %30 == 0) then {  
+				if (_count %75 == 0) then {  
 					_posX = _orgX; 
 					_posY = _orgY + (_count * 10); 
 				};
@@ -82,6 +100,6 @@ switch _mode do {
 			};
 		} forEach _classNames;
 		
-		systemChat format["Output %1 buildings with positions.", _count];
+		systemChat format["Output %1 buildings with positions.", _count];*/
 	};
 };
