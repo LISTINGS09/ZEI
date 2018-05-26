@@ -7,9 +7,6 @@ params [
 // Need to pass logic pos info to GUI somehow?
 _bld = missionNamespace getVariable ["ZEI_LastBuilding", objNull];
 
-systemChat format["Passed: Faction: %1  Units: %2  DS: %3", _faction, _units, _enableDS];
-[format["[ZEI][Garrison] Passed - Faction: %1  Units: %2  DS: %3", _faction, _units, _enableDS]] call ZEI_fnc_debug;
-
 // Get all units with a weapon and non-parachute backpack.
 _tempList = "getText (_x >> 'faction') == _faction && (configName _x) isKindoF 'CAManBase' && getNumber(_x >> 'scope') == 2" configClasses (configFile >> "CfgVehicles");
 

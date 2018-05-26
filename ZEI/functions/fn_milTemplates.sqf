@@ -1,4 +1,4 @@
-params ["_bld"];
+params ["_bld", ["_infoOnly", FALSE]];
 
 private _bld = typeOf _bld;
 
@@ -33,10 +33,10 @@ private _before = count _templates;
 // Scan for spawnable templates for the current modset
 _templates = _templates select {[_x] call ZEI_fnc_templateCanSpawn};
 
-["[ZEI][MIL] Templates Total: %1 | After Filtering: %2", _before, count _templates] call ZEI_fnc_debug;
+["[ZEI][MIL] Templates Total: %1 | After Filtering: %2", _before, count _templates] call ZEI_fnc_misc_debug;
 
 // Don't spam messages if there is an area to fill
-if (!_fillArea && {_templates isEqualTo []}) then {
+if (!_infoOnly && {_templates isEqualTo []}) then {
 	systemChat format ["[ZEI] Building Not Found: %1 (%2) - We need your help to get a template/scheme for this building!", _bld,  getText (configFile >> "CfgVehicles" >> _bld >> "displayName")];
 }; 
 

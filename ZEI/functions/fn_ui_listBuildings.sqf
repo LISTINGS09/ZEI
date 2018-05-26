@@ -4,9 +4,6 @@ params [
 		["_showBP", FALSE]
 	];
 
-systemChat format["Passed: Filter: %1 - Empty: %2 - BP: %3", _filter, _fCount, _showBP];
-diag_log format["Passed: Filter: %1 - Empty: %2 - BP: %3", _filter, _fCount, _showBP];
-
 _configs = "configName _x isKindof 'Building' && getNumber (_x >> 'scope') == 2" configClasses (configFile >> "CfgVehicles"); 
 _classNames = _configs apply {configName _x}; 
 _classNames = _classNames select {toLower _x find "ruin" < 0}; // Remove Ruins
