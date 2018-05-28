@@ -25,26 +25,16 @@ Example:	[object, 45] call rotateAroundOwnAxisX;		// the object turn 45Â° back
 */
 
 // find object and rotation angle
-_object = _this select 0;
-_angle = _this select 1;
+params [["_object", objNull], ["_angle", 0]];
 
 // get current vector dir and up
-_dir = vectorDir _object;
 _up = vectorUp _object;
-
-// split into x,y,z
-_dirXTemp = _dir select 0;
-_dirYTemp = _dir select 1;
-_dirZTemp = _dir select 2;
-
-_upX = _up select 0;
-_upY = _up select 1;
-_upZ = _up select 2;
+_up params ["_upX", "_upY", "_upZ"];
+(vectorDir _object) params ["_dirXTemp", "_dirYTemp", "_dirZTemp"];
 
 // set cos and sin
 _cos = cos _angle;
 _sin = sin _angle;
-
 
 // calculate new vector dir
 _dirX = _dirXTemp*(_upX*_upX*(1-_cos)+_cos) + _dirYTemp*(_upX*_upY*(1-_cos)-_upZ*_sin) + _dirZTemp*(_upX*_upZ*(1-_cos)+_upY*_sin);

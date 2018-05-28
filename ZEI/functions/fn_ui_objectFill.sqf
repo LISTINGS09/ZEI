@@ -46,7 +46,9 @@ _fnc_checkObject = {
 		case "Land_WoodenCounter_01_F": {_fromEdge = [0.2,0.2,0.2,0.2]; _offSet = [-0.03,-0.77]};
 	};
 	
-	if (_offSet isEqualTo []) exitWith { systemChat "No offset provided for Model!" };
+	if (_offSet isEqualTo []) exitWith { 
+		[format ["No offset provided for Model!", _count], "ERROR"] call ZEI_fnc_misc_logMsg;
+	};
 	
 	_objBB = boundingBox _objToFill;
 	{
@@ -128,7 +130,7 @@ _classNames = [
 _tmpArr = nearestObjects [(missionNamespace getVariable ["ZEI_LastPos", [0,0,0]]), _classNames, 10, TRUE];
 
 if (_tmpArr isEqualTo []) exitWith {
-	systemChat "No suitable objects found!";
+	["No suitable objects found!", "ERROR"] call ZEI_fnc_misc_logMsg;
 };
 
 _foodItems = ["Land_Orange_01_F","Land_WaterBottle_01_empty_F","Land_WaterBottle_01_full_F","Land_BottlePlastic_V1_F","Land_Can_Rusty_F","Land_Can_V1_F","Land_Can_V2_F","Land_Can_V3_F","Land_TacticalBacon_F","Land_Can_Dented_F","Land_BottlePlastic_V2_F","Land_BakedBeans_F","Land_PowderedMilk_F","Land_RiceBox_F","Land_Tableware_01_stackOfNapkins_F","Land_Tableware_01_cup_F","Land_TinContainer_F"];

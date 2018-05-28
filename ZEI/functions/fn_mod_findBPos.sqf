@@ -5,22 +5,18 @@ params [["_mode","",[""]],["_input",[],[[]]]];
 switch _mode do {
 	case "init": {
 		_input params [["_logic",objNull,[objNull]],["_isActivated",true,[true]], ["_isCuratorPlaced",false,[true]]];
-						
-		//systemChat format ["VAR: %1", allVariables _logic];
+								
+		private _bldArr = nearestObjects [_logic, ["building"], 50, true]; 
 		
-		private _fillArea = _logic getVariable ["fillArea",false];
-		private _searchRadius = _logic getVariable ["searchRadius",50];
-		private _bldArr = nearestObjects [_logic, ["building"], _searchRadius, true]; 
+		_bldArr = _bldArr select { str (_x buildingPos 0) != "[0,0,0]" };
 		
-		_bldArr = _bldArr select {str (_x buildingPos 0) != "[0,0,0]"};
-		
-		if (!_fillArea && count _bldArr > 1) then { _bldArr resize 1; };
+		if (count _bldArr > 1) then { _bldArr resize 1 };
 	
 		// Delete the module to prevent any dependencies.
 		if (_logic isKindOf "Logic") then {
-			if (_isCuratorPlaced) then { deleteVehicle _logic; } else { delete3DENEntities [_logic]; };
+			if (is3DEN) then { delete3DENEntities [_logic] } else { deleteVehicle _logic };
 		};
-		
+				
 		collect3DENHistory {
 			{ 
 				private _bld = _x;
@@ -30,9 +26,9 @@ switch _mode do {
 						private _obj = create3DENEntity ["Object", "Sign_Arrow_Large_Green_F", [0, 0, 0]];
 						_obj set3DENAttribute ["rotation", [ 0, 0, 0]];
 						if (surfaceIsWater _x) then {
-							_obj set3DENAttribute ["position", AGLToASL _x];							
+							_obj set3DENAttribute ["position", AGLToASL _x]							
 						} else {
-							_obj set3DENAttribute ["position", _x];
+							_obj set3DENAttribute ["position", _x]
 						};
 					} forEach _bPos;
 				};

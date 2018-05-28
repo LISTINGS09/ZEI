@@ -1,7 +1,6 @@
 params [
 		["_mode", "", [""]],
-		["_input", [], [[]]]//,
-		//["_setVar", true, [true]]
+		["_input", [], [[]]]
 	];
 
 switch _mode do {
@@ -15,6 +14,11 @@ switch _mode do {
 		// Need to pass logic pos info to GUI somehow?
 		ZEI_LastPos = getPos _logic;
 		
+		// Delete the module to prevent any dependencies.
+		if (_logic isKindOf "Logic") then {
+			if (is3DEN) then { delete3DENEntities [_logic] } else { deleteVehicle _logic };
+		};
+		
 		// Start Display 1701
 		if (_isCuratorPlaced) then { 
 			findDisplay 312 createDisplay "Rsc_ZEI_ObjectSwitch";  // Zeus
@@ -24,11 +28,6 @@ switch _mode do {
 			} else {
 				createDialog "Rsc_ZEI_ObjectSwitch";
 			};
-		};
-		
-		// Delete the module to prevent any dependencies.
-		if (_logic isKindOf "Logic") then {
-			if (is3DEN) then {delete3DENEntities [_logic]} else {deleteVehicle _logic};
 		};
 	};
 };

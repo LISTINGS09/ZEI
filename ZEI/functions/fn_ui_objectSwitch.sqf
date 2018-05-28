@@ -6,7 +6,7 @@ params [
 // Need to pass logic pos info to GUI somehow?
 _pos = missionNamespace getVariable ["ZEI_LastPos", [0,0,0]];
 
-systemChat format["Passed: Type: %1 - Radius: %2 - Pos: %3", _type, _searchRadius, _pos];
+[format["Passed: Type: %1 - Radius: %2 - Pos: %3", _type, _searchRadius, _pos], "DEBUG"] call ZEI_fnc_misc_logMsg;
 
 _nearObjects = nearestObjects [_pos, [], _searchRadius, true]; 
 
@@ -37,7 +37,9 @@ switch (_type) do {
 	};
 };
 
-if (count _replaceType == 0) exitWith { systemChat "NOTHING TO REPLACE!"; };
+if (count _replaceType == 0) exitWith { 
+	["No objects loaded to replace.", "ERROR"] call ZEI_fnc_misc_logMsg;
+};
 
 _toReplace = [];
 
@@ -77,7 +79,9 @@ _toReplace = [];
 	} forEach _searchType;
 } forEach _nearObjects;
 
-if (count _toReplace == 0) exitWith { systemChat "NOTHING TO REPACE!"; };
+if (count _toReplace == 0) exitWith { 
+	["No objects to replace.", "INFO"] call ZEI_fnc_misc_logMsg;
+};
 
 _count = 0;
 
@@ -92,10 +96,9 @@ if (is3DEN) then {
 	{ 
 		_x params ["_original", "_replacement"];
 		_obj = createVehicle [_replacement, getPosATL _original, [], 0, "CAN_COLLIDE"];
-		//_obj = createSimpleObject [_replacement, getPosASL _original];
 		_obj setVectorDirAndUp [vectorDir _original, vectorUp _original];
 		deleteVehicle _original;
 	} forEach _toReplace;
 };
 
-systemChat format["Converted %1 Objects", count _toReplace];
+[format["Converted %1 Objects", count _toReplace], "INFO"] call ZEI_fnc_misc_logMsg;

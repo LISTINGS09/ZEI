@@ -1,8 +1,9 @@
+// Called from ZEI_fnc_ui_interiorFill
 params [
 		["_bld", objNull],
+		["_fillType", "mil"],
 		["_fillArea", FALSE],
-		["_addZeus", FALSE],
-		["_civilian", TRUE],
+		["_addZeus", TRUE],
 		["_infoOnly", FALSE]
 	];
 
@@ -11,11 +12,7 @@ if (isNull _bld || !isNull (_bld getVariable ["zei_furnished", objNull])) exitWi
 
 private _templates = [];
 
-if (_civilian) then {
-	_templates = [_bld, _infoOnly] call ZEI_fnc_civTemplates;
-} else {
-	_templates = [_bld, _infoOnly] call ZEI_fnc_milTemplates;
-};
+_templates = [_bld, _fillType, (_fillArea || _infoOnly)] call ZEI_fnc_findTemplates;
 
 // Return the number of templates only (listBuildings module).
 if (_infoOnly) exitWith { count _templates };
@@ -31,9 +28,7 @@ if !(_templates isEqualTo []) then {
 	
 	// Random template selection
 	//_items = selectRandom _templates;
-		
-	// TODO: Properly rotate objects by their rotation settings and also that of the object.
-		
+				
 	// Spawn items depending on Zeus/Eden
 	private _obj = objNull; // Used to track Undo in Eden.
 		
@@ -74,7 +69,6 @@ if !(_templates isEqualTo []) then {
 				_obj = createSimpleObject [_item, AGLtoASL (_bld modelToWorld _offset)];
 			};
 			
-			//_obj setPosATL (_bld modelToWorld _offset); // Rotated objects model centre changes with rotation.
 			_obj setVectorDirAndUp [vectorDir _bld, vectorUp _bld];
 			
 			if !(_rot isEqualTo [0,0,0]) then { 

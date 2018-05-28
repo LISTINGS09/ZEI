@@ -25,28 +25,17 @@ Example:	[object, 45] call rotateAroundOwnAxisX;		// the object turn 45Â° back
 */
 
 // find object and rotation angle
-_object = _this select 0;
-_angle = _this select 1;
+params [["_object", objNull], ["_angle", 0]];
 
 // get current vector dir and up
 _dir = vectorDir _object;
 _up = vectorUp _object;
 
+_dir params ["_dirXTemp", "_dirYTemp", "_dirZTemp"];
+_up params ["_upXTemp", "_upYTemp", "_upZTemp"];
+
 // find x-axis
-_axis = [_dir,_up] call BIS_fnc_crossProduct;
-
-// split into x,y,z
-_dirXTemp = _dir select 0;
-_dirYTemp = _dir select 1;
-_dirZTemp = _dir select 2;
-
-_upXTemp = _up select 0;
-_upYTemp = _up select 1;
-_upZTemp = _up select 2;
-
-_axisX = _axis select 0;
-_axisY = _axis select 1;
-_axisZ = _axis select 2;
+([_dir,_up] call BIS_fnc_crossProduct) params ["_axisX", "_axisY", "_axisZ"];
 
 // set cos and sin
 _cos = cos _angle;

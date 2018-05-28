@@ -105,4 +105,4 @@ _fnc_createTemplateMarker = {
 	};
 } forEach _classNames;
 
-systemChat format["Output %1 buildings with positions.", _count];
+[format["Output %1 buildings with positions.", _count], "INFO"] call ZEI_fnc_misc_logMsg;

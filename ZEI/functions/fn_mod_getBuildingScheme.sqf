@@ -20,13 +20,15 @@ switch _mode do {
 			params ["_isCuratorPlaced"];
 			([get3DENMouseOver, curatorMouseOver] select _isCuratorPlaced) params [["_mouseType", ""], ["_mouseObj", objNull]];
 			
-			if (_mouseType != "Object" && {isNull _mouseObj}) exitWith {systemChat "[ZEI][ERROR] Module must be placed over a building!"};
+			if (_mouseType != "Object" && {isNull _mouseObj}) exitWith {
+				["Module must be placed over a building!", "ERROR"] call ZEI_fnc_misc_logMsg;
+			};
 			
 			private _bldArr = [_mouseObj] select {!((_x buildingPos -1) isEqualTo []) || typeOf _x in (missionNamespace getVariable ["ZEI_additionalBuildings", []])};
 			
 			// Don't continue if array is empty.
 			if (_bldArr isEqualTo [] && inputAction "LookAround" < 1) exitWith {
-				systemChat "[ZEI] No valid building found! Add it to 'ZEI_additionalBuildings' if it has no positions.";
+				["No valid building found! Add it to 'ZEI_additionalBuildings' if it has no positions.", "ERROR"] call ZEI_fnc_misc_logMsg;
 			};
 			
 			// Array is empty, but 'LookAround' was pressed, force the object.
@@ -37,19 +39,26 @@ switch _mode do {
 			private _keyObjType = typeOf _keyObj;
 			private _nearObjects = _keyObj nearObjects ((sizeOf _keyObjType) + 2);
 			private _mod = "";
+			diag_log text format["********** [ZEI - BUILDING OUTPUT ""%1""] **********", _keyObjType];
+			
 			private _tempArr = _nearObjects apply { 
 				private _xType = typeOf _x;
 				if !(_xType in ["Sign_Arrow_Large_Green_F", "Logic", "CamCurator", _keyObjType]) then {	
 					if !(_xType call ZEI_fnc_isVanillaObject) then {_mod = "[MOD] "};
-										
+					
+					private _objPos = _keyObj worldToModel (getPosATL _x);
+					private _objDir = round ((getDir _x) - (getDir _keyObj));
+					
 					if ((_x call BIS_fnc_getPitchBank) isEqualTo [0,0]) then {
-						[_xType, _keyObj worldToModel (getPosATL _x), round ((getDir _x) - (getDir _keyObj))]
+						diag_log text format ["[""%1"", %2, %3]", _xType, _objPos, _objDir];
+						[_xType, _objPos, _objDir]
 					} else {
 						private _orgVec = [vectorDir _x, vectorUp _x];
-						_x setVectorDirAndUp [[0,1,0],[0,0,1]]; // Realign Direction to get correct position.
+						_x setVectorDirAndUp [[0,1,0],[0,0,1]]; // Realign object direction to get correct worldToModel position.
 						_objPos = _keyObj worldToModel (getPosATL _x);
 						_x setVectorDirAndUp _orgVec;  // Revert to original orientation.
-						[_xType, _objPos, round ((getDir _x)  - (getDir _keyObj)), ((_x get3DENAttribute "Rotation") select 0)]
+						diag_log text format ["[""%1"", %2, %3, %4]", _xType, _objPos, _objDir, ((_x get3DENAttribute "Rotation") select 0)];
+						[_xType, _objPos, _objDir, ((_x get3DENAttribute "Rotation") select 0)]
 					};
 				} else {
 					objNull
@@ -57,20 +66,21 @@ switch _mode do {
 			};
 			_tempArr = _tempArr - [objNull];
 			
-			copyToClipboard format ["%3%1 %2", _keyObjType, _tempArr, _mod];
-			diag_log text format ["%3%1 %2", _keyObjType, _tempArr, _mod];
-			systemChat format["'%1' written to clipboard (%2). Paste and save or send it to the mod developer!", _keyObjType, count _tempArr];
+			copyToClipboard format ["%3%1: %2", _keyObjType, _tempArr, _mod];
+			[format["'%1' written to clipboard (%2). Paste and save or send it to the mod developer!", _keyObjType, count _tempArr], "INFO"] call ZEI_fnc_misc_logMsg;
 			if !((_keyObj call BIS_fnc_getPitchBank) isEqualTo [0,0]) then {
 				// Warn if building has been rotated (objects are not offset according to the building)
 				// TODO: Add support for all building angles?
-				systemChat format["[WARNING] Building is not flat. Objects may be saved incorrectly!"];
+				["Building is not flat. Objects may be saved incorrectly!", "WARNING"] call ZEI_fnc_misc_logMsg;
 			};
 			if (count _tempArr > 130) then {
-				// Warn if too many objects (causes clipboard to cut off text)
+				// Warn if too many objects (causes clipboard to cut off text - 8191 length?)
 				// TODO: Add line break when scheme is too large and will break clipboard?
-				systemChat format["[WARNING] High number of objects! Not all objects may have been copied due to clipboard limitations."];
+				["High number of objects! Not all objects may have been copied due to clipboard limitations.", "WARNING"] call ZEI_fnc_misc_logMsg;
 			};
-			if (worldName != "VR") then {systemChat "[WARNING] World is not VR. Positions saved may not be accurate."};
+			if (worldName != "VR") then {
+				["World is not VR. Positions saved may not be accurate.", "WARNING"] call ZEI_fnc_misc_logMsg;
+			};
 		};
 	};
 };

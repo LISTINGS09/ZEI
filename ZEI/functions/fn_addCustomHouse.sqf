@@ -1,8 +1,7 @@
 params [["_house", "", [""]]];
 
 if !(isClass (configFile >> "CfgVehicles" >> _house)) exitWith {
-	diag_log text format ["[ZEI][ERROR] Building class '%1' not found in CfgVehicles.", _house];
-	systemChat format ["[ZEI][ERROR] Building class '%1' not found in CfgVehicles.", _house];
+	[format ["Building class '%1' not found in CfgVehicles.", _house], "ERROR"] call ZEI_fnc_misc_logMsg;
 };
 if (isNil "ZEI_additionalBuildings") then {ZEI_additionalBuildings = []};
 

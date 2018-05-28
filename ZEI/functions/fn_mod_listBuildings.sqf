@@ -12,7 +12,10 @@ switch _mode do {
 			if (is3DEN) then { delete3DENEntities [_logic] } else { deleteVehicle _logic };
 		};
 		
-		if (worldName != "VR") exitWith {systemChat "[ERROR] You must be in the VR world to use this module."};
+		
+		if (worldName != "VR") exitWith {
+			["You must be in the VR world to use this module.", "ERROR"] call ZEI_fnc_misc_logMsg
+		};
 		
 		// Start Display 1702
 		if (_isCuratorPlaced) then { 

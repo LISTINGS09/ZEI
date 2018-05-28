@@ -4,6 +4,8 @@ params [
 		["_enableDS", TRUE]
 	];
 
+[format["Passed - F: %1 U: %2 DS: %2", _faction, _units, _enableDS], "DEBUG"] call ZEI_fnc_misc_logMsg;
+	
 // Need to pass logic pos info to GUI somehow?
 _bld = missionNamespace getVariable ["ZEI_LastBuilding", objNull];
 
@@ -43,7 +45,7 @@ if (count _menList == 0) then { _menList = _tempList };
 
 // No units exist at all!
 if (count _menList == 0) exitWith {
-	systemChat format["[ZEI][ERROR] No units found for: %1", _faction];
+	[format["No units found for faction: %1", _faction], "ERROR"] call ZEI_fnc_misc_logMsg;
 };
 
 _bldPos = _bld buildingPos -1;

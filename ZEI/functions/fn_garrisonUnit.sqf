@@ -15,6 +15,8 @@ _setDirStance = {
 	
 	_unitEyePos = eyePos _unit;
 		
+	// TODO: Re-run check after unit has been made prone?
+		
 	// Make unit crouch if they have sky above their heads.
 	if (count (lineIntersectsWith [_unitEyePos, (_unitEyePos vectorAdd [0, 0, 10])] select {_x isKindOf 'Building'}) < 1) then {
 		if (is3DEN) then { _unit set3DENAttribute ["unitPos", 1]; } else { _unit setUnitPos "MIDDLE"; };
@@ -101,7 +103,7 @@ _setDirStance = {
 private _lastItem = objNull; // to track if it was undo in eden
 if is3DEN then {
 	_unit = create3DENEntity ["Object", _type, [0, 0, 0], TRUE];
-	_unit set3DENAttribute ["position", _x];
+	_unit set3DENAttribute ["position", _pos];
 	[_unit, _bld, _enableDS] call _setDirStance;
 } else {
 	private _group = switch _side do { 
@@ -117,3 +119,4 @@ if is3DEN then {
 	//Add to Zeus
 	{ _x addCuratorEditableObjects [[_unit],true] } forEach allCurators;
 };
+

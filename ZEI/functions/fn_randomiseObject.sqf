@@ -44,7 +44,7 @@ if (isClass(configFile >> 'CfgPatches' >> 'CUP_Core')) then {
 } forEach _objectsList;
 
 if !(isClass (configFile >> "CfgVehicles" >> _item)) then {
-	diag_log text format["[ZEI] ERROR - Invalid Classname (%1)", _item];
+	[format ["Invalid Classname (%1)", _item], "ERROR"] call ZEI_fnc_misc_logMsg;
 	_item = "Land_HelipadEmpty_F";
 };
 

@@ -13,7 +13,7 @@ switch _mode do {
 			];
 				
 		private _bldArr = (nearestObjects [_logic, ["building"], 200, true]) select {count (_x buildingPos -1) > 0};
-
+		
 		if (count _bldArr > 0) then {
 			ZEI_LastPos = getPos _logic;
 			ZEI_LastBuilding = _bldArr select 0;
@@ -29,12 +29,12 @@ switch _mode do {
 				};
 			};
 		} else {
-			systemChat "NO VALID BUILDINGS"
+			["No valid buildings found!", "ERROR"] call ZEI_fnc_misc_logMsg;
 		};
 		
 		// Delete the module to prevent any dependencies.
 		if (_logic isKindOf "Logic") then {
-			if (is3DEN) then {delete3DENEntities [_logic]} else {deleteVehicle _logic};
+			if (is3DEN) then { delete3DENEntities [_logic] } else { deleteVehicle _logic };
 		};
 	};
 };
