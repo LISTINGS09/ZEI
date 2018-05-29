@@ -3,7 +3,7 @@ params [
 		["_fCount", 15],
 		["_showBP", FALSE]
 	];
-
+	
 _configs = "configName _x isKindof 'Building' && getNumber (_x >> 'scope') == 2" configClasses (configFile >> "CfgVehicles"); 
 _classNames = _configs apply {configName _x}; 
 _classNames = _classNames select {toLower _x find "ruin" < 0}; // Remove Ruins
@@ -27,6 +27,8 @@ _fnc_createTemplateMarker = {
 		};
 	};
 };
+
+[format["Processing %1 Classes.", count _classNames], "INFO"] call ZEI_fnc_misc_logMsg;
  
 { 
 	_bld = objNull;
@@ -40,35 +42,35 @@ _fnc_createTemplateMarker = {
 	
 	// If building has positions check if it has got matching templates.
 	if (count (_bld buildingPos -1) > 0) then {
-		_civTemplates = [_bld, FALSE, !is3DEN, TRUE, TRUE] call ZEI_fnc_createTemplate;
-		_milTemplates = [_bld, FALSE, !is3DEN, FALSE, TRUE] call ZEI_fnc_createTemplate;
-		
+		_civCount = count ([_bld, "civ", TRUE] call ZEI_fnc_findTemplates);
+		_milCount = count ([_bld, "mil", TRUE] call ZEI_fnc_findTemplates);
+				
 		switch (_filter) do {
 			// Civilian Only
 			case 1: {
-				if (_civTemplates > _fCount) then { 
+				if (_civCount > _fCount) then { 
 					_skip = TRUE;
 				} else {
-					[_civTemplates, _bld, 10, "Sign_Arrow_Large_Pink_F"] spawn _fnc_createTemplateMarker
+					[_civCount, _bld, 10, "Sign_Arrow_Large_Pink_F"] spawn _fnc_createTemplateMarker
 				};
 			};
 						
 			// Military Only
 			case 2: {
-				if (_milTemplates > _fCount) then { 
+				if (_milCount > _fCount) then { 
 					_skip = TRUE;
 				} else {
-					[_milTemplates, _bld, 15, "Sign_Arrow_Large_F"] spawn _fnc_createTemplateMarker
+					[_milCount, _bld, 15, "Sign_Arrow_Large_F"] spawn _fnc_createTemplateMarker
 				};
 			};
 			
 			// All
 			default {
-				if (_civTemplates > _fCount || _milTemplates > _fCount) then {
+				if (_civCount > _fCount || _milCount > _fCount) then {
 					_skip = TRUE;
 				} else {
-					if (_civTemplates > 0) then { [_civTemplates, _bld, 10, "Sign_Arrow_Large_Pink_F"] spawn _fnc_createTemplateMarker };
-					if (_milTemplates > 0) then { [_milTemplates, _bld, 15, "Sign_Arrow_Large_F"] spawn _fnc_createTemplateMarker };
+					if (_civCount > 0) then { [_civCount, _bld, 10, "Sign_Arrow_Large_Pink_F"] spawn _fnc_createTemplateMarker };
+					if (_milCount > 0) then { [_milCount, _bld, 15, "Sign_Arrow_Large_F"] spawn _fnc_createTemplateMarker };
 				};
 			};
 		};

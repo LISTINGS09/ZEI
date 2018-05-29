@@ -3,19 +3,17 @@ params [
 		["_bld", objNull],
 		["_fillType", "mil"],
 		["_fillArea", FALSE],
-		["_addZeus", TRUE],
-		["_infoOnly", FALSE]
+		["_addZeus", TRUE]
 	];
 
+[format ["Passed - B: %1 T: %2 A: %3 Z: %4", _bld, _fillType, _fillArea, _addZeus], "DEBUG"] call ZEI_fnc_misc_logMsg;
+	
 // Skip previously processed houses
 if (isNull _bld || !isNull (_bld getVariable ["zei_furnished", objNull])) exitWith {};
 
 private _templates = [];
 
-_templates = [_bld, _fillType, (_fillArea || _infoOnly)] call ZEI_fnc_findTemplates;
-
-// Return the number of templates only (listBuildings module).
-if (_infoOnly) exitWith { count _templates };
+_templates = [_bld, _fillType, _fillArea] call ZEI_fnc_findTemplates;
 
 // Furnish house if list is assigned and no people inside
 if !(_templates isEqualTo []) then {

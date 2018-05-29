@@ -1,6 +1,8 @@
 // Called from ZEI_fnc_createTemplate. Finds a suitable '_templates' array according to the passed '_tempType'.
 params ["_bld", ["_tempType", "mil"], ["_infoOnly", FALSE]];
 
+[format ["Passed - B: %1 T: %2 I: %3", _bld, _tempType, _infoOnly], "DEBUG"] call ZEI_fnc_misc_logMsg;
+
 private _bld = typeOf _bld;
 
 // Fix Case
@@ -12,7 +14,7 @@ private _templates = [];
 // Find any user-created custom buildings.
 private _customTemplate = missionNamespace getVariable [format["ZEI_%1_customBuildings", _tempType], []];
 
-if !(_customTemplates isEqualTo []) then {
+if !(_customTemplate isEqualTo []) then {
 	private _path = [_customTemplate, _bld] call BIS_fnc_findNestedElement;
 	
 	if !(_path isEqualTo []) then {
@@ -51,7 +53,10 @@ private _before = count _templates;
 // Scan for spawnable templates for the current modset
 _templates = _templates select {[_x] call ZEI_fnc_templateCanSpawn};
 
-[format ["Templates (%3): %1 | After: %2", _before, count _templates, toUpper _tempType], "DEBUG"] call ZEI_fnc_misc_logMsg;
+if !(_before isEqualTo count _templates) then {
+	// TODO: Really needed? ZEI_fnc_randomiseObject will replace any invalid objects in a template. 
+	[format ["Template(s) removed due to invalid objects (%3): Before %1 | After: %2", _before, count _templates, toUpper _tempType], "WARNING"] call ZEI_fnc_misc_logMsg;
+};
 
 // Don't spam messages if there is an area to fill
 if (!_infoOnly && {_templates isEqualTo []}) then {
