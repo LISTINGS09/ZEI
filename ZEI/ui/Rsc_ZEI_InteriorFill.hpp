@@ -72,7 +72,7 @@ class Rsc_ZEI_InteriorFill
 	};
 	class ZEI_IF_Text_Items: RscText
 	{
-		idc = 1;
+		idc = 2;
 		text = "Radius: Nearest"; //--- ToDo: Localize;
 		x = 0.340156 * safezoneW + safezoneX;
 		y = 0.412 * safezoneH + safezoneY;
@@ -87,7 +87,7 @@ class Rsc_ZEI_InteriorFill
 		w = 0.144375 * safezoneW;
 		h = 0.033 * safezoneH;
 		tooltip = "Radius of buildings to fill";
-		onSliderPosChanged = "if (round (_this select 1) > 0) then { (findDisplay 1705 displayCtrl 1) ctrlSetText format['Radius: %1 Meters', round (_this select 1)]; } else { (findDisplay 1705 displayCtrl 1) ctrlSetText 'Radius: Nearest'; };";
+		onSliderPosChanged = "if (round (_this select 1) > 0) then { (findDisplay 1705 displayCtrl 2) ctrlSetText format['Radius: %1 Meters', round (_this select 1)]; } else { (findDisplay 1705 displayCtrl 2) ctrlSetText 'Radius: Nearest'; };";
 		onLoad= "_this spawn {\
 			waitUntil { !isNull (_this select 0) };\
 			(findDisplay 1705 displayCtrl 20) sliderSetRange [ 0, 250 ];\
@@ -96,12 +96,15 @@ class Rsc_ZEI_InteriorFill
 	};
 	class ZEI_IF_Text_EditObject: RscText
 	{
-		idc = -1;
-		text = "Allow Edit (ZEUS Only)"; //--- ToDo: Localize;
+		idc = 3;
+		text = "Allow Edit"; //--- ToDo: Localize;
 		x = 0.340156 * safezoneW + safezoneX;
 		y = 0.467 * safezoneH + safezoneY;
 		w = 0.0845 * safezoneW;
 		h = 0.022 * safezoneH;
+		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) };\
+			if is3DEN then { (findDisplay 1705 displayCtrl 3) ctrlShow FALSE; };\
+		}";
 	};
 	class ZEI_IF_CheckBox_EditObject: RscCheckbox
 	{
@@ -110,8 +113,11 @@ class Rsc_ZEI_InteriorFill
 		y = 0.467 * safezoneH + safezoneY;
 		w = 0.020625 * safezoneW;
 		h = 0.033 * safezoneH;
-		tooltip = "Add objects to Curator (HAS NO EFFECT IN EDEN)";
-		checked = "if is3DEN then { 0 } else { 1 }";
+		tooltip = "Add objects to Curator";
+		checked = 1;
+		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) };\
+			if is3DEN then { (findDisplay 1705 displayCtrl 30) ctrlShow FALSE; };\
+		}";
 	};
 	class ZEI_IF_Button_OK: RscButton
 	{

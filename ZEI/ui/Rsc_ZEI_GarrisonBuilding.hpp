@@ -26,7 +26,7 @@ class Rsc_ZEI_GarrisonBuilding
 		x = 0.335 * safezoneW + safezoneX;
 		y = 0.324 * safezoneH + safezoneY;
 		w = 0.2475 * safezoneW;
-		h = 0.242 * safezoneH;
+		h = 0.232 * safezoneH;
 	};
 	class ZEI_GB_Frame: RscFrame
 	{
@@ -34,7 +34,7 @@ class Rsc_ZEI_GarrisonBuilding
 		x = 0.335 * safezoneW + safezoneX;
 		y = 0.324 * safezoneH + safezoneY;
 		w = 0.2475 * safezoneW;
-		h = 0.242 * safezoneH;
+		h = 0.232 * safezoneH;
 	};
 	class ZEI_GB_Text_Title: RscText
 	{
@@ -95,7 +95,7 @@ class Rsc_ZEI_GarrisonBuilding
 		idc = -1;
 		text = "Dynamic Simulation"; //--- ToDo: Localize;
 		x = 0.340156 * safezoneW + safezoneX;
-		y = 0.467 * safezoneH + safezoneY;
+		y = 0.456 * safezoneH + safezoneY;
 		w = 0.0825 * safezoneW;
 		h = 0.022 * safezoneH;
 	};
@@ -103,11 +103,10 @@ class Rsc_ZEI_GarrisonBuilding
 	{
 		idc = 30;
 		x = 0.422656 * safezoneW + safezoneX;
-		y = 0.467 * safezoneH + safezoneY;
+		y = 0.456 * safezoneH + safezoneY;
 		w = 0.020625 * safezoneW;
 		h = 0.033 * safezoneH;
-		checked = "if is3DEN then { 1 } else { 0 }";
-		/*onLoad= "_this spawn { waitUntil { !isNull (_this select 0) }; if (is3DEN) then { (findDisplay 1702 displayCtrl 30) cbSetChecked true; }; };";*/
+		tooltip = "Enables Dynamic Simulation for units\nDO NOT use when AI can easily be seen (e.g. outside or top of buildings).";
 	};
 	class ZEI_GB_Button_OK: RscButton
 	{

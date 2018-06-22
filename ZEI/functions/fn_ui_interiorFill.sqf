@@ -6,7 +6,7 @@ params [
 
 private _fillType = if (_type isEqualTo 0) then { "mil" } else { "civ" };
 private _fillArea = if (_area isEqualTo 0) then { FALSE } else { TRUE };
-private _bldTmp = nearestObjects [(missionNamespace getVariable ["ZEI_LastPos", [0,0,0]]), ["Building"], if (_area isEqualTo 0) then { 25 } else { _area }, TRUE]; 
+private _bldTmp = nearestObjects [(missionNamespace getVariable ["ZEI_LastPos", [0,0,0]]), ["Building"], if (_area isEqualTo 0) then { 15 } else { _area }, TRUE]; 
 
 // Don't continue if no objects were found.
 if (_bldTmp isEqualTo []) exitWith {

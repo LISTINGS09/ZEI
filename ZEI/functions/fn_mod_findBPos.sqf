@@ -4,7 +4,10 @@ params [["_mode","",[""]],["_input",[],[[]]]];
 
 switch _mode do {
 	case "init": {
-		_input params [["_logic",objNull,[objNull]],["_isActivated",true,[true]], ["_isCuratorPlaced",false,[true]]];
+		_input params [["_logic",objNull,[objNull]],["_isActivated",TRUE,[TRUE]], ["_isCuratorPlaced",FALSE,[TRUE]]];
+		
+		// In MP only run for local client.
+		if (!local _logic) exitWith {};
 								
 		private _bldArr = nearestObjects [_logic, ["building"], 50, true]; 
 		

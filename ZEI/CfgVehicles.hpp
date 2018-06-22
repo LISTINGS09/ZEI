@@ -17,7 +17,7 @@ class CfgVehicles {
 		function = "ZEI_fnc_mod_listBuildings";
 		functionPriority = 1;
 		icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
-		isGlobal = 0;
+		isGlobal = 1;
 		isTriggerActivated = 0;
 		is3DEN = 1;
 	};
@@ -30,7 +30,7 @@ class CfgVehicles {
 		function = "ZEI_fnc_mod_garrisonBuilding";
 		functionPriority = 1;
 		icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\rifle_ca.paa";
-		isGlobal = 0;
+		isGlobal = 1;
 		isTriggerActivated = 0;
 		is3DEN = 1;
 	};
@@ -43,7 +43,7 @@ class CfgVehicles {
 		function = "ZEI_fnc_mod_objectFill";
 		functionPriority = 1;
 		icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\box_ca.paa";
-		isGlobal = 0;
+		isGlobal = 1;
 		isTriggerActivated = 0;
 		is3DEN = 1;
 	};
@@ -56,7 +56,7 @@ class CfgVehicles {
 		function = "ZEI_fnc_mod_objectSwitch";
 		functionPriority = 1;
 		icon = "\a3\Modules_f\data\portraitRespawn_ca.paa";
-		isGlobal = 0;
+		isGlobal = 1;
 		isTriggerActivated = 0;
 		is3DEN = 1;
 	};
@@ -68,7 +68,7 @@ class CfgVehicles {
 		category = "zei_interiors";
 		function = "ZEI_fnc_mod_interiorFill";
 		functionPriority = 1;
-		isGlobal = 0;
+		isGlobal = 1;
 		isTriggerActivated = 0;
 		is3DEN = 1;
 	};
@@ -80,7 +80,7 @@ class CfgVehicles {
 		function = "ZEI_fnc_mod_findBPos";
 		functionPriority = 1;
 		icon = "\A3\modules_f\data\portraitStrategicMapMission_ca.paa";
-		isGlobal = 0;
+		isGlobal = 1;
 		isTriggerActivated = 0;
 		is3DEN = 1;
 	};
@@ -92,7 +92,7 @@ class CfgVehicles {
 		function = "ZEI_fnc_mod_getBuildingScheme";
 		functionPriority = 1;
 		icon = "\a3\Modules_F\Data\iconSavegame_ca.paa";
-		isGlobal = 0;
+		isGlobal = 1;
 		isTriggerActivated = 0;
 		is3DEN = 1;
 	};

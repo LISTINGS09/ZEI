@@ -69,7 +69,7 @@ class Rsc_ZEI_ObjectFill
 	};
 	class ZEI_OF_Text_Items: RscText
 	{
-		idc = 1;
+		idc = 2;
 		text = "Fill Percent (30)"; //--- ToDo: Localize;
 		x = 0.340156 * safezoneW + safezoneX;
 		y = 0.412 * safezoneH + safezoneY;
@@ -84,7 +84,7 @@ class Rsc_ZEI_ObjectFill
 		w = 0.144375 * safezoneW;
 		h = 0.033 * safezoneH;
 		tooltip = "Chance to spawn an object";
-		onSliderPosChanged = "(findDisplay 1704 displayCtrl 1) ctrlSetText format['Fill Percent (%1)', round (_this select 1) * 10];";
+		onSliderPosChanged = "(findDisplay 1704 displayCtrl 2) ctrlSetText format['Fill Percent (%1)', round (_this select 1) * 10];";
 		onLoad= "_this spawn {\
 			waitUntil { !isNull (_this select 0) };\
 			(findDisplay 1704 displayCtrl 20) sliderSetRange [ 1, 10 ];\
@@ -93,12 +93,15 @@ class Rsc_ZEI_ObjectFill
 	};
 	class ZEI_OF_Text_EditObject: RscText
 	{
-		idc = -1;
-		text = "Edit Object (ZEUS Only)"; //--- ToDo: Localize;
+		idc = 3;
+		text = "Edit Object"; //--- ToDo: Localize;
 		x = 0.340156 * safezoneW + safezoneX;
 		y = 0.467 * safezoneH + safezoneY;
 		w = 0.0845 * safezoneW;
 		h = 0.022 * safezoneH;
+		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) };\
+			if is3DEN then { (findDisplay 1704 displayCtrl 3) ctrlShow FALSE; };\
+		}";
 	};
 	class ZEI_OF_CheckBox_EditObject: RscCheckbox
 	{
@@ -108,7 +111,10 @@ class Rsc_ZEI_ObjectFill
 		w = 0.020625 * safezoneW;
 		h = 0.033 * safezoneH;
 		tooltip = "Allow Zeus to Move/Edit Objects";
-		checked = "if is3DEN then { 0 } else { 1 }";
+		checked = 1;
+		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) };\
+			if is3DEN then { (findDisplay 1704 displayCtrl 30) ctrlShow FALSE; };\
+		}";
 	};
 	class ZEI_OF_Button_OK: RscButton
 	{

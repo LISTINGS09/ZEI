@@ -79,7 +79,7 @@ class Rsc_ZEI_ListBuildings
 	};
 	class ZEI_LB_Text_MinTemplatesCount: RscText
 	{
-		idc = 1;
+		idc = 2;
 		text = "(15 or less)"; //--- ToDo: Localize;
 		x = 0.340156 * safezoneW + safezoneX;
 		y = 0.436 * safezoneH + safezoneY;
@@ -93,7 +93,7 @@ class Rsc_ZEI_ListBuildings
 		y = 0.412 * safezoneH + safezoneY;
 		w = 0.144375 * safezoneW;
 		h = 0.033 * safezoneH;
-		onSliderPosChanged = "if (round (_this select 1) > 0) then { (findDisplay 1703 displayCtrl 1) ctrlSetText format['(%1 or less)', round (_this select 1)]; } else { (findDisplay 1703 displayCtrl 1) ctrlSetText '(No Template)'; };";
+		onSliderPosChanged = "if (round (_this select 1) > 0) then { (findDisplay 1703 displayCtrl 2) ctrlSetText format['(%1 or less)', round (_this select 1)]; } else { (findDisplay 1703 displayCtrl 2) ctrlSetText '(No Template)'; };";
 		onLoad= "_this spawn {\
 			waitUntil { !isNull (_this select 0) };\
 			(findDisplay 1703 displayCtrl 20) sliderSetRange [ 0, 15 ];\

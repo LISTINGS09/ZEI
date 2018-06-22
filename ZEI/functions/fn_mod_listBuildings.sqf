@@ -7,11 +7,13 @@ switch _mode do {
 	case "init": {
 		_input params [["_logic",objNull,[objNull]],["_isActivated",true,[true]], ["_isCuratorPlaced",false,[true]]];
 		
+		// In MP only run for local client.
+		if (!local _logic) exitWith {};
+		
 		// Delete the module to prevent any dependencies.
 		if (_logic isKindOf "Logic") then {
 			if (is3DEN) then { delete3DENEntities [_logic] } else { deleteVehicle _logic };
 		};
-		
 		
 		if (worldName != "VR") exitWith {
 			["You must be in the VR world to use this module.", "ERROR"] call ZEI_fnc_misc_logMsg
