@@ -53,6 +53,7 @@ class CfgFunctions {
 			class ui_listBuildings {};		// listBuildings
 			class ui_objectFill {};			// objectFill
 			class ui_objectSwitch {};		// objectSwitch
+			class getFurnitureData {};		// get furniture data for new scheme
 		};
 		class Rotation {
 			file = "\zei\functions";

@@ -36,6 +36,11 @@ switch _mode do {
 			// Decorate building in Eden, select building then run code below in debug console to generate a template to clipboard.
 			private _keyObj = _bldArr select 0;
 			private _keyObjType = typeOf _keyObj;
+			private _data = [_keyObj] call ZEI_fnc_getFurnitureData;
+			_data params ["_isVanilla","_tempArr"];
+			private _mod = ["[MOD] ", ""] select _isVanilla;
+			
+			/*
 			private _nearObjects = _keyObj nearObjects ((sizeOf _keyObjType) + 2);
 			private _mod = "";
 			diag_log text format["********** [ZEI - BUILDING OUTPUT ""%1""] **********", _keyObjType];
@@ -64,9 +69,10 @@ switch _mode do {
 				};
 			};
 			_tempArr = _tempArr - [objNull];
-			
+			*/
 			copyToClipboard format ["%3%1: %2", _keyObjType, _tempArr, _mod];
 			[format["'%1' written to clipboard (%2). Paste and save or send it to the mod developer!", _keyObjType, count _tempArr], "INFO"] call ZEI_fnc_misc_logMsg;
+			/*
 			if !((_keyObj call BIS_fnc_getPitchBank) isEqualTo [0,0]) then {
 				// Warn if building has been rotated (objects are not offset according to the building)
 				// TODO: Add support for all building angles?
@@ -80,6 +86,7 @@ switch _mode do {
 			if (worldName != "VR") then {
 				["World is not VR. Positions saved may not be accurate.", "WARNING"] call ZEI_fnc_misc_logMsg;
 			};
+			*/
 		};
 	};
 };
