@@ -1,4 +1,4 @@
-params ["_item", ["_doRandom", true]];
+params ["_item", ["_doRandom", TRUE]];
 
 private _objectsList = [];
 

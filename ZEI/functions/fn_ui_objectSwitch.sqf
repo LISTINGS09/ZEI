@@ -8,7 +8,7 @@ _pos = missionNamespace getVariable ["ZEI_LastPos", [0,0,0]];
 
 [format["Passed: Type: %1 - Radius: %2 - Pos: %3", _type, _searchRadius, _pos], "DEBUG"] call ZEI_fnc_misc_logMsg;
 
-_nearObjects = nearestObjects [_pos, [], _searchRadius, true]; 
+_nearObjects = nearestObjects [_pos, [], _searchRadius, TRUE]; 
 
 _typeVanilla = 	["Land_BagFence_Corner_F", "Land_BagFence_Long_F", "Land_BagFence_Short_F", "Land_BagFence_End_F", "Land_BagFence_Round_F", "CamoNet_BLUFOR_F", "CamoNet_BLUFOR_open_F", "CamoNet_BLUFOR_big_F", "CamoNet_OPFOR_F", "CamoNet_OPFOR_open_F", "CamoNet_OPFOR_big_F", "Land_HBarrier_1_F", "Land_HBarrier_3_F", "Land_HBarrier_5_F", "Land_HBarrier_Big_F", "Land_BagBunker_Small_F", "Land_BagBunker_Large_F", "Land_BagBunker_Tower_F", "Land_Cargo_Patrol_V3_F", "Land_Cargo_House_V3_F", "Land_Cargo_HQ_V3_F", "Land_Cargo_Tower_V3_F"];
 _typeAPEX = ["Land_BagFence_01_corner_green_F","Land_BagFence_01_long_green_F","Land_BagFence_01_short_green_F","Land_BagFence_01_end_green_F","Land_BagFence_01_round_green_F", "CamoNet_BLUFOR_F", "CamoNet_BLUFOR_open_F", "CamoNet_BLUFOR_big_F", "CamoNet_ghex_F", "CamoNet_ghex_open_F", "CamoNet_ghex_big_F", "Land_HBarrier_01_line_1_green_F", "Land_HBarrier_01_line_3_green_F", "Land_HBarrier_01_line_5_green_F", "Land_HBarrier_01_big_4_green_F", "Land_BagBunker_01_small_green_F", "Land_BagBunker_01_large_green_F", "Land_HBarrier_01_tower_green_F", "Land_Cargo_Patrol_V4_F", "Land_Cargo_House_V4_F", "Land_Cargo_HQ_V4_F", "Land_Cargo_Tower_V4_F"];

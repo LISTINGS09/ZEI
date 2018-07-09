@@ -71,17 +71,17 @@ _fnc_attachItem = {
 	
 	// Spawn items depending on Zeus/Eden
 	if (is3DEN) then {
-		private _obj = create3DENEntity ["Object", _item, [0,0,0], true];
+		private _obj = create3DENEntity ["Object", _item, [0,0,0], TRUE];
 		_obj set3DENAttribute ["position", (_parent modelToWorld _itemToPos)];
 		_obj set3DENAttribute ["rotation", [ _xRot, _yRot, _zRot + _forceDir]];
-		_obj set3DENAttribute ["enableSimulation", false];
-		_obj set3DENAttribute ["objectIsSimple", true];
+		_obj set3DENAttribute ["enableSimulation", FALSE];
+		_obj set3DENAttribute ["objectIsSimple", TRUE];
 	} else {	
 		private _obj = objNull;
 		
 		if (_addZeus) then {
 			_obj = createVehicle [_item, [0,0,0], [], 0, "CAN_COLLIDE"];
-			_obj enableSimulationGlobal FALSE;
+			[_obj, FALSE] remoteExec ["enableSimulationGlobal", 2];
 		} else {
 			_obj =  createSimpleObject [_item, [0,0,0]];
 		};
@@ -90,7 +90,7 @@ _fnc_attachItem = {
 		_obj setVectorDirAndUp [vectorDir _parent, vectorUp _parent];
 		[_obj, _forceDir] call ZEI_fnc_misc_rotateAroundOwnAxisZ;
 		
-		{ _x addCuratorEditableObjects [[_obj],true] } forEach allCurators;
+		{ [_x, [ [_obj], TRUE]] remoteExec ["addCuratorEditableObjects",2] } forEach allCurators;
 	};
 };
 
@@ -149,7 +149,7 @@ _itemArray = switch (_type) do {
 if (is3DEN) then {
 	collect3DENHistory {
 		[_tmpArr select 0] call _fnc_checkObject;
-		(_tmpArr select 0) set3DENAttribute ["enableSimulation", false];
+		(_tmpArr select 0) set3DENAttribute ["enableSimulation", FALSE];
 	};
 } else {
 	[_tmpArr select 0] call _fnc_checkObject;

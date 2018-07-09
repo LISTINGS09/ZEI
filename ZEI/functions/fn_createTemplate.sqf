@@ -3,10 +3,11 @@ params [
 		["_bld", objNull],
 		["_fillType", "mil"],
 		["_fillArea", FALSE],
-		["_addZeus", TRUE]
+		["_addZeus", TRUE],
+		["_allowDamage", FALSE]
 	];
 
-[format ["Passed - B: %1 T: %2 A: %3 Z: %4", _bld, _fillType, _fillArea, _addZeus], "DEBUG"] call ZEI_fnc_misc_logMsg;
+[format ["Passed - B: %1 T: %2 A: %3 Z: %4 D: %5", _bld, _fillType, _fillArea, _addZeus, _allowDamage], "DEBUG"] call ZEI_fnc_misc_logMsg;
 	
 // Skip previously processed houses
 if (isNull _bld || !isNull (_bld getVariable ["zei_furnished", objNull])) exitWith {};
@@ -31,7 +32,8 @@ if !(_templates isEqualTo []) then {
 	private _obj = objNull; // Used to track Undo in Eden.
 		
 	if (is3DEN) then {
-		_bld set3DENAttribute ["allowDamage", false]; // TODO: Doesn't work in Eden? Find alternative method.
+		// TODO: Doesn't work in Eden? Find alternative method.
+		// _bld set3DENAttribute ["allowDamage", FALSE]; 
 		
 		{ 
 			_x params ["_item", "_offset", ["_angle", 0], ["_rot", [0, 0, 0]]]; 
@@ -53,7 +55,8 @@ if !(_templates isEqualTo []) then {
 			_obj set3DENAttribute ["position", (_bld modelToWorld _offset)]; 
 		} forEach _items;		
 	} else {
-		[_bld, false] remoteExecCall ["allowDamage", _bld]; // Stop floating items when building is destroyed.
+		// Stop floating items when building is destroyed.
+		if !(_allowDamage) then { [_bld, FALSE] remoteExecCall ["allowDamage", _bld]; };
 
 		{ 
 			_x params ["_item", "_offset", ["_angle", 0], ["_rot", [0, 0, 0]]];
@@ -61,8 +64,8 @@ if !(_templates isEqualTo []) then {
 			
 			if (_addZeus) then {
 				_obj = createVehicle [_item, (_bld modelToWorld _offset), [], 0, "CAN_COLLIDE"];
-				_obj enableSimulationGlobal FALSE;
-				{ _x addCuratorEditableObjects [[_obj],TRUE] } forEach allCurators;
+				[_obj, FALSE] remoteExec ["enableSimulationGlobal", 2];
+				{ [_x, [ [_obj], TRUE]] remoteExec ["addCuratorEditableObjects", 2] } forEach allCurators;
 			} else {
 				_obj = createSimpleObject [_item, AGLtoASL (_bld modelToWorld _offset)];
 			};

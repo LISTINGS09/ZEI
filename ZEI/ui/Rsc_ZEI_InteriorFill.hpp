@@ -11,13 +11,15 @@ class Rsc_ZEI_InteriorFill
 		ZEI_IF_Text_Title,
 		ZEI_IF_Text_Type,
 		ZEI_IF_Text_Items,
-		ZEI_IF_Text_EditObject
+		ZEI_IF_Text_EditObject,
+		ZEI_IF_Text_AllowDamage
 	};
 	
 	controls[]={
 		ZEI_IF_Combo_Type,
 		ZEI_IF_Slider_Items,
 		ZEI_IF_CheckBox_EditObject,
+		ZEI_IF_CheckBox_AllowDamage,
 		ZEI_IF_Button_OK,
 		ZEI_IF_Button_Cancel
 	};
@@ -28,7 +30,7 @@ class Rsc_ZEI_InteriorFill
 		x = 0.335 * safezoneW + safezoneX;
 		y = 0.324 * safezoneH + safezoneY;
 		w = 0.2475 * safezoneW;
-		h = 0.242 * safezoneH;
+		h = 0.262 * safezoneH;
 	};
 	class ZEI_IF_Frame: RscFrame
 	{
@@ -36,7 +38,7 @@ class Rsc_ZEI_InteriorFill
 		x = 0.335 * safezoneW + safezoneX;
 		y = 0.324 * safezoneH + safezoneY;
 		w = 0.2475 * safezoneW;
-		h = 0.242 * safezoneH;
+		h = 0.262 * safezoneH;
 	};
 	class ZEI_IF_Text_Title: RscText
 	{
@@ -97,7 +99,7 @@ class Rsc_ZEI_InteriorFill
 	class ZEI_IF_Text_EditObject: RscText
 	{
 		idc = 3;
-		text = "Allow Edit"; //--- ToDo: Localize;
+		text = "Edit Objects"; //--- ToDo: Localize;
 		x = 0.340156 * safezoneW + safezoneX;
 		y = 0.467 * safezoneH + safezoneY;
 		w = 0.0845 * safezoneW;
@@ -113,28 +115,53 @@ class Rsc_ZEI_InteriorFill
 		y = 0.467 * safezoneH + safezoneY;
 		w = 0.020625 * safezoneW;
 		h = 0.033 * safezoneH;
-		tooltip = "Add objects to Curator";
+		tooltip = "Add the spawned objects to Curator\nIf disabled, they cannot be moved or edited by Zeus.";
 		checked = 1;
 		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) };\
 			if is3DEN then { (findDisplay 1705 displayCtrl 30) ctrlShow FALSE; };\
 		}";
 	};
+	class ZEI_IF_Text_AllowDamage: RscText
+	{
+		idc = 4;
+		text = "Allow Damage"; //--- ToDo: Localize;
+		x = 0.340156 * safezoneW + safezoneX;
+		y = 0.511 * safezoneH + safezoneY;
+		w = 0.0845 * safezoneW;
+		h = 0.022 * safezoneH;
+		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) };\
+			if is3DEN then { (findDisplay 1705 displayCtrl 4) ctrlShow FALSE; };\
+		}";
+	};
+	class ZEI_IF_CheckBox_AllowDamage: RscCheckbox
+	{
+		idc = 40;
+		x = 0.422656 * safezoneW + safezoneX;
+		y = 0.511 * safezoneH + safezoneY;
+		w = 0.020625 * safezoneW;
+		h = 0.033 * safezoneH;
+		tooltip = "Allow the building to be damaged.\nIf enabled, all objects inside the building may be left 'floating' when damaged/destroyed.";
+		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) };\
+			if is3DEN then { (findDisplay 1705 displayCtrl 40) ctrlShow FALSE; };\
+		}";
+	};
+	
 	class ZEI_IF_Button_OK: RscButton
 	{
 		idc = -1;
 		text = "OK"; //--- ToDo: Localize;
 		x = 0.360781 * safezoneW + safezoneX;
-		y = 0.522 * safezoneH + safezoneY;
+		y = 0.542 * safezoneH + safezoneY;
 		w = 0.04125 * safezoneW;
 		h = 0.022 * safezoneH;
-		onButtonClick  = "[ lbCurSel (findDisplay 1705 displayCtrl 10), round (sliderPosition (findDisplay 1705 displayCtrl 20)), cbChecked (findDisplay 1705 displayCtrl 30) ] spawn ZEI_fnc_ui_interiorFill; (findDisplay 1705) closeDisplay 1;";
+		onButtonClick  = "[ lbCurSel (findDisplay 1705 displayCtrl 10), round (sliderPosition (findDisplay 1705 displayCtrl 20)), cbChecked (findDisplay 1705 displayCtrl 30), cbChecked (findDisplay 1705 displayCtrl 40) ] spawn ZEI_fnc_ui_interiorFill; (findDisplay 1705) closeDisplay 1;";
 	};
 	class ZEI_IF_Button_Cancel: RscButton
 	{
 		idc = -1;
 		text = "Cancel"; //--- ToDo: Localize;
 		x = 0.494844 * safezoneW + safezoneX;
-		y = 0.522 * safezoneH + safezoneY;
+		y = 0.542 * safezoneH + safezoneY;
 		w = 0.04125 * safezoneW;
 		h = 0.022 * safezoneH;
 		onButtonClick  = "(findDisplay 1705) closeDisplay 2;";

@@ -108,7 +108,7 @@ if is3DEN then {
 	[_unit, _bld] call _setDirStance;
 	
 	//Add to Zeus
-	{ _x addCuratorEditableObjects [ [_unit], TRUE] } forEach allCurators;
+	{ [_x, [ [_unit], TRUE]] remoteExec ["addCuratorEditableObjects",2] } forEach allCurators;
 };
 
 [format["Created %1 [%2] at %3", typeOf _unit, _group, _pos], "DEBUG"] call ZEI_fnc_misc_logMsg;

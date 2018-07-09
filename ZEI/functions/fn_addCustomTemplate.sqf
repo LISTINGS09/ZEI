@@ -3,7 +3,7 @@ params ["_type", "_data"];
 (_data splitString ": ") params ["_bld", "_template"];
 _template = parseSimpleArray _template;
 
-if ((_type isEqualTo true && {_type}) || (_type isEqualTo "" && {_type == "civ"})) then {
+if ((_type isEqualTo TRUE && {_type}) || (_type isEqualTo "" && {_type == "civ"})) then {
 	if (isNil "ZEI_civ_customBuildings") then {ZEI_civ_customBuildings = []};
 	private _path = [ZEI_civ_customBuildings, _bld] call BIS_fnc_findNestedElement;
 	

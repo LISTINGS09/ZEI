@@ -1,13 +1,6 @@
 class CfgVehicles {
 	class Logic;
-	class Module_F: Logic {
-		class AttributesBase {
-			class Default;
-			class Edit;
-			class Combo;
-			class Checkbox;
-		};
-	};
+	class Module_F: Logic {};
 	
 	class ZEI_ListBuildings : Module_F {
 		scope = 2;
@@ -55,7 +48,7 @@ class CfgVehicles {
 		category = "zei_interiors";
 		function = "ZEI_fnc_mod_objectSwitch";
 		functionPriority = 1;
-		icon = "\a3\Modules_f\data\portraitRespawn_ca.paa";
+		icon = "\A3\Modules_f\data\portraitRespawn_ca.paa";
 		isGlobal = 1;
 		isTriggerActivated = 0;
 		is3DEN = 1;
@@ -68,6 +61,7 @@ class CfgVehicles {
 		category = "zei_interiors";
 		function = "ZEI_fnc_mod_interiorFill";
 		functionPriority = 1;
+		icon = "\A3\modules_f\data\portraitModule_ca.paa";
 		isGlobal = 1;
 		isTriggerActivated = 0;
 		is3DEN = 1;

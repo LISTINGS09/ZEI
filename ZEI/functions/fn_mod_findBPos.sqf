@@ -9,7 +9,7 @@ switch _mode do {
 		// In MP only run for local client.
 		if (!local _logic) exitWith {};
 								
-		private _bldArr = nearestObjects [_logic, ["building"], 50, true]; 
+		private _bldArr = nearestObjects [_logic, ["building"], 50, TRUE]; 
 		
 		_bldArr = _bldArr select { str (_x buildingPos 0) != "[0,0,0]" };
 		
@@ -40,4 +40,4 @@ switch _mode do {
 	};
 };
 
-true
+TRUE

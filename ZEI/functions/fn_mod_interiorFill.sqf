@@ -1,7 +1,7 @@
 params [
 		["_mode", "", [""]],
 		["_input", [], [[]]]//,
-		//["_setVar", true, [true]]
+		//["_setVar", TRUE, [TRUE]]
 	];
 
 switch _mode do {
@@ -36,3 +36,5 @@ switch _mode do {
 		};
 	};
 };
+
+TRUE

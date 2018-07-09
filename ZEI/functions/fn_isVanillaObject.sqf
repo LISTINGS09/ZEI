@@ -1,6 +1,6 @@
 params [["_obj", objNull, [objNull, ""]]];
 
-if (_obj isEqualTo "" || {_obj isEqualTo objNull}) exitWith {false};
+if (_obj isEqualTo "" || {_obj isEqualTo objNull}) exitWith {FALSE};
 if (_obj isEqualType objNull) then {_obj = typeOf _obj};
 
 1 == {

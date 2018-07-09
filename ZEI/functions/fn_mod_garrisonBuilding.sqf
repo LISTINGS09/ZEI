@@ -1,7 +1,7 @@
 params [
 		["_mode", "", [""]],
 		["_input", [], [[]]]//,
-		//["_setVar", true, [true]]
+		//["_setVar", TRUE, [TRUE]]
 	];
 
 switch _mode do {
@@ -11,7 +11,7 @@ switch _mode do {
 		// In MP only run for local client.
 		if (!local _logic) exitWith {};
 				
-		private _bldArr = (nearestObjects [_logic, ["building"], 200, true]) select {count (_x buildingPos -1) > 0};
+		private _bldArr = (nearestObjects [_logic, ["building"], 200, TRUE]) select {count (_x buildingPos -1) > 0};
 		
 		if (count _bldArr > 0) then {
 			ZEI_LastPos = getPos _logic;
@@ -37,3 +37,5 @@ switch _mode do {
 		};
 	};
 };
+
+TRUE

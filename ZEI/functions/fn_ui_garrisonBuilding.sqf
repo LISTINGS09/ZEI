@@ -70,7 +70,7 @@ if (is3DEN) then {
 		(group _tempUnit) set3DENAttribute ["garbageCollectGroup", TRUE];
 		
 		// Set dynamicSimulation if forced or all units are inside a building.
-		if ({(count (lineIntersectsWith [eyePos _x, ((eyePos _x) vectorAdd [0, 0, 10])] select {_x isKindOf 'Building'}) < 1)} count units ((get3DENSelected "Group") select 0) > 0 || {_forceDS}) then { 
+		if (({(count (lineIntersectsWith [eyePos _x, ((eyePos _x) vectorAdd [0, 0, 10])] select {_x isKindOf 'Building'}) < 1)} count (units _tempUnit)) == 0 || {_forceDS}) then { 
 				(group _tempUnit) set3DENAttribute ["dynamicSimulation", TRUE];
 		};
 		delete3DENEntities [_tempUnit];

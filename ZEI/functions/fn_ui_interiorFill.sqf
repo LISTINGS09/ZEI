@@ -1,7 +1,8 @@
 params [
 		["_type", 0],
 		["_area", 0],
-		["_addZeus", TRUE]
+		["_addZeus", TRUE],
+		["_allowDamage", FALSE]
 	];
 
 private _fillType = if (_type isEqualTo 0) then { "mil" } else { "civ" };
@@ -28,11 +29,11 @@ if (_bldArr isEqualTo []) then {
 if (is3DEN) then {
 	collect3DENHistory {
 		{
-			[_x, _fillType, _fillArea] call ZEI_fnc_createTemplate;
+			[_x, _fillType, _fillArea, _addZeus, _allowDamage] call ZEI_fnc_createTemplate;
 		} forEach _bldArr;
 	};
 } else {
 	{
-		[_x, _fillType, _fillArea, _addZeus] call ZEI_fnc_createTemplate;
+		[_x, _fillType, _fillArea, _addZeus, _allowDamage] call ZEI_fnc_createTemplate;
 	} forEach _bldArr;
 };
