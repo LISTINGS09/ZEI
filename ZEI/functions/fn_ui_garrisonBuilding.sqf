@@ -48,6 +48,9 @@ if (count _menList == 0) exitWith {
 	[format["No units found for faction: %1", _faction], "ERROR"] call ZEI_fnc_misc_logMsg;
 };
 
+// Store faction for next time
+ZEI_LastFaction = _faction;
+
 private _bldPos = _bld buildingPos -1;
 
 if (is3DEN) then {

@@ -76,9 +76,9 @@ private _setDirStance = {
 	// Force hold position.
 	if !(leader _unit == _unit) then {
 		if (is3DEN) then { 
-			_unit set3DENAttribute ["Init", "if (local this) then { doStop this };"];
+			_unit set3DENAttribute ["Init", "this disableAI 'PATH';"];
 		} else {
-			doStop _unit;
+			_unit disableAI "PATH";
 		};
 	};
 	

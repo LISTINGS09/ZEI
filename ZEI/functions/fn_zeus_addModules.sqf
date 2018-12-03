@@ -1,5 +1,5 @@
 // Add custom items to Zeus.
-sleep 0.1; // Display needs time to init.
+sleep 1; // Display needs time to init.
 
 if (isNull findDisplay 312) exitWith { 
 	["Failed to add Modules - Zeus Display not found!", "ERROR"] call ZEI_fnc_misc_logMsg;
