@@ -19,7 +19,7 @@ class Rsc_ZEI_ObjectSwitch
 		ZEI_OS_Button_Cancel
 	};
 
-	class ZEI_OS_Background: IGUIBack
+	class ZEI_OS_Background: ZEI_IGUIBack
 	{
 		idc = -1;
 		x = 0.350468 * safezoneW + safezoneX;
@@ -27,7 +27,7 @@ class Rsc_ZEI_ObjectSwitch
 		w = 0.242344 * safezoneW;
 		h = 0.209 * safezoneH;
 	};
-	class ZEI_OS_Frame: RscFrame
+	class ZEI_OS_Frame: ZEI_RscFrame
 	{
 		idc = -1;
 		x = 0.350468 * safezoneW + safezoneX;
@@ -35,7 +35,7 @@ class Rsc_ZEI_ObjectSwitch
 		w = 0.242344 * safezoneW;
 		h = 0.209 * safezoneH;
 	};
-	class ZEI_OS_Text_Title: RscText
+	class ZEI_OS_Text_Title: ZEI_RscText
 	{
 		idc = -1;
 		text = "Object Switcher"; //--- ToDo: Localize;
@@ -44,7 +44,7 @@ class Rsc_ZEI_ObjectSwitch
 		w = 0.0773437 * safezoneW;
 		h = 0.033 * safezoneH;
 	};
-	class ZEI_OS_Text_Radius: RscText
+	class ZEI_OS_Text_Radius: ZEI_RscText
 	{
 		idc = -1;
 		text = "Radius"; //--- ToDo: Localize;
@@ -53,7 +53,7 @@ class Rsc_ZEI_ObjectSwitch
 		w = 0.0360937 * safezoneW;
 		h = 0.022 * safezoneH;
 	};
-	class ZEI_OS_Text_RadiusMeters: RscText
+	class ZEI_OS_Text_RadiusMeters: ZEI_RscText
 	{
 		idc = 1;
 		text = "50m"; //--- ToDo: Localize;
@@ -62,7 +62,7 @@ class Rsc_ZEI_ObjectSwitch
 		w = 0.0360937 * safezoneW;
 		h = 0.022 * safezoneH;
 	};
-	class ZEI_OS_Text_Type: RscText
+	class ZEI_OS_Text_Type: ZEI_RscText
 	{
 		idc = -1;
 		text = "Convert To"; //--- ToDo: Localize;
@@ -71,7 +71,7 @@ class Rsc_ZEI_ObjectSwitch
 		w = 0.0464063 * safezoneW;
 		h = 0.022 * safezoneH;
 	};
-	class ZEI_OS_Combo_Type: RscCombo
+	class ZEI_OS_Combo_Type: ZEI_RscCombo
 	{
 		idc = 10;
 		x = 0.407187 * safezoneW + safezoneX;
@@ -86,7 +86,7 @@ class Rsc_ZEI_ObjectSwitch
 			(findDisplay 1701 displayCtrl 10) lbSetCurSel 0;\
 		}";
 	};
-	class ZEI_OS_Slider_Radius: RscSlider
+	class ZEI_OS_Slider_Radius: ZEI_RscSlider
 	{
 		idc = 20;
 		x = 0.407187 * safezoneW + safezoneX;
@@ -97,7 +97,7 @@ class Rsc_ZEI_ObjectSwitch
 		onSliderPosChanged = "(findDisplay 1701 displayCtrl 1) ctrlSetText format['%1m', round (_this select 1)];";
 		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) }; (findDisplay 1701 displayCtrl 20) sliderSetRange [ 1, 250 ]; (findDisplay 1701 displayCtrl 20) sliderSetPosition 50; };";
 	};
-	class ZEI_OS_Button_OK: RscButton
+	class ZEI_OS_Button_OK: ZEI_RscButton
 	{
 		idc = -1;
 		text = "OK"; //--- ToDo: Localize;
@@ -107,7 +107,7 @@ class Rsc_ZEI_ObjectSwitch
 		h = 0.022 * safezoneH;
 		onButtonClick  = "[ lbCurSel (findDisplay 1701 displayCtrl 10), sliderPosition (findDisplay 1701 displayCtrl 20) ] spawn ZEI_fnc_ui_objectSwitch; findDisplay 1701 closeDisplay 1;";
 	};
-	class ZEI_OS_Button_Cancel: RscButton
+	class ZEI_OS_Button_Cancel: ZEI_RscButton
 	{
 		idc = -1;
 		text = "Cancel"; //--- ToDo: Localize;
