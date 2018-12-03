@@ -24,7 +24,7 @@ class Rsc_ZEI_InteriorFill
 		ZEI_IF_Button_Cancel
 	};
 
-	class ZEI_IF_Background: IGUIBack
+	class ZEI_IF_Background: ZEI_IGUIBack
 	{
 		idc = -1;
 		x = 0.335 * safezoneW + safezoneX;
@@ -32,7 +32,7 @@ class Rsc_ZEI_InteriorFill
 		w = 0.2475 * safezoneW;
 		h = 0.262 * safezoneH;
 	};
-	class ZEI_IF_Frame: RscFrame
+	class ZEI_IF_Frame: ZEI_RscFrame
 	{
 		idc = -1;
 		x = 0.335 * safezoneW + safezoneX;
@@ -40,7 +40,7 @@ class Rsc_ZEI_InteriorFill
 		w = 0.2475 * safezoneW;
 		h = 0.262 * safezoneH;
 	};
-	class ZEI_IF_Text_Title: RscText
+	class ZEI_IF_Text_Title: ZEI_RscText
 	{
 		idc = -1;
 		text = "Interior Type"; //--- ToDo: Localize;
@@ -49,7 +49,7 @@ class Rsc_ZEI_InteriorFill
 		w = 0.19 * safezoneW;
 		h = 0.033 * safezoneH;
 	};
-	class ZEI_IF_Combo_Type: RscCombo
+	class ZEI_IF_Combo_Type: ZEI_RscCombo
 	{
 		idc = 10;
 		x = 0.432969 * safezoneW + safezoneX;
@@ -63,7 +63,7 @@ class Rsc_ZEI_InteriorFill
 			(findDisplay 1705 displayCtrl 10) lbSetCurSel 0;\
 		}";
 	};
-	class ZEI_IF_Text_Type: RscText
+	class ZEI_IF_Text_Type: ZEI_RscText
 	{
 		idc = -1;
 		text = "Object Type"; //--- ToDo: Localize;
@@ -72,7 +72,7 @@ class Rsc_ZEI_InteriorFill
 		w = 0.0567187 * safezoneW;
 		h = 0.022 * safezoneH;
 	};
-	class ZEI_IF_Text_Items: RscText
+	class ZEI_IF_Text_Items: ZEI_RscText
 	{
 		idc = 2;
 		text = "Radius: Nearest"; //--- ToDo: Localize;
@@ -81,7 +81,7 @@ class Rsc_ZEI_InteriorFill
 		w = 0.0825 * safezoneW;
 		h = 0.022 * safezoneH;
 	};
-	class ZEI_IF_Slider_Items: RscSlider
+	class ZEI_IF_Slider_Items: ZEI_RscSlider
 	{
 		idc = 20;
 		x = 0.427812 * safezoneW + safezoneX;
@@ -96,7 +96,7 @@ class Rsc_ZEI_InteriorFill
 			(findDisplay 1705 displayCtrl 20) sliderSetPosition 0;\
 		};";
 	};
-	class ZEI_IF_Text_EditObject: RscText
+	class ZEI_IF_Text_EditObject: ZEI_RscText
 	{
 		idc = 3;
 		text = "Edit Objects"; //--- ToDo: Localize;
@@ -108,7 +108,7 @@ class Rsc_ZEI_InteriorFill
 			if is3DEN then { (findDisplay 1705 displayCtrl 3) ctrlShow FALSE; };\
 		}";
 	};
-	class ZEI_IF_CheckBox_EditObject: RscCheckbox
+	class ZEI_IF_CheckBox_EditObject: ZEI_RscCheckBox
 	{
 		idc = 30;
 		x = 0.422656 * safezoneW + safezoneX;
@@ -121,7 +121,7 @@ class Rsc_ZEI_InteriorFill
 			if is3DEN then { (findDisplay 1705 displayCtrl 30) ctrlShow FALSE; };\
 		}";
 	};
-	class ZEI_IF_Text_AllowDamage: RscText
+	class ZEI_IF_Text_AllowDamage: ZEI_RscText
 	{
 		idc = 4;
 		text = "Allow Damage"; //--- ToDo: Localize;
@@ -133,7 +133,7 @@ class Rsc_ZEI_InteriorFill
 			if is3DEN then { (findDisplay 1705 displayCtrl 4) ctrlShow FALSE; };\
 		}";
 	};
-	class ZEI_IF_CheckBox_AllowDamage: RscCheckbox
+	class ZEI_IF_CheckBox_AllowDamage: ZEI_RscCheckBox
 	{
 		idc = 40;
 		x = 0.422656 * safezoneW + safezoneX;
@@ -146,7 +146,7 @@ class Rsc_ZEI_InteriorFill
 		}";
 	};
 	
-	class ZEI_IF_Button_OK: RscButton
+	class ZEI_IF_Button_OK: ZEI_RscButton
 	{
 		idc = -1;
 		text = "OK"; //--- ToDo: Localize;
@@ -156,7 +156,7 @@ class Rsc_ZEI_InteriorFill
 		h = 0.022 * safezoneH;
 		onButtonClick  = "[ lbCurSel (findDisplay 1705 displayCtrl 10), round (sliderPosition (findDisplay 1705 displayCtrl 20)), cbChecked (findDisplay 1705 displayCtrl 30), cbChecked (findDisplay 1705 displayCtrl 40) ] spawn ZEI_fnc_ui_interiorFill; (findDisplay 1705) closeDisplay 1;";
 	};
-	class ZEI_IF_Button_Cancel: RscButton
+	class ZEI_IF_Button_Cancel: ZEI_RscButton
 	{
 		idc = -1;
 		text = "Cancel"; //--- ToDo: Localize;

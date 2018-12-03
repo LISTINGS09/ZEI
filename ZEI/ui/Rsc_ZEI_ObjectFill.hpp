@@ -20,7 +20,7 @@ class Rsc_ZEI_ObjectFill
 		ZEI_OF_Button_Cancel
 	};
 
-	class ZEI_OF_Background: IGUIBack
+	class ZEI_OF_Background: ZEI_IGUIBack
 	{
 		idc = -1;
 		x = 0.335 * safezoneW + safezoneX;
@@ -28,7 +28,7 @@ class Rsc_ZEI_ObjectFill
 		w = 0.2475 * safezoneW;
 		h = 0.242 * safezoneH;
 	};
-	class ZEI_OF_Frame: RscFrame
+	class ZEI_OF_Frame: ZEI_RscFrame
 	{
 		idc = -1;
 		x = 0.335 * safezoneW + safezoneX;
@@ -36,7 +36,7 @@ class Rsc_ZEI_ObjectFill
 		w = 0.2475 * safezoneW;
 		h = 0.242 * safezoneH;
 	};
-	class ZEI_OF_Text_Title: RscText
+	class ZEI_OF_Text_Title: ZEI_RscText
 	{
 		idc = -1;
 		text = "Object Fill"; //--- ToDo: Localize;
@@ -45,7 +45,7 @@ class Rsc_ZEI_ObjectFill
 		w = 0.19 * safezoneW;
 		h = 0.033 * safezoneH;
 	};
-	class ZEI_OF_Combo_Type: RscCombo
+	class ZEI_OF_Combo_Type: ZEI_RscCombo
 	{
 		idc = 10;
 		x = 0.432969 * safezoneW + safezoneX;
@@ -58,7 +58,7 @@ class Rsc_ZEI_ObjectFill
 			(findDisplay 1704 displayCtrl 10) lbSetCurSel 0;\
 		}";
 	};
-	class ZEI_OF_Text_Type: RscText
+	class ZEI_OF_Text_Type: ZEI_RscText
 	{
 		idc = -1;
 		text = "Object Type"; //--- ToDo: Localize;
@@ -67,7 +67,7 @@ class Rsc_ZEI_ObjectFill
 		w = 0.0567187 * safezoneW;
 		h = 0.022 * safezoneH;
 	};
-	class ZEI_OF_Text_Items: RscText
+	class ZEI_OF_Text_Items: ZEI_RscText
 	{
 		idc = 2;
 		text = "Fill Percent (30)"; //--- ToDo: Localize;
@@ -76,7 +76,7 @@ class Rsc_ZEI_ObjectFill
 		w = 0.0825 * safezoneW;
 		h = 0.022 * safezoneH;
 	};
-	class ZEI_OF_Slider_Items: RscSlider
+	class ZEI_OF_Slider_Items: ZEI_RscSlider
 	{
 		idc = 20;
 		x = 0.427812 * safezoneW + safezoneX;
@@ -91,7 +91,7 @@ class Rsc_ZEI_ObjectFill
 			(findDisplay 1704 displayCtrl 20) sliderSetPosition 3;\
 			};";
 	};
-	class ZEI_OF_Text_EditObject: RscText
+	class ZEI_OF_Text_EditObject: ZEI_RscText
 	{
 		idc = 3;
 		text = "Edit Object"; //--- ToDo: Localize;
@@ -103,7 +103,7 @@ class Rsc_ZEI_ObjectFill
 			if is3DEN then { (findDisplay 1704 displayCtrl 3) ctrlShow FALSE; };\
 		}";
 	};
-	class ZEI_OF_CheckBox_EditObject: RscCheckbox
+	class ZEI_OF_CheckBox_EditObject: ZEI_RscCheckBox
 	{
 		idc = 30;
 		x = 0.422656 * safezoneW + safezoneX;
@@ -116,7 +116,7 @@ class Rsc_ZEI_ObjectFill
 			if is3DEN then { (findDisplay 1704 displayCtrl 30) ctrlShow FALSE; };\
 		}";
 	};
-	class ZEI_OF_Button_OK: RscButton
+	class ZEI_OF_Button_OK: ZEI_RscButton
 	{
 		idc = -1;
 		text = "OK"; //--- ToDo: Localize;
@@ -126,7 +126,7 @@ class Rsc_ZEI_ObjectFill
 		h = 0.022 * safezoneH;
 		onButtonClick  = "[ lbCurSel (findDisplay 1704 displayCtrl 10), round (sliderPosition (findDisplay 1704 displayCtrl 20)) * 10, cbChecked (findDisplay 1704 displayCtrl 30) ] spawn ZEI_fnc_ui_objectFill; (findDisplay 1704) closeDisplay 1;";
 	};
-	class ZEI_OF_Button_Cancel: RscButton
+	class ZEI_OF_Button_Cancel: ZEI_RscButton
 	{
 		idc = -1;
 		text = "Cancel"; //--- ToDo: Localize;

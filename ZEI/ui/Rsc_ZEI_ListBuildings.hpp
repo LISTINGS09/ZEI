@@ -21,7 +21,7 @@ class Rsc_ZEI_ListBuildings
 		ZEI_LB_Button_Cancel
 	};
 
-	class ZEI_LB_Background: IGUIBack
+	class ZEI_LB_Background: ZEI_IGUIBack
 	{
 		idc = -1;
 		x = 0.335 * safezoneW + safezoneX;
@@ -29,7 +29,7 @@ class Rsc_ZEI_ListBuildings
 		w = 0.2475 * safezoneW;
 		h = 0.242 * safezoneH;
 	};
-	class ZEI_LB_Frame: RscFrame
+	class ZEI_LB_Frame: ZEI_RscFrame
 	{
 		idc = -1;
 		x = 0.335 * safezoneW + safezoneX;
@@ -37,7 +37,7 @@ class Rsc_ZEI_ListBuildings
 		w = 0.2475 * safezoneW;
 		h = 0.242 * safezoneH;
 	};
-	class ZEI_LB_Text_Title: RscText
+	class ZEI_LB_Text_Title: ZEI_RscText
 	{
 		idc = -1;
 		text = "List Template Buildings"; //--- ToDo: Localize;
@@ -46,7 +46,7 @@ class Rsc_ZEI_ListBuildings
 		w = 0.19 * safezoneW;
 		h = 0.033 * safezoneH;
 	};
-	class ZEI_LB_Combo_Matching: RscCombo
+	class ZEI_LB_Combo_Matching: ZEI_RscCombo
 	{
 		idc = 10;
 		x = 0.432969 * safezoneW + safezoneX;
@@ -59,7 +59,7 @@ class Rsc_ZEI_ListBuildings
 			(findDisplay 1703 displayCtrl 10) lbSetCurSel 0;\
 		}";
 	};
-	class ZEI_LB_Text_Matching: RscText
+	class ZEI_LB_Text_Matching: ZEI_RscText
 	{
 		idc = -1;
 		text = "Template Filter"; //--- ToDo: Localize;
@@ -68,7 +68,7 @@ class Rsc_ZEI_ListBuildings
 		w = 0.0567187 * safezoneW;
 		h = 0.022 * safezoneH;
 	};
-	class ZEI_LB_Text_MinTemplates: RscText
+	class ZEI_LB_Text_MinTemplates: ZEI_RscText
 	{
 		idc = -1;
 		text = "Number of Templates"; //--- ToDo: Localize;
@@ -77,7 +77,7 @@ class Rsc_ZEI_ListBuildings
 		w = 0.0825 * safezoneW;
 		h = 0.022 * safezoneH;
 	};
-	class ZEI_LB_Text_MinTemplatesCount: RscText
+	class ZEI_LB_Text_MinTemplatesCount: ZEI_RscText
 	{
 		idc = 2;
 		text = "(15 or less)"; //--- ToDo: Localize;
@@ -86,7 +86,7 @@ class Rsc_ZEI_ListBuildings
 		w = 0.0825 * safezoneW;
 		h = 0.022 * safezoneH;
 	};
-	class ZEI_LB_Slider_MinTemplates: RscSlider
+	class ZEI_LB_Slider_MinTemplates: ZEI_RscSlider
 	{
 		idc = 20;
 		x = 0.427812 * safezoneW + safezoneX;
@@ -100,7 +100,7 @@ class Rsc_ZEI_ListBuildings
 			(findDisplay 1703 displayCtrl 20) sliderSetPosition 15;\
 			};";
 	};
-	class ZEI_LB_Text_ShowPositions: RscText
+	class ZEI_LB_Text_ShowPositions: ZEI_RscText
 	{
 		idc = -1;
 		text = "Mark Positions"; //--- ToDo: Localize;
@@ -109,7 +109,7 @@ class Rsc_ZEI_ListBuildings
 		w = 0.0825 * safezoneW;
 		h = 0.022 * safezoneH;
 	};
-	class ZEI_LB_CheckBox_ShowPositions: RscCheckbox
+	class ZEI_LB_CheckBox_ShowPositions: ZEI_RscCheckBox
 	{
 		idc = 30;
 		x = 0.422656 * safezoneW + safezoneX;
@@ -117,7 +117,7 @@ class Rsc_ZEI_ListBuildings
 		w = 0.020625 * safezoneW;
 		h = 0.033 * safezoneH;
 	};
-	class ZEI_LB_Button_OK: RscButton
+	class ZEI_LB_Button_OK: ZEI_RscButton
 	{
 		idc = -1;
 		text = "OK"; //--- ToDo: Localize;
@@ -127,7 +127,7 @@ class Rsc_ZEI_ListBuildings
 		h = 0.022 * safezoneH;
 		onButtonClick  = "[ lbCurSel (findDisplay 1703 displayCtrl 10), round (sliderPosition (findDisplay 1703 displayCtrl 20)), cbChecked (findDisplay 1703 displayCtrl 30) ] spawn ZEI_fnc_ui_listBuildings; (findDisplay 1703) closeDisplay 1;";
 	};
-	class ZEI_LB_Button_Cancel: RscButton
+	class ZEI_LB_Button_Cancel: ZEI_RscButton
 	{
 		idc = -1;
 		text = "Cancel"; //--- ToDo: Localize;

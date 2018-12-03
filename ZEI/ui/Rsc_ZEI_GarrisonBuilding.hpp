@@ -20,7 +20,7 @@ class Rsc_ZEI_GarrisonBuilding
 		ZEI_GB_Button_Cancel
 	};
 
-	class ZEI_GB_Background: IGUIBack
+	class ZEI_GB_Background: ZEI_IGUIBack
 	{
 		idc = -1;
 		x = 0.335 * safezoneW + safezoneX;
@@ -28,7 +28,7 @@ class Rsc_ZEI_GarrisonBuilding
 		w = 0.2475 * safezoneW;
 		h = 0.232 * safezoneH;
 	};
-	class ZEI_GB_Frame: RscFrame
+	class ZEI_GB_Frame: ZEI_RscFrame
 	{
 		idc = -1;
 		x = 0.335 * safezoneW + safezoneX;
@@ -36,7 +36,7 @@ class Rsc_ZEI_GarrisonBuilding
 		w = 0.2475 * safezoneW;
 		h = 0.232 * safezoneH;
 	};
-	class ZEI_GB_Text_Title: RscText
+	class ZEI_GB_Text_Title: ZEI_RscText
 	{
 		idc = 1;
 		text = "Garrison Building"; //--- ToDo: Localize;
@@ -46,7 +46,7 @@ class Rsc_ZEI_GarrisonBuilding
 		h = 0.033 * safezoneH;
 		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) }; (findDisplay 1702 displayCtrl 1) ctrlSetText format['Garrison Building - %1 (%2m)', getText(configFile >> 'CfgVehicles' >> typeOf (missionNamespace getVariable ['ZEI_LastBuilding',objNull]) >> 'displayName'), round ((missionNamespace getVariable ['ZEI_LastPos',[0,0,0]]) distance2D (missionNamespace getVariable ['ZEI_LastBuilding',objNull]))]; };";
 	};
-	class ZEI_GB_Combo_Type: RscCombo
+	class ZEI_GB_Combo_Type: ZEI_RscCombo
 	{
 		idc = 10;
 		x = 0.432969 * safezoneW + safezoneX;
@@ -56,7 +56,7 @@ class Rsc_ZEI_GarrisonBuilding
 		tooltip = "Choose the faction you wish to spawn.";
 		onLoad= "_this spawn ZEI_fnc_ui_garrisonCombo;";
 	};
-	class ZEI_GB_Text_Type: RscText
+	class ZEI_GB_Text_Type: ZEI_RscText
 	{
 		idc = -1;
 		text = "Faction"; //--- ToDo: Localize;
@@ -65,7 +65,7 @@ class Rsc_ZEI_GarrisonBuilding
 		w = 0.0567187 * safezoneW;
 		h = 0.022 * safezoneH;
 	};
-	class ZEI_GB_Text_Units: RscText
+	class ZEI_GB_Text_Units: ZEI_RscText
 	{
 		idc = 2;
 		text = "No. of Units"; //--- ToDo: Localize;
@@ -74,7 +74,7 @@ class Rsc_ZEI_GarrisonBuilding
 		w = 0.0825 * safezoneW;
 		h = 0.022 * safezoneH;
 	};
-	class ZEI_GB_Slider_Units: RscSlider
+	class ZEI_GB_Slider_Units: ZEI_RscSlider
 	{
 		idc = 20;
 		x = 0.427812 * safezoneW + safezoneX;
@@ -90,7 +90,7 @@ class Rsc_ZEI_GarrisonBuilding
 			(findDisplay 1702 displayCtrl 2) ctrlSetText format['No. of Units (%1)', round ((count ((missionNamespace getVariable ['ZEI_LastBuilding',objNull]) buildingPos -1)) / 3)];\
 			};";
 	};
-	class ZEI_GB_Text_DSEnabled: RscText
+	class ZEI_GB_Text_DSEnabled: ZEI_RscText
 	{
 		idc = -1;
 		text = "Dynamic Simulation"; //--- ToDo: Localize;
@@ -99,7 +99,7 @@ class Rsc_ZEI_GarrisonBuilding
 		w = 0.0825 * safezoneW;
 		h = 0.022 * safezoneH;
 	};
-	class ZEI_GB_CheckBox_DSEnabled: RscCheckbox
+	class ZEI_GB_CheckBox_DSEnabled: ZEI_RscCheckBox
 	{
 		idc = 30;
 		x = 0.422656 * safezoneW + safezoneX;
@@ -108,7 +108,7 @@ class Rsc_ZEI_GarrisonBuilding
 		h = 0.033 * safezoneH;
 		tooltip = "Enables Dynamic Simulation for units\nDO NOT use when AI can easily be seen (e.g. outside or top of buildings).";
 	};
-	class ZEI_GB_Button_OK: RscButton
+	class ZEI_GB_Button_OK: ZEI_RscButton
 	{
 		idc = -1;
 		text = "OK"; //--- ToDo: Localize;
@@ -118,7 +118,7 @@ class Rsc_ZEI_GarrisonBuilding
 		h = 0.022 * safezoneH;
 		onButtonClick  = "[ (findDisplay 1702 displayCtrl 10) lbData (lbCurSel (findDisplay 1702 displayCtrl 10)), round (sliderPosition (findDisplay 1702 displayCtrl 20)), cbChecked (findDisplay 1702 displayCtrl 30) ] spawn ZEI_fnc_ui_garrisonBuilding; (findDisplay 1702) closeDisplay 1;";
 	};
-	class ZEI_GB_Button_Cancel: RscButton
+	class ZEI_GB_Button_Cancel: ZEI_RscButton
 	{
 		idc = -1;
 		text = "Cancel"; //--- ToDo: Localize;
