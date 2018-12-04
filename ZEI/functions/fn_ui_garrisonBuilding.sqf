@@ -7,7 +7,7 @@ params [
 [format["Passed - F: %1 U: %2 DS: %2", _faction, _units, _forceDS], "DEBUG"] call ZEI_fnc_misc_logMsg;
 	
 // Need to pass logic pos info to GUI somehow?
-private _bld = missionNamespace getVariable ["ZEI_LastBuilding", objNull];
+private _bld = missionNamespace getVariable ["ZEI_UiLastBuilding", objNull];
 
 // Get all units with a weapon and non-parachute backpack.
 private _tempList = "getText (_x >> 'faction') == _faction && (configName _x) isKindoF 'CAManBase' && getNumber(_x >> 'scope') == 2" configClasses (configFile >> "CfgVehicles");
@@ -48,8 +48,9 @@ if (count _menList == 0) exitWith {
 	[format["No units found for faction: %1", _faction], "ERROR"] call ZEI_fnc_misc_logMsg;
 };
 
-// Store faction for next time
-ZEI_LastFaction = _faction;
+// Save UI Settings for next time
+ZEI_UiGarrisonFaction = _faction;
+ZEI_UiGarrisonDynamic = _forceDS;
 
 private _bldPos = _bld buildingPos -1;
 

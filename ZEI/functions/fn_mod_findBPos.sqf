@@ -2,14 +2,16 @@
 // This is intended to highlight positions to avoid when decorating houses.
 params [["_mode","",[""]],["_input",[],[[]]]];
 
+[format["Passed Mode: %1 - Input: %2", _mode, _input], "DEBUG"] call ZEI_fnc_misc_logMsg;
+
 switch _mode do {
-    case "attributesChanged3DEN";
+	case "attributesChanged3DEN";
 	case "init": {
-		_input params [["_logic",objNull,[objNull]],["_isActivated",true,[true]],["_isCuratorPlaced",false,[true]]];
+		_input params [["_logic",objNull,[objNull]],["_isActivated",true,[true]], ["_isCuratorPlaced",false,[true]]];
 		
 		// In MP only run for local client.
 		if (!local _logic) exitWith {};
-		
+								
 		private _bldArr = nearestObjects [_logic, ["building"], 50, true]; 
 		
 		_bldArr = _bldArr select { str (_x buildingPos 0) != "[0,0,0]" };

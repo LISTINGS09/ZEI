@@ -83,7 +83,7 @@ class Rsc_ZEI_ObjectSwitch
 			waitUntil { !isNull (_this select 0) };\
 			{ (findDisplay 1701 displayCtrl 10) lbAdd _x } forEach ['Vanilla', 'Jungle (Apex)'];\
 			if (isClass(configFile >> 'CfgPatches' >> 'CUP_Core')) then { {(findDisplay 1701 displayCtrl 10) lbAdd _x } forEach [ 'Desert (CUP)', 'Woodland (CUP)'] };\
-			(findDisplay 1701 displayCtrl 10) lbSetCurSel 0;\
+			(findDisplay 1701 displayCtrl 10) lbSetCurSel (missionNamespace getVariable ['ZEI_UiSwitchCombo', 0]);\
 		}";
 	};
 	class ZEI_OS_Slider_Radius: ZEI_RscSlider

@@ -104,7 +104,7 @@ if is3DEN then {
 	[_unit, _bld] call _setDirStance;
 } else {
 	_unit = _group createUnit [_type, _pos, [], 0, "NONE"];
-	//_unit setPosATL _pos;
+	if !(surfaceIsWater _pos) then { _unit setPosATL _pos };
 	[_unit, _bld] call _setDirStance;
 	
 	//Add to Zeus

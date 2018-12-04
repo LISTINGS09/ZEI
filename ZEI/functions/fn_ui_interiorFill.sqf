@@ -7,7 +7,12 @@ params [
 
 private _fillType = if (_type isEqualTo 0) then { "mil" } else { "civ" };
 private _fillArea = if (_area isEqualTo 0) then { FALSE } else { TRUE };
-private _bldTmp = nearestObjects [(missionNamespace getVariable ["ZEI_LastPos", [0,0,0]]), ["Building"], if (_area isEqualTo 0) then { 15 } else { _area }, TRUE]; 
+private _bldTmp = nearestObjects [(missionNamespace getVariable ["ZEI_UiLastPos", [0,0,0]]), ["Building"], if (_area isEqualTo 0) then { 15 } else { _area }, TRUE]; 
+
+// Save UI Settings for next time
+ZEI_UiInteriorType = _type;
+ZEI_UiInteriorEdit = _addZeus;
+ZEI_UiInteriorDamage = _allowDamage;
 
 // Don't continue if no objects were found.
 if (_bldTmp isEqualTo []) exitWith {

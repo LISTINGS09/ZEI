@@ -44,7 +44,7 @@ class Rsc_ZEI_GarrisonBuilding
 		y = 0.324 * safezoneH + safezoneY;
 		w = 0.19 * safezoneW;
 		h = 0.033 * safezoneH;
-		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) }; (findDisplay 1702 displayCtrl 1) ctrlSetText format['Garrison Building - %1 (%2m)', getText(configFile >> 'CfgVehicles' >> typeOf (missionNamespace getVariable ['ZEI_LastBuilding',objNull]) >> 'displayName'), round ((missionNamespace getVariable ['ZEI_LastPos',[0,0,0]]) distance2D (missionNamespace getVariable ['ZEI_LastBuilding',objNull]))]; };";
+		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) }; (findDisplay 1702 displayCtrl 1) ctrlSetText format['Garrison Building - %1 (%2m)', getText(configFile >> 'CfgVehicles' >> typeOf (missionNamespace getVariable ['ZEI_UiLastBuilding',objNull]) >> 'displayName'), round ((missionNamespace getVariable ['ZEI_UiLastPos',[0,0,0]]) distance2D (missionNamespace getVariable ['ZEI_UiLastBuilding',objNull]))]; };";
 	};
 	class ZEI_GB_Combo_Type: ZEI_RscCombo
 	{
@@ -85,10 +85,10 @@ class Rsc_ZEI_GarrisonBuilding
 		onSliderPosChanged = "(findDisplay 1702 displayCtrl 2) ctrlSetText format['No. of Units (%1)', round (_this select 1)];";
 		onLoad= "_this spawn {\
 			waitUntil { !isNull (_this select 0) };\
-			(findDisplay 1702 displayCtrl 20) sliderSetRange [ 1, (count ((missionNamespace getVariable ['ZEI_LastBuilding',objNull]) buildingPos -1)) ];\
-			(findDisplay 1702 displayCtrl 20) sliderSetPosition round ((count ((missionNamespace getVariable ['ZEI_LastBuilding',objNull]) buildingPos -1)) / 3);\
-			(findDisplay 1702 displayCtrl 2) ctrlSetText format['No. of Units (%1)', round ((count ((missionNamespace getVariable ['ZEI_LastBuilding',objNull]) buildingPos -1)) / 3)];\
-			};";
+			(findDisplay 1702 displayCtrl 20) sliderSetRange [ 1, (count ((missionNamespace getVariable ['ZEI_UiLastBuilding',objNull]) buildingPos -1)) ];\
+			(findDisplay 1702 displayCtrl 20) sliderSetPosition round ((count ((missionNamespace getVariable ['ZEI_UiLastBuilding',objNull]) buildingPos -1)) / 3);\
+			(findDisplay 1702 displayCtrl 2) ctrlSetText format['No. of Units (%1)', round ((count ((missionNamespace getVariable ['ZEI_UiLastBuilding',objNull]) buildingPos -1)) / 3)];\
+		};";
 	};
 	class ZEI_GB_Text_DSEnabled: ZEI_RscText
 	{
@@ -107,6 +107,10 @@ class Rsc_ZEI_GarrisonBuilding
 		w = 0.020625 * safezoneW;
 		h = 0.033 * safezoneH;
 		tooltip = "Enables Dynamic Simulation for units\nDO NOT use when AI can easily be seen (e.g. outside or top of buildings).";
+		onLoad= "_this spawn {\
+			waitUntil { !isNull (_this select 0) };\
+			(findDisplay 1702 displayCtrl 30) cbSetChecked (missionNamespace getVariable ['ZEI_UiGarrisonDynamic', FALSE]);\
+		};";
 	};
 	class ZEI_GB_Button_OK: ZEI_RscButton
 	{

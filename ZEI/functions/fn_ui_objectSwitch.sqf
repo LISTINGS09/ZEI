@@ -4,7 +4,7 @@ params [
 	];
 		
 // Need to pass logic pos info to GUI somehow?
-_pos = missionNamespace getVariable ["ZEI_LastPos", [0,0,0]];
+_pos = missionNamespace getVariable ["ZEI_UiLastPos", [0,0,0]];
 
 [format["Passed: Type: %1 - Radius: %2 - Pos: %3", _type, _searchRadius, _pos], "DEBUG"] call ZEI_fnc_misc_logMsg;
 
@@ -17,6 +17,9 @@ _typeCUP_W = ["Land_BagFenceCorner", "Land_BagFenceLong", "Land_BagFenceShort", 
 
 _searchType = [];
 _replaceType = [];
+
+// Save UI Settings for next time
+ZEI_UiSwitchCombo = _type;
 
 switch (_type) do {
 	case 0: {

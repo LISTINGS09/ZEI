@@ -127,7 +127,7 @@ _classNames = [
 	"OfficeTable_01_old_F",
 	"Land_CashDesk_F"];
 
-_tmpArr = nearestObjects [(missionNamespace getVariable ["ZEI_LastPos", [0,0,0]]), _classNames, 10, TRUE];
+_tmpArr = nearestObjects [(missionNamespace getVariable ["ZEI_UiLastPos", [0,0,0]]), _classNames, 10, TRUE];
 
 if (_tmpArr isEqualTo []) exitWith {
 	["No suitable objects found!", "ERROR"] call ZEI_fnc_misc_logMsg;

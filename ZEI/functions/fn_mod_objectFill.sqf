@@ -1,10 +1,7 @@
-params [
-		["_mode", "", [""]],
-		["_input", [], [[]]]
-	];
+params [["_mode","",[""]],["_input",[],[[]]]];
 
 switch _mode do {
-    case "attributesChanged3DEN";
+	case "attributesChanged3DEN";
 	case "init": {
 		_input params [["_logic",objNull,[objNull]],["_isActivated",true,[true]], ["_isCuratorPlaced",false,[true]]];
 		
@@ -12,7 +9,7 @@ switch _mode do {
 		if (!local _logic) exitWith {};
 		
 		// Need to pass logic pos info to GUI somehow?
-		ZEI_LastPos = getPos _logic;
+		ZEI_UiLastPos = getPos _logic;
 		
 		// Delete the module to prevent any dependencies.
 		if (_logic isKindOf "Logic") then {

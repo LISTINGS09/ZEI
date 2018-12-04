@@ -1,11 +1,7 @@
-params [
-		["_mode", "", [""]],
-		["_input", [], [[]]]//,
-		//["_setVar", true, [true]]
-	];
+params [["_mode","",[""]],["_input",[],[[]]]];
 
 switch _mode do {
-    case "attributesChanged3DEN";
+	case "attributesChanged3DEN";
 	case "init": {
 		_input params [["_logic",objNull,[objNull]],["_isActivated",true,[true]], ["_isCuratorPlaced",false,[true]]];
 		
@@ -13,7 +9,7 @@ switch _mode do {
 		if (!local _logic) exitWith {};
 		
 		// Need to pass logic pos info to GUI somehow?
-		ZEI_LastPos = getPos _logic;
+		ZEI_UiLastPos = getPos _logic;
 		
 		if ((inputAction "lookAround") isEqualTo 1) then {
 			// Skip UI and use default values.

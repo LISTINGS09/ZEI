@@ -60,7 +60,7 @@ class Rsc_ZEI_InteriorFill
 		onLoad= "_this spawn {\
 			waitUntil { !isNull (_this select 0) };\
 			{ (findDisplay 1705 displayCtrl 10) lbAdd _x } forEach ['Military', 'Civilian'];\
-			(findDisplay 1705 displayCtrl 10) lbSetCurSel 0;\
+			(findDisplay 1705 displayCtrl 10) lbSetCurSel (missionNamespace getVariable ['ZEI_UiInteriorType', 0]);\
 		}";
 	};
 	class ZEI_IF_Text_Type: ZEI_RscText
@@ -118,6 +118,7 @@ class Rsc_ZEI_InteriorFill
 		tooltip = "Add the spawned objects to Curator\nIf disabled, they cannot be moved or edited by Zeus.";
 		checked = 1;
 		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) };\
+			(findDisplay 1705 displayCtrl 30) cbSetChecked (missionNamespace getVariable ['ZEI_UiInteriorEdit', TRUE]);\
 			if is3DEN then { (findDisplay 1705 displayCtrl 30) ctrlShow FALSE; };\
 		}";
 	};
@@ -142,6 +143,7 @@ class Rsc_ZEI_InteriorFill
 		h = 0.033 * safezoneH;
 		tooltip = "Allow the building to be damaged.\nIf enabled, all objects inside the building may be left 'floating' when damaged/destroyed.";
 		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) };\
+			(findDisplay 1705 displayCtrl 40) cbSetChecked (missionNamespace getVariable ['ZEI_UiInteriorDamage', FALSE]);\
 			if is3DEN then { (findDisplay 1705 displayCtrl 40) ctrlShow FALSE; };\
 		}";
 	};

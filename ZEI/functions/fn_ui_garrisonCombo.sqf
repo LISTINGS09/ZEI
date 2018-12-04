@@ -22,7 +22,7 @@ _factionIndex = 0;
 	[format["Found faction: %1 (%2) - %3", _name, _side, _config], "DEBUG"] call ZEI_fnc_misc_logMsg;
 	_display lbAdd format["%1 (%2)", _name, _side];
 	_display lbSetData [_forEachIndex, _config];
-	if ((missionNamespace getVariable ["ZEI_LastFaction",""]) isEqualTo _config) then { _factionIndex = _forEachIndex };
+	if ((missionNamespace getVariable ["ZEI_UiGarrisonFaction",""]) isEqualTo _config) then { _factionIndex = _forEachIndex };
 } forEach _factionsFound;
 
 _display lbSetCurSel _factionIndex; // Remember last used faction.
