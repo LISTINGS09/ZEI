@@ -1,12 +1,13 @@
 params [
 		["_mode", "", [""]],
 		["_input", [], [[]]]//,
-		//["_setVar", TRUE, [TRUE]]
+		//["_setVar", true, [true]]
 	];
 
 switch _mode do {
+    case "attributesChanged3DEN";
 	case "init": {
-		_input params [["_logic",objNull,[objNull]],["_isActivated",TRUE,[TRUE]], ["_isCuratorPlaced",FALSE,[TRUE]]];
+		_input params [["_logic",objNull,[objNull]],["_isActivated",true,[true]], ["_isCuratorPlaced",false,[true]]];
 		
 		// In MP only run for local client.
 		if (!local _logic) exitWith {};
@@ -37,4 +38,4 @@ switch _mode do {
 	};
 };
 
-TRUE
+true
