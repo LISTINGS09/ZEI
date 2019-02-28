@@ -1,29 +1,20 @@
 params [
-		["_faction", ""],
+		["_gType", ""],
 		["_units", 4],
 		["_forceDS", TRUE]
 	];
 
-[format["Passed - F: %1 U: %2 DS: %2", _faction, _units, _forceDS], "DEBUG"] call ZEI_fnc_misc_logMsg;
+[format["Passed - F: %1 U: %2 DS: %2", _gType, _units, _forceDS], "DEBUG"] call ZEI_fnc_misc_logMsg;
 	
 // Need to pass logic pos info to GUI somehow?
 private _bld = missionNamespace getVariable ["ZEI_UiLastBuilding", objNull];
 
-// Get all units with a weapon and non-parachute backpack.
-private _tempList = "getText (_x >> 'faction') == _faction && (configName _x) isKindoF 'CAManBase' && getNumber(_x >> 'scope') == 2" configClasses (configFile >> "CfgVehicles");
+// Split out the faction and category classes
+(_gType splitString "#") params [["_factClass", ""], ["_catClass", ""]];
 
-// FIX - BIS didn't add viper units as a separate faction!
-if (_faction == "OPF_V_F") then {
-	_tempList = [
-		configFile >> "CfgVehicles" >> "O_V_Soldier_Exp_ghex_F",
-		configFile >> "CfgVehicles" >> "O_V_Soldier_JTAC_ghex_F",
-		configFile >> "CfgVehicles" >> "O_V_Soldier_M_ghex_F",
-		configFile >> "CfgVehicles" >> "O_V_Soldier_ghex_F",
-		configFile >> "CfgVehicles" >> "O_V_Soldier_Medic_ghex_F",
-		configFile >> "CfgVehicles" >> "O_V_Soldier_LAT_ghex_F",
-		configFile >> "CfgVehicles" >> "O_V_Soldier_TL_ghex_F"
-	];
-};
+// Get all units with a weapon and non-parachute backpack.
+private _tempList = "getText (_x >> 'faction') == _factClass && getText (_x >> 'editorSubcategory') == _catClass && (configName _x) isKindoF 'CAManBase' && getNumber(_x >> 'scope') == 2" configClasses (configFile >> "CfgVehicles");
+
 
 // Filter out and invalid unit types matching strings.
 _fnc_notInString = {
@@ -45,11 +36,12 @@ if (count _menList == 0) then { _menList = _tempList };
 
 // No units exist at all!
 if (count _menList == 0) exitWith {
-	[format["No units found for faction: %1", _faction], "ERROR"] call ZEI_fnc_misc_logMsg;
+	[format["No units found for faction: %1", _factClass], "ERROR"] call ZEI_fnc_misc_logMsg;
 };
 
 // Save UI Settings for next time
-ZEI_UiGarrisonFaction = _faction;
+ZEI_UiGarrisonFaction = _factClass;
+ZEI_UiGarrisonCategory = _catClass;
 ZEI_UiGarrisonDynamic = _forceDS;
 
 private _bldPos = _bld buildingPos -1;
@@ -57,7 +49,7 @@ private _bldPos = _bld buildingPos -1;
 if (is3DEN) then {
 	collect3DENHistory {
 		// TODO: Find a neater way to create a group (create3DENComposition)?
-		private _tempUnit = switch (getNumber (configFile >> "CfgFactionClasses" >> _faction >> "side")) do { 
+		private _tempUnit = switch (getNumber (configFile >> "CfgFactionClasses" >> _factClass >> "side")) do { 
 				case 0: { create3DENEntity ["Object", "O_Soldier_F", [0, 0, 0]]; };
 				case 1: { create3DENEntity ["Object", "B_Soldier_F", [0, 0, 0]]; };
 				default { create3DENEntity ["Object", "I_Soldier_F", [0, 0, 0]]; };
@@ -80,7 +72,7 @@ if (is3DEN) then {
 		delete3DENEntities [_tempUnit];
 	};
 } else {
-	private _grp = switch (getNumber (configFile >> "CfgFactionClasses" >> _faction >> "side")) do { 
+	private _grp = switch (getNumber (configFile >> "CfgFactionClasses" >> _factClass >> "side")) do { 
 		case 0: { createGroup [EAST, TRUE] };
 		case 1: { createGroup [WEST, TRUE] };
 		default { createGroup [INDEPENDENT, TRUE] };
