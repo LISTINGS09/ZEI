@@ -72,7 +72,13 @@ _fnc_attachItem = {
 	// Spawn items depending on Zeus/Eden
 	if (is3DEN) then {
 		private _obj = create3DENEntity ["Object", _item, [0,0,0], TRUE];
-		_obj set3DENAttribute ["position", (_parent modelToWorld _itemToPos)];
+
+		if (surfaceIsWater _itemToPos) then { 
+			_obj set3DENAttribute ["position", ASLToATL (_parent modelToWorld _itemToPos)];
+		} else {
+			_obj set3DENAttribute ["position", (_parent modelToWorld _itemToPos)];
+		};
+		
 		_obj set3DENAttribute ["rotation", [ _xRot, _yRot, _zRot + _forceDir]];
 		_obj set3DENAttribute ["enableSimulation", FALSE];
 		_obj set3DENAttribute ["objectIsSimple", TRUE];

@@ -80,7 +80,12 @@ _fnc_createTemplateMarker = {
 			{		
 				private _obj = create3DENEntity ["Object", "Sign_Arrow_Large_Green_F", [0, 0, 0]];
 				_obj set3DENAttribute ["rotation", [ 0, 0, 0]];
-				_obj set3DENAttribute ["position", _x];
+				
+				if (surfaceIsWater _pos) then { 
+					_obj set3DENAttribute ["position", ASLToATL _x];
+				} else {
+					_obj set3DENAttribute ["position", _x];
+				};
 			} forEach (_bld buildingPos -1);
 		};
 		

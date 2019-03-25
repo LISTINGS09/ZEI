@@ -100,7 +100,13 @@ private _setDirStance = {
 // Spawn items depending on Zeus/Eden
 if is3DEN then {
 	_unit = _group create3DENEntity ["Object", _type, [0, 0, 0]];
-	_unit set3DENAttribute ["position", _pos];
+	
+	if (surfaceIsWater _pos) then { 
+		_unit set3DENAttribute ["position", ASLToATL _pos];
+	} else {
+		_unit set3DENAttribute ["position", _pos];
+	};
+	
 	[_unit, _bld] call _setDirStance;
 } else {
 	_unit = _group createUnit [_type, _pos, [], 0, "NONE"];
