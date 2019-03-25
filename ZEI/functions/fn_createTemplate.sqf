@@ -51,13 +51,17 @@ if !(_templates isEqualTo []) then {
 				[_obj, _angle*-1] call ZEI_fnc_misc_rotateAroundOwnAxisZ;
 			};
 			
-			_obj set3DENAttribute ["rotation", [_obj] call ZEI_fnc_misc_Vector2Eden]; 
+			_obj set3DENAttribute ["rotation", [_obj] call ZEI_fnc_misc_Vector2Eden];
 			
-			if (surfaceIsWater _offset) then { 
-				_obj set3DENAttribute ["position", ASLToATL (_bld modelToWorld _offset)];
+			_pos = (_bld modelToWorld _offset);
+			
+			if (surfaceIsWater _pos) then {
+				_obj set3DENAttribute ["position", ASLToATL _pos];
 			} else {
-				_obj set3DENAttribute ["position", (_bld modelToWorld _offset)]; 
+				_obj set3DENAttribute ["position",_pos];
 			};
+			
+			
 		} forEach _items;		
 	} else {
 		// Stop floating items when building is destroyed.
