@@ -37,31 +37,32 @@ if !(_templates isEqualTo []) then {
 		
 		{ 
 			_x params ["_item", "_offset", ["_angle", 0], ["_rot", [0, 0, 0]]]; 
-			_item = [_item] call ZEI_fnc_randomiseObject; 
-			_obj = create3DENEntity ["Object", _item, [0,0,0], TRUE]; 
-			_obj set3DENAttribute ["objectIsSimple", TRUE]; 
-			_obj setVectorDirAndUp [vectorDir _bld, vectorUp _bld];
+			_item = [_item] call ZEI_fnc_randomiseObject;
+			
+			if (_item != "") then {
+				_obj = create3DENEntity ["Object", _item, [0,0,0], TRUE]; 
+				_obj set3DENAttribute ["objectIsSimple", TRUE]; 
+				_obj setVectorDirAndUp [vectorDir _bld, vectorUp _bld];
 
-			if !(_rot isEqualTo [0,0,0]) then { 
-				// Apply further rotation to object. 
-				[_obj, (_rot select 0)*-1] call ZEI_fnc_misc_rotateAroundOwnAxisX;
-				[_obj, (_rot select 1)*-1] call ZEI_fnc_misc_rotateAroundOwnAxisY; 
-				[_obj, (_rot select 2)*-1] call ZEI_fnc_misc_rotateAroundOwnAxisZ;
-			} else {
-				[_obj, _angle*-1] call ZEI_fnc_misc_rotateAroundOwnAxisZ;
+				if !(_rot isEqualTo [0,0,0]) then { 
+					// Apply further rotation to object. 
+					[_obj, (_rot select 0)*-1] call ZEI_fnc_misc_rotateAroundOwnAxisX;
+					[_obj, (_rot select 1)*-1] call ZEI_fnc_misc_rotateAroundOwnAxisY; 
+					[_obj, (_rot select 2)*-1] call ZEI_fnc_misc_rotateAroundOwnAxisZ;
+				} else {
+					[_obj, _angle*-1] call ZEI_fnc_misc_rotateAroundOwnAxisZ;
+				};
+				
+				_obj set3DENAttribute ["rotation", [_obj] call ZEI_fnc_misc_Vector2Eden];
+				
+				_pos = (_bld modelToWorld _offset);
+				
+				if (surfaceIsWater _pos) then {
+					_obj set3DENAttribute ["position", ASLToATL _pos];
+				} else {
+					_obj set3DENAttribute ["position",_pos];
+				};
 			};
-			
-			_obj set3DENAttribute ["rotation", [_obj] call ZEI_fnc_misc_Vector2Eden];
-			
-			_pos = (_bld modelToWorld _offset);
-			
-			if (surfaceIsWater _pos) then {
-				_obj set3DENAttribute ["position", ASLToATL _pos];
-			} else {
-				_obj set3DENAttribute ["position",_pos];
-			};
-			
-			
 		} forEach _items;		
 	} else {
 		// Stop floating items when building is destroyed.
@@ -71,23 +72,25 @@ if !(_templates isEqualTo []) then {
 			_x params ["_item", "_offset", ["_angle", 0], ["_rot", [0, 0, 0]]];
 			_item = [_item] call ZEI_fnc_randomiseObject;
 			
-			if (_addZeus) then {
-				_obj = createVehicle [_item, (_bld modelToWorld _offset), [], 0, "CAN_COLLIDE"];
-				[_obj, FALSE] remoteExec ["enableSimulationGlobal", 2];
-				{ [_x, [ [_obj], TRUE]] remoteExec ["addCuratorEditableObjects", 2] } forEach allCurators;
-			} else {
-				_obj = createSimpleObject [_item, AGLtoASL (_bld modelToWorld _offset)];
-			};
-			
-			_obj setVectorDirAndUp [vectorDir _bld, vectorUp _bld];
-			
-			if !(_rot isEqualTo [0,0,0]) then { 
-				// Apply further rotation to object. 
-				[_obj, (_rot select 0)*-1] call ZEI_fnc_misc_rotateAroundOwnAxisX;
-				[_obj, (_rot select 1)*-1] call ZEI_fnc_misc_rotateAroundOwnAxisY; 
-				[_obj, (_rot select 2)*-1] call ZEI_fnc_misc_rotateAroundOwnAxisZ;
-			} else {
-				[_obj, _angle*-1] call ZEI_fnc_misc_rotateAroundOwnAxisZ;
+			if (_item != "") then {
+				if (_addZeus) then {
+					_obj = createVehicle [_item, (_bld modelToWorld _offset), [], 0, "CAN_COLLIDE"];
+					[_obj, FALSE] remoteExec ["enableSimulationGlobal", 2];
+					{ [_x, [ [_obj], TRUE]] remoteExec ["addCuratorEditableObjects", 2] } forEach allCurators;
+				} else {
+					_obj = createSimpleObject [_item, AGLtoASL (_bld modelToWorld _offset)];
+				};
+				
+				_obj setVectorDirAndUp [vectorDir _bld, vectorUp _bld];
+				
+				if !(_rot isEqualTo [0,0,0]) then { 
+					// Apply further rotation to object. 
+					[_obj, (_rot select 0)*-1] call ZEI_fnc_misc_rotateAroundOwnAxisX;
+					[_obj, (_rot select 1)*-1] call ZEI_fnc_misc_rotateAroundOwnAxisY; 
+					[_obj, (_rot select 2)*-1] call ZEI_fnc_misc_rotateAroundOwnAxisZ;
+				} else {
+					[_obj, _angle*-1] call ZEI_fnc_misc_rotateAroundOwnAxisZ;
+				};
 			};
 		} forEach _items;
 	};

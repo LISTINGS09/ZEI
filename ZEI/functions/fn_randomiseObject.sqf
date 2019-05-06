@@ -31,6 +31,7 @@ _objectsList pushBack ["Land_Cargo10_IDAP_F","Land_Cargo10_blue_F","Land_Cargo10
 _objectsList pushBack ["Land_Cargo20_IDAP_F","Land_Cargo20_blue_F","Land_Cargo20_brick_red_F","Land_Cargo20_cyan_F","Land_Cargo20_grey_F","Land_Cargo20_light_blue_F","Land_Cargo20_light_green_F","Land_Cargo20_military_green_F","Land_Cargo20_orange_F","Land_Cargo20_red_F","Land_Cargo20_sand_F","Land_Cargo20_yellow_F","Land_Cargo20_white_F"];
 _objectsList pushBack ["Land_Cargo40_IDAP_F","Land_Cargo40_blue_F","Land_Cargo40_brick_red_F","Land_Cargo40_cyan_F","Land_Cargo40_grey_F","Land_Cargo40_light_blue_F","Land_Cargo40_light_green_F","Land_Cargo40_military_green_F","Land_Cargo40_orange_F","Land_Cargo40_red_F","Land_Cargo40_sand_F","Land_Cargo40_yellow_F","Land_Cargo40_white_F"];
 _objectsList pushBack ["Land_WoodenCrate_01_stack_x5_F","Land_WoodenCrate_01_stack_x3_F"];
+_objectsList pushBack ["Land_WoodenCrate_01_stack_x5_F","Land_WoodenCrate_01_stack_x3_F"];
 
 // If CUP is active, add additional items.
 if (isClass(configFile >> 'CfgPatches' >> 'CUP_Core')) then {
@@ -38,14 +39,26 @@ if (isClass(configFile >> 'CfgPatches' >> 'CUP_Core')) then {
 	_objectsList pushBack ["Land_CratesWooden_F","Land_transport_crates_EP1"];
 };
 
+// If GM is active, OVERWRITE additional items (no futuristic items).
+if (isClass(configFile >> 'CfgPatches' >> 'gm_core')) then {
+	_objectsList = [["","land_gm_sandbags_01_window_01","land_gm_sandbags_01_window_02"]];
+	_objectsList pushBack ["","land_gm_euro_misc_awning_01","land_gm_euro_misc_awning_02","land_gm_euro_misc_awning_03","land_gm_euro_misc_awning_04","land_gm_euro_misc_awning_05"];
+	_objectsList pushBack ["Land_Basket_F","Land_CratesShabby_F","Land_Sacks_heap_F"];
+	_objectsList pushBack ["Land_PaperBox_01_small_open_brown_F","Land_PaperBox_01_small_ransacked_brown_F"];
+	_objectsList pushBack ["Land_Orange_01_F","Land_WaterBottle_01_empty_F","Land_WaterBottle_01_full_F","Land_BottlePlastic_V1_F","Land_Can_Rusty_F","Land_Can_V1_F","Land_Can_V2_F","Land_Can_V3_F","Land_TacticalBacon_F","Land_Can_Dented_F","Land_BottlePlastic_V2_F","Land_BakedBeans_F","Land_PowderedMilk_F","Land_RiceBox_F","Land_Tableware_01_stackOfNapkins_F","Land_Tableware_01_cup_F","Land_TinContainer_F"];
+	_objectsList pushBack ["Land_Cargo10_blue_F","Land_Cargo10_brick_red_F","Land_Cargo10_grey_F","Land_Cargo10_light_blue_F","Land_Cargo10_light_green_F","Land_Cargo10_military_green_F","Land_Cargo10_orange_F","Land_Cargo10_red_F","Land_Cargo10_sand_F","Land_Cargo10_yellow_F","Land_Cargo10_white_F"];
+	_objectsList pushBack ["Land_Cargo20_blue_F","Land_Cargo20_brick_red_F","Land_Cargo20_grey_F","Land_Cargo20_light_blue_F","Land_Cargo20_light_green_F","Land_Cargo20_military_green_F","Land_Cargo20_orange_F","Land_Cargo20_red_F","Land_Cargo20_sand_F","Land_Cargo20_yellow_F","Land_Cargo20_white_F"];
+	_objectsList pushBack ["Land_Cargo40_blue_F","Land_Cargo40_brick_red_F","Land_Cargo40_grey_F","Land_Cargo40_light_blue_F","Land_Cargo40_light_green_F","Land_Cargo40_military_green_F","Land_Cargo40_orange_F","Land_Cargo40_red_F","Land_Cargo40_sand_F","Land_Cargo40_yellow_F","Land_Cargo40_white_F"];
+};
+
 // If item is present, replace it with a random variant.
 {
 	if (_item in _x && {_doRandom}) exitWith {_item = selectRandom _x};
 } forEach _objectsList;
 
-if !(isClass (configFile >> "CfgVehicles" >> _item)) then {
+if (!(isClass (configFile >> "CfgVehicles" >> _item)) && _item != "") then {
 	[format ["Invalid Classname (%1)", _item], "ERROR"] call ZEI_fnc_misc_logMsg;
-	_item = "Land_HelipadEmpty_F";
+	_item = "";
 };
 
 _item;

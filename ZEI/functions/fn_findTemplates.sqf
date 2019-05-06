@@ -31,6 +31,9 @@ if (_tempType isEqualTo "mil") then {
 		// CUP
 		#include "..\templates\mil_cup.sqf"
 		
+		// GM
+		#include "..\templates\mil_gm.sqf"
+		
 		// OTHER
 		#include "..\templates\mil_other.sqf"
 		
@@ -43,6 +46,9 @@ if (_tempType isEqualTo "mil") then {
 		
 		// CUP
 		#include "..\templates\civ_cup.sqf"
+		
+		// GM
+		#include "..\templates\civ_gm.sqf"
 		
 		default {[]};
 	});
