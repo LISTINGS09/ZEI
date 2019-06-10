@@ -38,12 +38,13 @@ class Rsc_ZEI_ObjectFill
 	};
 	class ZEI_OF_Text_Title: ZEI_RscText
 	{
-		idc = -1;
+		idc = 1;
 		text = "Object Fill"; //--- ToDo: Localize;
 		x = 0.340156 * safezoneW + safezoneX;
 		y = 0.324 * safezoneH + safezoneY;
 		w = 0.19 * safezoneW;
 		h = 0.033 * safezoneH;
+		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) }; (findDisplay 1704 displayCtrl 1) ctrlSetText format['Object Fill (%1)', getText(configFile >> 'CfgVehicles' >> typeOf (missionNamespace getVariable ['ZEI_UiLastObject',objNull]) >> 'displayName')]; };";
 	};
 	class ZEI_OF_Combo_Type: ZEI_RscCombo
 	{
@@ -54,7 +55,7 @@ class Rsc_ZEI_ObjectFill
 		h = 0.022 * safezoneH;
 		onLoad= "_this spawn {\
 			waitUntil { !isNull (_this select 0) };\
-			{ (findDisplay 1704 displayCtrl 10) lbAdd _x } forEach ['Random', 'Food', 'Medical', 'Office', 'Tools'];\
+			{ (findDisplay 1704 displayCtrl 10) lbAdd _x } forEach ['Random', 'Food', 'Medical', 'Office', 'Tools', 'Electric', 'CBRN Cleaning'];\
 			(findDisplay 1704 displayCtrl 10) lbSetCurSel 0;\
 		}";
 	};

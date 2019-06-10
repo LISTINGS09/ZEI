@@ -8,8 +8,22 @@ switch _mode do {
 		// In MP only run for local client.
 		if (!local _logic) exitWith {};
 		
-		// Need to pass logic pos info to GUI somehow?
-		ZEI_UiLastPos = getPos _logic;
+		// Store the Object under the cursor or nearest of type.
+		if (is3DEN) then {
+			//systemChat str get3DENMouseOver;
+			if (get3DENMouseOver # 0 == "Object") then {
+				ZEI_UiLastObject = get3DENMouseOver # 1;
+			} else {
+				ZEI_UiLastObject = (nearestObjects [getPos _logic, "Thing", 10, TRUE]) param [0, ObjNull];
+			};
+		} else {
+			//systemChat str curatorMouseOver;
+			if (curatorMouseOver # 0 == "Object") then {
+				ZEI_UiLastObject = curatorMouseOver # 1;
+			} else {
+				ZEI_UiLastObject = (nearestObjects [getPos _logic, "Thing", 10, TRUE]) param [0, ObjNull];
+			};
+		};
 		
 		// Delete the module to prevent any dependencies.
 		if (_logic isKindOf "Logic") then {
@@ -21,14 +35,10 @@ switch _mode do {
 			// Skip UI and use default values.
 			[] call ZEI_fnc_ui_objectFill;
 		} else {
-			if (_isCuratorPlaced) then { 
-				findDisplay 312 createDisplay "Rsc_ZEI_ObjectFill";  // Zeus
+			if (is3DEN) then {
+				findDisplay 313 createDisplay "Rsc_ZEI_ObjectFill"; // Eden
 			} else {
-				if (is3DEN) then {
-					findDisplay 313 createDisplay "Rsc_ZEI_ObjectFill"; // Eden
-				} else {
-					createDialog "Rsc_ZEI_ObjectFill";
-				};
+				findDisplay 312 createDisplay "Rsc_ZEI_ObjectFill";  // Zeus
 			};
 		};
 	};
