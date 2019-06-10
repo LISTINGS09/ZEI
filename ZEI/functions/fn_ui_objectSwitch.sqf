@@ -8,40 +8,77 @@ _pos = missionNamespace getVariable ["ZEI_UiLastPos", [0,0,0]];
 
 [format["Passed: Type: %1 - Radius: %2 - Pos: %3", _type, _searchRadius, _pos], "DEBUG"] call ZEI_fnc_misc_logMsg;
 
-_nearObjects = nearestObjects [_pos, [], _searchRadius, TRUE]; 
-
-_typeVanilla = 	["Land_BagFence_Corner_F", "Land_BagFence_Long_F", "Land_BagFence_Short_F", "Land_BagFence_End_F", "Land_BagFence_Round_F", "CamoNet_BLUFOR_F", "CamoNet_BLUFOR_open_F", "CamoNet_BLUFOR_big_F", "CamoNet_OPFOR_F", "CamoNet_OPFOR_open_F", "CamoNet_OPFOR_big_F", "Land_HBarrier_1_F", "Land_HBarrier_3_F", "Land_HBarrier_5_F", "Land_HBarrier_Big_F", "Land_BagBunker_Small_F", "Land_BagBunker_Large_F", "Land_BagBunker_Tower_F", "Land_Cargo_Patrol_V3_F", "Land_Cargo_House_V3_F", "Land_Cargo_HQ_V3_F", "Land_Cargo_Tower_V3_F"];
-_typeAPEX = ["Land_BagFence_01_corner_green_F","Land_BagFence_01_long_green_F","Land_BagFence_01_short_green_F","Land_BagFence_01_end_green_F","Land_BagFence_01_round_green_F", "CamoNet_BLUFOR_F", "CamoNet_BLUFOR_open_F", "CamoNet_BLUFOR_big_F", "CamoNet_ghex_F", "CamoNet_ghex_open_F", "CamoNet_ghex_big_F", "Land_HBarrier_01_line_1_green_F", "Land_HBarrier_01_line_3_green_F", "Land_HBarrier_01_line_5_green_F", "Land_HBarrier_01_big_4_green_F", "Land_BagBunker_01_small_green_F", "Land_BagBunker_01_large_green_F", "Land_HBarrier_01_tower_green_F", "Land_Cargo_Patrol_V4_F", "Land_Cargo_House_V4_F", "Land_Cargo_HQ_V4_F", "Land_Cargo_Tower_V4_F"];
-_typeCUP_D = ["Land_BagFenceCorner", "Land_BagFenceLong", "Land_BagFenceShort", "Land_BagFenceEnd", "Land_BagFenceRound", "Land_CamoNet_NATO_EP1", "Land_CamoNetVar_NATO_EP1", "Land_CamoNetB_NATO_EP1", "Land_CamoNet_EAST_EP1", "Land_CamoNetVar_EAST_EP1", "Land_CamoNetB_EAST_EP1", "Land_HBarrier1", "Land_HBarrier3", "Land_HBarrier5", "Land_HBarrier_large", "Land_fortified_nest_small_EP1", "Land_fortified_nest_big_EP1", "Land_Fort_Watchtower_EP1", "Land_Cargo_Patrol_V3_F", "Land_Cargo_House_V3_F", "Land_Cargo_HQ_V3_F", "Land_Cargo_Tower_V3_F"];
-_typeCUP_W = ["Land_BagFenceCorner", "Land_BagFenceLong", "Land_BagFenceShort", "Land_BagFenceEnd", "Land_BagFenceRound", "Land_CamoNet_NATO", "Land_CamoNetVar_NATO", "Land_CamoNetB_NATO", "Land_CamoNet_EAST", "Land_CamoNetVar_EAST", "Land_CamoNetB_EAST", "Land_HBarrier_1_F", "Land_HBarrier_3_F", "Land_HBarrier_5_F", "Land_HBarrier_Big_F", "Fort_Nest", "Land_fortified_nest_big", "Land_Fort_Watchtower", "Land_Cargo_Patrol_V1_F", "Land_Cargo_House_V1_F", "Land_Cargo_HQ_V1_F", "Land_Cargo_Tower_V1_F"];
-
-_searchType = [];
-_replaceType = [];
+// A3 Desert
+_typeVanilla = 	[
+	"Land_BagFence_Corner_F","Land_BagFence_Long_F","Land_BagFence_Short_F","Land_BagFence_End_F","Land_BagFence_Round_F","CamoNet_BLUFOR_F","CamoNet_BLUFOR_open_F","CamoNet_BLUFOR_big_F","CamoNet_OPFOR_F","CamoNet_OPFOR_open_F","CamoNet_OPFOR_big_F",
+	"Land_HBarrier_1_F","Land_HBarrier_3_F","Land_HBarrier_5_F","Land_HBarrier_Big_F","Land_BagBunker_Small_F","Land_BagBunker_Large_F","Land_BagBunker_Tower_F", 
+	"Land_Cargo_Patrol_V3_F","Land_Cargo_House_V3_F","Land_Cargo_HQ_V3_F","Land_Cargo_Tower_V3_F",
+	"Land_BatteryPack_01_battery_sand_F","Land_BatteryPack_01_closed_sand_F","Land_BatteryPack_01_open_sand_F","Land_Computer_01_sand_F","Land_DeskChair_01_sand_F","Land_IPPhone_01_sand_F","Land_Laptop_03_sand_F","Land_MultiScreenComputer_01_closed_sand_F","Land_MultiScreenComputer_01_sand_F",
+	"Land_PortableCabinet_01_4drawers_sand_F","Land_PortableCabinet_01_7drawers_sand_F","Land_PortableCabinet_01_bookcase_sand_F","Land_PortableCabinet_01_closed_sand_F","Land_PortableCabinet_01_lid_sand_F","Land_PortableDesk_01_panel_sand_F","Land_PortableDesk_01_sand_F","Land_PortableGenerator_01_sand_F","Land_PortableLight_02_double_sand_F","Land_PortableLight_02_folded_sand_F","Land_PortableLight_02_quad_sand_F","Land_PortableLight_02_single_folded_sand_F","Land_PortableLight_02_single_sand_F","Land_PortableServer_01_cover_sand_F","Land_PortableServer_01_sand_F","Land_PortableSolarPanel_01_folded_sand_F","Land_PortableSolarPanel_01_sand_F","Land_PortableWeatherStation_01_sand_F","Land_Router_01_sand_F","Land_SolarPanel_04_sand_F","Land_TripodScreen_01_dual_v1_sand_F","Land_TripodScreen_01_dual_v2_sand_F","Land_TripodScreen_01_large_sand_F","Land_laptop_03_closed_sand_F","OmniDirectionalAntenna_01_sand_F","SatelliteAntenna_01_Sand_F","SatelliteAntenna_01_Small_Mounted_Sand_F","SatelliteAntenna_01_Small_Sand_F",
+	"Land_PlasticCase_01_large_F","Land_PlasticCase_01_medium_F","Land_PlasticCase_01_small_F","Land_PlasticCase_01_large_CBRN_F","Land_PlasticCase_01_medium_CBRN_F","Land_PlasticCase_01_small_CBRN_F",
+	"Land_ConnectorTent_01_NATO_closed_F","Land_ConnectorTent_01_NATO_cross_F","Land_ConnectorTent_01_NATO_open_F","Land_DeconTent_01_NATO_F","Land_MedicalTent_01_NATO_generic_closed_F","Land_MedicalTent_01_NATO_generic_inner_F","Land_MedicalTent_01_NATO_generic_open_F","Land_MedicalTent_01_NATO_generic_outer_F","Land_MedicalTent_01_MTP_closed_F",
+	"Land_ConnectorTent_01_CSAT_brownhex_closed_F","Land_ConnectorTent_01_CSAT_brownhex_cross_F","Land_ConnectorTent_01_CSAT_brownhex_open_F","Land_DeconTent_01_CSAT_brownhex_F","Land_MedicalTent_01_CSAT_brownhex_generic_closed_F","Land_MedicalTent_01_CSAT_brownhex_generic_inner_F","Land_MedicalTent_01_CSAT_brownhex_generic_open_F","Land_MedicalTent_01_CSAT_brownhex_generic_outer_F","Land_MedicalTent_01_brownhex_closed_F"	
+];
+// A3 Jungle
+_typeAPEX = [
+	"Land_BagFence_01_corner_green_F","Land_BagFence_01_long_green_F","Land_BagFence_01_short_green_F","Land_BagFence_01_end_green_F","Land_BagFence_01_round_green_F","CamoNet_BLUFOR_F","CamoNet_BLUFOR_open_F","CamoNet_BLUFOR_big_F","CamoNet_ghex_F","CamoNet_ghex_open_F","CamoNet_ghex_big_F",
+	"Land_HBarrier_01_line_1_green_F","Land_HBarrier_01_line_3_green_F","Land_HBarrier_01_line_5_green_F","Land_HBarrier_01_big_4_green_F","Land_BagBunker_01_small_green_F","Land_BagBunker_01_large_green_F","Land_HBarrier_01_tower_green_F",
+	"Land_Cargo_Patrol_V4_F","Land_Cargo_House_V4_F","Land_Cargo_HQ_V4_F","Land_Cargo_Tower_V4_F",
+	"Land_BatteryPack_01_battery_olive_F","Land_BatteryPack_01_closed_olive_F","Land_BatteryPack_01_open_olive_F","Land_Computer_01_olive_F","Land_DeskChair_01_olive_F","Land_IPPhone_01_olive_F","Land_Laptop_03_olive_F","Land_MultiScreenComputer_01_closed_olive_F","Land_MultiScreenComputer_01_olive_F",
+	"Land_PortableCabinet_01_4drawers_olive_F","Land_PortableCabinet_01_7drawers_olive_F","Land_PortableCabinet_01_bookcase_olive_F","Land_PortableCabinet_01_closed_olive_F","Land_PortableCabinet_01_lid_olive_F","Land_PortableDesk_01_panel_olive_F","Land_PortableDesk_01_olive_F","Land_PortableGenerator_01_F","Land_PortableLight_02_double_olive_F","Land_PortableLight_02_folded_olive_F","Land_PortableLight_02_quad_olive_F","Land_PortableLight_02_single_folded_olive_F","Land_PortableLight_02_single_olive_F","Land_PortableServer_01_cover_olive_F","Land_PortableServer_01_olive_F","Land_PortableSolarPanel_01_folded_olive_F","Land_PortableSolarPanel_01_olive_F","Land_PortableWeatherStation_01_olive_F","Land_Router_01_olive_F","Land_SolarPanel_04_olive_F","Land_TripodScreen_01_dual_v1_F","Land_TripodScreen_01_dual_v2_F","Land_TripodScreen_01_large_F","Land_laptop_03_closed_olive_F","OmniDirectionalAntenna_01_olive_F","SatelliteAntenna_01_olive_F","SatelliteAntenna_01_Small_Mounted_olive_F","SatelliteAntenna_01_Small_olive_F",
+	"Land_PlasticCase_01_large_olive_F","Land_PlasticCase_01_medium_olive_F","Land_PlasticCase_01_small_olive_F","Land_PlasticCase_01_large_olive_CBRN_F","Land_PlasticCase_01_medium_olive_CBRN_F","Land_PlasticCase_01_small_olive_CBRN_F",
+	"Land_ConnectorTent_01_NATO_tropic_closed_F","Land_ConnectorTent_01_NATO_tropic_cross_F","Land_ConnectorTent_01_NATO_tropic_open_F","Land_DeconTent_01_NATO_tropic_F","Land_MedicalTent_01_NATO_tropic_generic_closed_F","Land_MedicalTent_01_NATO_tropic_generic_inner_F","Land_MedicalTent_01_NATO_tropic_generic_open_F","Land_MedicalTent_01_NATO_tropic_generic_outer_F","Land_MedicalTent_01_tropic_closed_F",
+	"Land_ConnectorTent_01_CSAT_greenhex_closed_F","Land_ConnectorTent_01_CSAT_greenhex_cross_F","Land_ConnectorTent_01_CSAT_greenhex_open_F","Land_DeconTent_01_CSAT_greenhex_F","Land_MedicalTent_01_CSAT_greenhex_generic_closed_F","Land_MedicalTent_01_CSAT_greenhex_generic_inner_F","Land_MedicalTent_01_CSAT_greenhex_generic_open_F","Land_MedicalTent_01_CSAT_greenhex_generic_outer_F","Land_MedicalTent_01_greenhex_closed_F"
+];
+// A3 Woodland
+_typeContact = [
+	"Land_BagFence_01_corner_green_F","Land_BagFence_01_long_green_F","Land_BagFence_01_short_green_F","Land_BagFence_01_end_green_F","Land_BagFence_01_round_green_F","CamoNet_wdl_F","CamoNet_wdl_open_F","CamoNet_wdl_big_F","CamoNet_ghex_F","CamoNet_ghex_open_F","CamoNet_ghex_big_F",
+	"Land_HBarrier_01_line_1_green_F","Land_HBarrier_01_line_3_green_F","Land_HBarrier_01_line_5_green_F","Land_HBarrier_01_big_4_green_F","Land_BagBunker_01_small_green_F","Land_BagBunker_01_large_green_F","Land_HBarrier_01_tower_green_F",
+	"Land_Cargo_Patrol_V1_F","Land_Cargo_House_V1_F","Land_Cargo_HQ_V1_F","Land_Cargo_Tower_V1_F",
+	"Land_BatteryPack_01_battery_black_F","Land_BatteryPack_01_closed_black_F","Land_BatteryPack_01_open_black_F","Land_Computer_01_black_F","Land_DeskChair_01_black_F","Land_IPPhone_01_black_F","Land_Laptop_03_black_F","Land_MultiScreenComputer_01_closed_black_F","Land_MultiScreenComputer_01_black_F",
+	"Land_PortableCabinet_01_4drawers_black_F","Land_PortableCabinet_01_7drawers_black_F","Land_PortableCabinet_01_bookcase_black_F","Land_PortableCabinet_01_closed_black_F","Land_PortableCabinet_01_lid_black_F","Land_PortableDesk_01_panel_black_F","Land_PortableDesk_01_black_F","Land_PortableGenerator_01_black_F","Land_PortableLight_02_double_black_F","Land_PortableLight_02_folded_black_F","Land_PortableLight_02_quad_black_F","Land_PortableLight_02_single_folded_black_F","Land_PortableLight_02_single_black_F","Land_PortableServer_01_cover_black_F","Land_PortableServer_01_black_F","Land_PortableSolarPanel_01_folded_olive_F","Land_PortableSolarPanel_01_olive_F","Land_PortableWeatherStation_01_white_F","Land_Router_01_black_F","Land_SolarPanel_04_black_F","Land_TripodScreen_01_dual_v1_black_F","Land_TripodScreen_01_dual_v2_black_F","Land_TripodScreen_01_large_black_F","Land_laptop_03_closed_black_F","OmniDirectionalAntenna_01_black_F","SatelliteAntenna_01_black_F","SatelliteAntenna_01_Small_Mounted_black_F","SatelliteAntenna_01_Small_black_F",
+	"Land_PlasticCase_01_large_black_F","Land_PlasticCase_01_medium_black_F","Land_PlasticCase_01_small_black_F","Land_PlasticCase_01_large_black_CBRN_F","Land_PlasticCase_01_medium_black_CBRN_F","Land_PlasticCase_01_small_black_CBRN_F",
+	"Land_ConnectorTent_01_wdl_closed_F","Land_ConnectorTent_01_wdl_cross_F","Land_ConnectorTent_01_wdl_open_F","Land_DeconTent_01_wdl_F","Land_MedicalTent_01_wdl_generic_closed_F","Land_MedicalTent_01_wdl_generic_inner_F","Land_MedicalTent_01_wdl_generic_open_F","Land_MedicalTent_01_wdl_generic_outer_F","Land_MedicalTent_01_wdl_closed_F",
+	"Land_ConnectorTent_01_CSAT_greenhex_closed_F","Land_ConnectorTent_01_CSAT_greenhex_cross_F","Land_ConnectorTent_01_CSAT_greenhex_open_F","Land_DeconTent_01_CSAT_greenhex_F","Land_MedicalTent_01_CSAT_greenhex_generic_closed_F","Land_MedicalTent_01_CSAT_greenhex_generic_inner_F","Land_MedicalTent_01_CSAT_greenhex_generic_open_F","Land_MedicalTent_01_CSAT_greenhex_generic_outer_F","Land_MedicalTent_01_greenhex_closed_F"
+];
+// CUP Desert
+_typeCUP_D = [
+	"Land_BagFenceCorner","Land_BagFenceLong","Land_BagFenceShort","Land_BagFenceEnd","Land_BagFenceRound","Land_CamoNet_NATO_EP1","Land_CamoNetVar_NATO_EP1","Land_CamoNetB_NATO_EP1","Land_CamoNet_EAST_EP1","Land_CamoNetVar_EAST_EP1","Land_CamoNetB_EAST_EP1",
+	"Land_HBarrier1","Land_HBarrier3","Land_HBarrier5","Land_HBarrier_large","Land_fortified_nest_small_EP1","Land_fortified_nest_big_EP1","Land_Fort_Watchtower_EP1",
+	"Land_Cargo_Patrol_V3_F","Land_Cargo_House_V3_F","Land_Cargo_HQ_V3_F","Land_Cargo_Tower_V3_F",
+	"Land_BatteryPack_01_battery_sand_F","Land_BatteryPack_01_closed_sand_F","Land_BatteryPack_01_open_sand_F","Land_Computer_01_sand_F","Land_DeskChair_01_sand_F","Land_IPPhone_01_sand_F","Land_Laptop_03_sand_F","Land_MultiScreenComputer_01_closed_sand_F","Land_MultiScreenComputer_01_sand_F",
+	"Land_PortableCabinet_01_4drawers_sand_F","Land_PortableCabinet_01_7drawers_sand_F","Land_PortableCabinet_01_bookcase_sand_F","Land_PortableCabinet_01_closed_sand_F","Land_PortableCabinet_01_lid_sand_F","Land_PortableDesk_01_panel_sand_F","Land_PortableDesk_01_sand_F","Land_PortableGenerator_01_sand_F","Land_PortableLight_02_double_sand_F","Land_PortableLight_02_folded_sand_F","Land_PortableLight_02_quad_sand_F","Land_PortableLight_02_single_folded_sand_F","Land_PortableLight_02_single_sand_F","Land_PortableServer_01_cover_sand_F","Land_PortableServer_01_sand_F","Land_PortableSolarPanel_01_folded_sand_F","Land_PortableSolarPanel_01_sand_F","Land_PortableWeatherStation_01_sand_F","Land_Router_01_sand_F","Land_SolarPanel_04_sand_F","Land_TripodScreen_01_dual_v1_sand_F","Land_TripodScreen_01_dual_v2_sand_F","Land_TripodScreen_01_large_sand_F","Land_laptop_03_closed_sand_F","OmniDirectionalAntenna_01_sand_F","SatelliteAntenna_01_Sand_F","SatelliteAntenna_01_Small_Mounted_Sand_F","SatelliteAntenna_01_Small_Sand_F",
+	"Land_PlasticCase_01_large_F","Land_PlasticCase_01_medium_F","Land_PlasticCase_01_small_F","Land_PlasticCase_01_large_CBRN_F","Land_PlasticCase_01_medium_CBRN_F","Land_PlasticCase_01_small_CBRN_F",
+	"Land_ConnectorTent_01_NATO_closed_F","Land_ConnectorTent_01_NATO_cross_F","Land_ConnectorTent_01_NATO_open_F","Land_DeconTent_01_NATO_F","Land_MedicalTent_01_NATO_generic_closed_F","Land_MedicalTent_01_NATO_generic_inner_F","Land_MedicalTent_01_NATO_generic_open_F","Land_MedicalTent_01_NATO_generic_outer_F","Land_MedicalTent_01_MTP_closed_F",
+	"Land_ConnectorTent_01_NATO_tropic_closed_F","Land_ConnectorTent_01_NATO_tropic_cross_F","Land_ConnectorTent_01_NATO_tropic_open_F","Land_DeconTent_01_NATO_tropic_F","Land_MedicalTent_01_NATO_tropic_generic_closed_F","Land_MedicalTent_01_NATO_tropic_generic_inner_F","Land_MedicalTent_01_NATO_tropic_generic_open_F","Land_MedicalTent_01_NATO_tropic_generic_outer_F","Land_MedicalTent_01_tropic_closed_F"
+];
+// CUP Woodland
+_typeCUP_W = [
+	"Land_BagFenceCorner","Land_BagFenceLong","Land_BagFenceShort","Land_BagFenceEnd","Land_BagFenceRound","Land_CamoNet_NATO","Land_CamoNetVar_NATO","Land_CamoNetB_NATO","Land_CamoNet_EAST","Land_CamoNetVar_EAST","Land_CamoNetB_EAST",
+	"Land_HBarrier_1_F","Land_HBarrier_3_F","Land_HBarrier_5_F","Land_HBarrier_Big_F","Fort_Nest","Land_fortified_nest_big","Land_Fort_Watchtower",
+	"Land_Cargo_Patrol_V1_F","Land_Cargo_House_V1_F","Land_Cargo_HQ_V1_F","Land_Cargo_Tower_V1_F",
+	"Land_BatteryPack_01_battery_black_F","Land_BatteryPack_01_closed_black_F","Land_BatteryPack_01_open_black_F","Land_Computer_01_black_F","Land_DeskChair_01_black_F","Land_IPPhone_01_black_F","Land_Laptop_03_black_F","Land_MultiScreenComputer_01_closed_black_F","Land_MultiScreenComputer_01_black_F",
+	"Land_PortableCabinet_01_4drawers_black_F","Land_PortableCabinet_01_7drawers_black_F","Land_PortableCabinet_01_bookcase_black_F","Land_PortableCabinet_01_closed_black_F","Land_PortableCabinet_01_lid_black_F","Land_PortableDesk_01_panel_black_F","Land_PortableDesk_01_black_F","Land_PortableGenerator_01_black_F","Land_PortableLight_02_double_black_F","Land_PortableLight_02_folded_black_F","Land_PortableLight_02_quad_black_F","Land_PortableLight_02_single_folded_black_F","Land_PortableLight_02_single_black_F","Land_PortableServer_01_cover_black_F","Land_PortableServer_01_black_F","Land_PortableSolarPanel_01_folded_olive_F","Land_PortableSolarPanel_01_olive_F","Land_PortableWeatherStation_01_white_F","Land_Router_01_black_F","Land_SolarPanel_04_black_F","Land_TripodScreen_01_dual_v1_black_F","Land_TripodScreen_01_dual_v2_black_F","Land_TripodScreen_01_large_black_F","Land_laptop_03_closed_black_F","OmniDirectionalAntenna_01_black_F","SatelliteAntenna_01_black_F","SatelliteAntenna_01_Small_Mounted_black_F","SatelliteAntenna_01_Small_black_F",
+	"Land_PlasticCase_01_large_black_F","Land_PlasticCase_01_medium_black_F","Land_PlasticCase_01_small_black_F","Land_PlasticCase_01_large_black_CBRN_F","Land_PlasticCase_01_medium_black_CBRN_F","Land_PlasticCase_01_small_black_CBRN_F",
+	"Land_ConnectorTent_01_wdl_closed_F","Land_ConnectorTent_01_wdl_cross_F","Land_ConnectorTent_01_wdl_open_F","Land_DeconTent_01_wdl_F","Land_MedicalTent_01_wdl_generic_closed_F","Land_MedicalTent_01_wdl_generic_inner_F","Land_MedicalTent_01_wdl_generic_open_F","Land_MedicalTent_01_wdl_generic_outer_F","Land_MedicalTent_01_wdl_closed_F",
+	"Land_ConnectorTent_01_NATO_tropic_closed_F","Land_ConnectorTent_01_NATO_tropic_cross_F","Land_ConnectorTent_01_NATO_tropic_open_F","Land_DeconTent_01_NATO_tropic_F","Land_MedicalTent_01_NATO_tropic_generic_closed_F","Land_MedicalTent_01_NATO_tropic_generic_inner_F","Land_MedicalTent_01_NATO_tropic_generic_open_F","Land_MedicalTent_01_NATO_tropic_generic_outer_F","Land_MedicalTent_01_tropic_closed_F"
+];
 
 // Save UI Settings for next time
 ZEI_UiSwitchCombo = _type;
 
-switch (_type) do {
-	case 0: {
-		_replaceType = _typeVanilla;
-		_searchType = [_typeAPEX, _typeCUP_D, _typeCUP_W];
+_replaceType = switch (_type) do {
+		case 0: { _typeVanilla };
+		case 1: { _typeAPEX };
+		case 2: { _typeContact };
+		case 3: { _typeCUP_D };
+		case 4: { _typeCUP_W };
 	};
-	case 1: {
-		_replaceType = _typeAPEX;
-		_searchType = [_typeVanilla, _typeCUP_D, _typeCUP_W];
-	};
-	case 2: {
-		_replaceType = _typeCUP_D;
-		_searchType = [_typeVanilla, _typeAPEX, _typeCUP_W];
-	};
-	case 3: {
-		_replaceType = _typeCUP_W;
-		_searchType = [_typeVanilla, _typeAPEX, _typeCUP_D];
-	};
-};
+
+_searchType = (if (isClass(configFile >> 'CfgPatches' >> 'CUP_Core')) then { [_typeVanilla, _typeAPEX, _typeContact, _typeCUP_D, _typeCUP_W] } else { [_typeVanilla, _typeAPEX, _typeContact] }) - [_replaceType];
 
 if (count _replaceType == 0) exitWith { 
-	["No objects loaded to replace.", "ERROR"] call ZEI_fnc_misc_logMsg;
+	["No objects loaded to replace.","ERROR"] call ZEI_fnc_misc_logMsg;
 };
 
 _toReplace = [];
@@ -50,40 +87,27 @@ _toReplace = [];
 {	
 	_foundObj = _x;
 	_foundType = typeOf _x;
-	_isFound = FALSE;
 	
 	// Iterate array containing searchable objects.
 	{
-		_searchArr = _x;
+		_index = _x findIf { _x == _foundType };
 		
-		if (_isFound) exitWith {};
-		
-		// Iterate array for any matches.
-		{		
-			if (isClass (configFile >> "CfgVehicles" >> _x)) then {
-				// Get correct class name for string comparison
-				_searchObj = configName (configFile >> "CfgVehicles" >> _x);
-				
-				if (_foundType isEqualTo _searchObj) exitWith {
-					// Pull replacement from array
-					_replaceClass = _replaceType select _forEachIndex;
-
-					// Add to the replacements list.
-					if (isClass (configFile >> "CfgVehicles" >> _replaceClass)) then {
-						if (_foundType != (configName (configFile >> "CfgVehicles" >> _replaceClass))) then {
-							_toReplace pushBack [_foundObj, _replaceClass];
-						};
+		if (_index >= 0) exitWith {
+			_replaceClass = _replaceType select _index;
+			
+			if (isClass (configFile >> "CfgVehicles" >> _replaceClass)) then {
+					if (_foundType != (configName (configFile >> "CfgVehicles" >> _replaceClass))) then {
+						_toReplace pushBack [_foundObj, _replaceClass];
 					};
-					
-					_isFound = TRUE;
+				} else {
+					[format["Object Switch - Invalid Object: %1",_replaceClass], "ERROR"] call ZEI_fnc_misc_logMsg;
 				};
-			};
-		} forEach _searchArr;
+		};
 	} forEach _searchType;
-} forEach _nearObjects;
+} forEach (nearestObjects [_pos, [], _searchRadius, TRUE]);
 
 if (count _toReplace == 0) exitWith { 
-	["No objects to replace.", "INFO"] call ZEI_fnc_misc_logMsg;
+	["No objects to replace.","INFO"] call ZEI_fnc_misc_logMsg;
 };
 
 _count = 0;
@@ -91,13 +115,13 @@ _count = 0;
 if (is3DEN) then {
 	collect3DENHistory {
 		{ 
-			_x params ["_original", "_replacement"];
+			_x params ["_original","_replacement"];
 			[_original] set3DENObjectType _replacement;
 		} forEach _toReplace;
 	};
 } else {
 	{ 
-		_x params ["_original", "_replacement"];
+		_x params ["_original","_replacement"];
 		_obj = createVehicle [_replacement, getPosATL _original, [], 0, "CAN_COLLIDE"];
 		_obj setVectorDirAndUp [vectorDir _original, vectorUp _original];
 		deleteVehicle _original;
