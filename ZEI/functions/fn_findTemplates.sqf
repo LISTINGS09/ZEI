@@ -1,9 +1,9 @@
 // Called from ZEI_fnc_createTemplate. Finds a suitable '_templates' array according to the passed '_tempType'.
 params ["_bld", ["_tempType", "mil"], ["_infoOnly", FALSE]];
 
-[format ["Passed - B: %1 T: %2 I: %3", _bld, _tempType, _infoOnly], "DEBUG"] call ZEI_fnc_misc_logMsg;
-
 private _bld = typeOf _bld;
+
+[format ["Passed - B: %1 T: %2 I: %3", _bld, _tempType, _infoOnly], "DEBUG"] call ZEI_fnc_misc_logMsg;
 
 // Fix Case
 _tempType = toLower _tempType;

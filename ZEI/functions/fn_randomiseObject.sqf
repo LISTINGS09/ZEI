@@ -23,7 +23,7 @@ _objectsList pushBack ["Land_CanisterFuel_F","Land_CanisterFuel_Blue_F","Land_Ca
 _objectsList pushBack ["Land_FoodContainer_01_White_F","Land_PlasticBucket_01_closed_F","Land_PlasticBucket_01_open_F","Land_FoodContainer_01_F"];
 _objectsList pushBack ["Land_Bucket_painted_F","Land_Bucket_clean_F","Land_Bucket_F"];
 _objectsList pushBack ["Land_BarrelEmpty_F","Land_BarrelEmpty_grey_F","Land_BarrelWater_F","Land_BarrelWater_grey_F","Land_Basket_F","Land_CanisterPlastic_F","Land_Sack_F","Land_MetalBarrel_empty_F"];
-_objectsList pushBack ["Land_Basket_F","Land_CratesShabby_F","Land_LuggageHeap_01_F","Land_LuggageHeap_02_F","Land_LuggageHeap_03_F","Land_Sacks_heap_F"];
+_objectsList pushBack ["Land_Basket_F","Land_CratesShabby_F","Land_Sacks_heap_F"];
 _objectsList pushBack ["Land_WaterBottle_01_stack_F","Land_PaperBox_01_small_stacked_F"];
 _objectsList pushBack ["Land_FoodSacks_01_large_brown_F","Land_FoodSacks_01_large_white_idap_F","Land_FoodSacks_01_large_brown_idap_F"];
 _objectsList pushBack ["Land_Orange_01_F","Land_WaterBottle_01_empty_F","Land_WaterBottle_01_full_F","Land_BottlePlastic_V1_F","Land_Can_Rusty_F","Land_Can_V1_F","Land_Can_V2_F","Land_Can_V3_F","Land_TacticalBacon_F","Land_Can_Dented_F","Land_BottlePlastic_V2_F","Land_BakedBeans_F","Land_PowderedMilk_F","Land_RiceBox_F","Land_Tableware_01_stackOfNapkins_F","Land_Tableware_01_cup_F","Land_TinContainer_F"];
