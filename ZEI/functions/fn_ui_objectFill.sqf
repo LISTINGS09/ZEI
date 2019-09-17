@@ -107,14 +107,17 @@ _fnc_attachItem = {
 	// Get rotation for Eden / Zeus
 	([_parent] call ZEI_fnc_misc_Vector2Eden) params ["_xRot", "_yRot", "_zRot"];
 	
+	// Get world position
+	private _itemPos = _parent modelToWorld _itemToPos;
+	
 	// Spawn items depending on Zeus/Eden
 	if (is3DEN) then {
 		private _obj = create3DENEntity ["Object", _item, [0,0,0], TRUE];
 
-		if (surfaceIsWater _itemToPos) then { 
-			_obj set3DENAttribute ["position", ASLToATL (_parent modelToWorld _itemToPos)];
+		if (surfaceIsWater _itemPos) then { 
+			_obj set3DENAttribute ["position", ASLToATL _itemPos];
 		} else {
-			_obj set3DENAttribute ["position", (_parent modelToWorld _itemToPos)];
+			_obj set3DENAttribute ["position", _itemPos];
 		};
 		
 		_obj set3DENAttribute ["rotation", [ _xRot, _yRot, _zRot + _forceDir]];
@@ -130,7 +133,7 @@ _fnc_attachItem = {
 			_obj =  createSimpleObject [_item, [0,0,0]];
 		};
 		
-		_obj setPosATL (_parent modelToWorld _itemToPos);
+		_obj setPosATL _itemPos;
 		_obj setVectorDirAndUp [vectorDir _parent, vectorUp _parent];
 		[_obj, _forceDir] call ZEI_fnc_misc_rotateAroundOwnAxisZ;
 		
