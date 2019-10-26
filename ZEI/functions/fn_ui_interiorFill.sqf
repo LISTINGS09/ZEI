@@ -7,12 +7,28 @@ params [
 
 private _fillType = if (_type isEqualTo 0) then { "mil" } else { "civ" };
 private _fillArea = if (_area isEqualTo 0) then { FALSE } else { TRUE };
-private _bldTmp = nearestObjects [(missionNamespace getVariable ["ZEI_UiLastPos", [0,0,0]]), ["Building"], if (_area isEqualTo 0) then { 15 } else { _area }, TRUE]; 
 
 // Save UI Settings for next time
 ZEI_UiInteriorType = _type;
 ZEI_UiInteriorEdit = _addZeus;
 ZEI_UiInteriorDamage = _allowDamage;
+
+private _bldTmp = ObjNull;
+
+// Store the Object under the cursor or nearest of type.
+if (is3DEN) then {
+	//systemChat str get3DENMouseOver;
+	if (get3DENMouseOver # 0 == "Object") then { _bldTmp = get3DENMouseOver # 1 };
+} else {
+	//systemChat str curatorMouseOver;
+	if (curatorMouseOver # 0 == "Object") then { _bldTmp = curatorMouseOver # 1 };
+};
+
+if (isNull _bldTmp || (_bldTmp buildingPos 0) isEqualTo [0,0,0]) then { 
+	_bldTmp = nearestObjects [(missionNamespace getVariable ["ZEI_UiLastPos", [0,0,0]]), ["Building"], if (_area isEqualTo 0) then { 15 } else { _area }, TRUE]; 
+} else {
+	_bldTmp = [_bldTmp];
+};
 
 // Don't continue if no objects were found.
 if (_bldTmp isEqualTo []) exitWith {

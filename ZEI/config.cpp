@@ -13,13 +13,13 @@ class CfgPatches {
 		};
 		
 		units[] = {
-			ZEI_ListBuildings,
-			ZEI_GarrisonBuilding,
-			ZEI_InteriorFill,
-			ZEI_ObjectSwitch,
-			ZEI_ObjectFill,
-			ZEI_FindBPos,
-			ZEI_GetBuildingScheme
+			"ZEI_ListBuildings",
+			"ZEI_GarrisonBuilding",
+			"ZEI_InteriorFill",
+			"ZEI_ObjectSwitch",
+			"ZEI_ObjectFill",
+			"ZEI_FindBPos",
+			"ZEI_GetBuildingScheme"
 		};
 		weapons[] = {};
       	worlds[] = {};
