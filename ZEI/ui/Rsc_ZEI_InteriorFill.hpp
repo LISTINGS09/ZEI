@@ -42,12 +42,13 @@ class Rsc_ZEI_InteriorFill
 	};
 	class ZEI_IF_Text_Title: ZEI_RscText
 	{
-		idc = -1;
-		text = "Interior Type"; //--- ToDo: Localize;
+		idc = 1;
+		text = "Interior Fill"; //--- ToDo: Localize;
 		x = 0.340156 * safezoneW + safezoneX;
 		y = 0.324 * safezoneH + safezoneY;
 		w = 0.19 * safezoneW;
 		h = 0.033 * safezoneH;
+		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) }; (findDisplay 1705 displayCtrl 1) ctrlSetText format['Interior Fill - %1 (%2m)', getText(configFile >> 'CfgVehicles' >> typeOf (missionNamespace getVariable ['ZEI_UiLastBuilding',objNull]) >> 'displayName'), round ((missionNamespace getVariable ['ZEI_UiLastPos',[0,0,0]]) distance2D (missionNamespace getVariable ['ZEI_UiLastBuilding',objNull]))]; };";
 	};
 	class ZEI_IF_Combo_Type: ZEI_RscCombo
 	{
