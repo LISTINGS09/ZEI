@@ -1,12 +1,11 @@
 params [
 		["_gType", ""],
 		["_units", 4],
-		["_forceDS", TRUE]
+		["_forceDS", missionNamespace getVariable ["ZEI_UiGarrisonDynamic", true]]
 	];
 
 [format["Passed - F: %1 U: %2 DS: %2", _gType, _units, _forceDS], "DEBUG"] call ZEI_fnc_misc_logMsg;
 	
-// Need to pass logic pos info to GUI somehow?
 private _bld = missionNamespace getVariable ["ZEI_UiLastBuilding", objNull];
 
 // Split out the faction and category classes
@@ -15,12 +14,11 @@ private _bld = missionNamespace getVariable ["ZEI_UiLastBuilding", objNull];
 // Get all units with a weapon and non-parachute backpack.
 private _tempList = "getText (_x >> 'faction') == _factClass && getText (_x >> 'editorSubcategory') == _catClass && (configName _x) isKindoF 'CAManBase' && getNumber(_x >> 'scope') == 2" configClasses (configFile >> "CfgVehicles");
 
-
 // Filter out and invalid unit types matching strings.
 _fnc_notInString = {
 	params ["_type"];
 	
-	private _notInString = TRUE;
+	private _notInString = true;
 	{
 		if (toLower _type find _x >= 0) exitWith { _notInString = FALSE };
 	} forEach [ "_story", "_vr", "competitor", "ghillie", "miller", "survivor", "crew", "diver", "pilot", "rangemaster", "uav", "unarmed", "officer" ];

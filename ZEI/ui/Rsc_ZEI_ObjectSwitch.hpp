@@ -82,7 +82,16 @@ class Rsc_ZEI_ObjectSwitch
 		onLoad= "_this spawn {\
 			waitUntil { !isNull (_this select 0) };\
 			{ (findDisplay 1701 displayCtrl 10) lbAdd _x } forEach ['Desert (Vanilla)', 'Jungle (Apex)', 'Woodland (Contact)'];\
-			if (isClass(configFile >> 'CfgPatches' >> 'CUP_Core')) then { {(findDisplay 1701 displayCtrl 10) lbAdd _x } forEach [ 'Desert (CUP)', 'Woodland (CUP)'] };\
+			if (isClass(configFile >> 'CfgPatches' >> 'CUP_Core')) then {\
+				{(findDisplay 1701 displayCtrl 10) lbAdd _x } forEach [ 'Desert (CUP)', 'Woodland (CUP)' ];\
+				if (isClass(configFile >> 'CfgPatches' >> 'vn_data_f')) then {\
+					{(findDisplay 1701 displayCtrl 10) lbAdd _x } forEach [ 'SOG (Brown)', 'SOG (Green)' ];\
+				};\
+			} else {\
+				if (isClass(configFile >> 'CfgPatches' >> 'vn_data_f')) then {\
+					{(findDisplay 1701 displayCtrl 10) lbAdd _x } forEach [ 'Invalid (CUP)', 'Invalid (CUP)', 'SOG (Brown)', 'SOG (Green)' ];\
+				};\
+			};\
 			(findDisplay 1701 displayCtrl 10) lbSetCurSel (missionNamespace getVariable ['ZEI_UiSwitchCombo', 0]);\
 		}";
 	};

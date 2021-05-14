@@ -79,11 +79,11 @@ class CfgVehicles {
 		is3DEN = 1;
 	};
 	
-	class ZEI_GetBuildingScheme : Module_F {
+	class ZEI_SaveBuildingScheme : Module_F {
 		scope = 2;
 		displayName = "Save Building Scheme";
 		category = "zei_interiors_dev";
-		function = "ZEI_fnc_mod_getBuildingScheme";
+		function = "ZEI_fnc_mod_saveBuildingScheme";
 		functionPriority = 1;
 		icon = "\a3\Modules_F\Data\iconSavegame_ca.paa";
 		isGlobal = 1;

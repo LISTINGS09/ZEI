@@ -7,13 +7,23 @@ switch _mode do {
 		
 		// In MP only run for local client.
 		if (!local _logic) exitWith {};
-				
-		private _bldArr = (nearestObjects [_logic, ["building"], 200, true]) select {count (_x buildingPos -1) > 0};
 		
-		if (count _bldArr > 0) then {
-			ZEI_UiLastPos = getPos _logic;
-			ZEI_UiLastBuilding = _bldArr select 0;
-			
+		if (!_isActivated) then { _logic setVariable ["bis_fnc_initModules_activate", true, !isServer] };
+		
+		// Delete the module to prevent any dependencies.
+		if (_logic isKindOf "Logic") then {
+			if (is3DEN) then { delete3DENEntities [_logic] } else { deleteVehicle _logic };
+		};
+		
+		// Find nearest building
+		ZEI_UiLastBuilding = nearestBuilding (screenToWorld getMousePosition);
+		
+		if ((screenToWorld getMousePosition) distance2D ZEI_UiLastBuilding > 25) exitWith { ["No valid buildings within 25m", "ERROR"] call ZEI_fnc_misc_logMsg };
+		
+		if ((inputAction "lookAround") isEqualTo 1) then {
+			if (isNil "ZEI_UiGarrisonFaction" || isNil "ZEI_UiGarrisonCategory" || isNil "ZEI_UiGarrisonDynamic") exitWith { ["Select your faction in the GUI first!", "ERROR"] call ZEI_fnc_misc_logMsg };
+			[format["%1#%2", ZEI_UiGarrisonFaction, ZEI_UiGarrisonCategory], 4, missionNamespace getVariable ["ZEI_UiGarrisonDynamic", true]] call ZEI_fnc_ui_garrisonBuilding;
+		} else {
 			// Start Display 1702
 			if (_isCuratorPlaced) then { 
 				findDisplay 312 createDisplay "Rsc_ZEI_GarrisonBuilding";  // Zeus
@@ -24,13 +34,6 @@ switch _mode do {
 					createDialog "Rsc_ZEI_GarrisonBuilding";
 				};
 			};
-		} else {
-			["No valid buildings found!", "ERROR"] call ZEI_fnc_misc_logMsg;
-		};
-		
-		// Delete the module to prevent any dependencies.
-		if (_logic isKindOf "Logic") then {
-			if (is3DEN) then { delete3DENEntities [_logic] } else { deleteVehicle _logic };
 		};
 	};
 };

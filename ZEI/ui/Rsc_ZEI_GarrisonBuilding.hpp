@@ -44,7 +44,7 @@ class Rsc_ZEI_GarrisonBuilding
 		y = 0.324 * safezoneH + safezoneY;
 		w = 0.19 * safezoneW;
 		h = 0.033 * safezoneH;
-		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) }; (findDisplay 1702 displayCtrl 1) ctrlSetText format['Garrison Building - %1 (%2m)', getText(configFile >> 'CfgVehicles' >> typeOf (missionNamespace getVariable ['ZEI_UiLastBuilding',objNull]) >> 'displayName'), round ((missionNamespace getVariable ['ZEI_UiLastPos',[0,0,0]]) distance2D (missionNamespace getVariable ['ZEI_UiLastBuilding',objNull]))]; };";
+		onLoad= "_this spawn { waitUntil { !isNull (_this select 0) }; (findDisplay 1702 displayCtrl 1) ctrlSetText format['Garrison Building - %1 (%2m)', getText(configFile >> 'CfgVehicles' >> typeOf (missionNamespace getVariable ['ZEI_UiLastBuilding',objNull]) >> 'displayName'), round ((screenToWorld getMousePosition) distance2D (missionNamespace getVariable ['ZEI_UiLastBuilding',objNull]))]; };";
 	};
 	class ZEI_GB_Combo_Type: ZEI_RscCombo
 	{

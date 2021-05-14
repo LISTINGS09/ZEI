@@ -4,12 +4,11 @@ switch _mode do {
 	case "attributesChanged3DEN";
 	case "init": {
 		_input params [["_logic",objNull,[objNull]],["_isActivated",true,[true]], ["_isCuratorPlaced",false,[true]]];
-		
+	
 		// In MP only run for local client.
 		if (!local _logic) exitWith {};
 		
-		// Need to pass logic pos info to GUI somehow?
-		ZEI_UiLastPos = getPos _logic;
+		if (!_isActivated) then { _logic setVariable ["bis_fnc_initModules_activate", true, !isServer] };
 		
 		// Delete the module to prevent any dependencies.
 		if (_logic isKindOf "Logic") then {

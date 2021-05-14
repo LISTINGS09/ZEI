@@ -7,13 +7,13 @@ class CfgFunctions {
 			class createTemplate {};		// InteriorFill
 			class garrisonUnit {};			// garrisonBuilding
 			class findTemplates {};			// InteriorFill
-			class isVanillaObject {};		// getBuildingScheme
+			class isVanillaObject {};		// saveBuildingScheme
 			class init { postInit = 1; };	// Zeus (Dedicated Fix)
 			class misc_Vector2Eden {};
 			class misc_logMsg {};
 			class mod_findBPos {};			// findBPos
 			class mod_garrisonBuilding {};	// garrisonBuilding
-			class mod_getBuildingScheme {};	// getBuildingScheme
+			class mod_saveBuildingScheme {};// saveBuildingScheme
 			class mod_interiorFill {};		// InteriorFill
 			class mod_listBuildings {};		// listBuildings
 			class mod_objectFill {};		// objectFill

@@ -48,20 +48,22 @@ switch _mode do {
 					_objPos = _keyObj worldToModel (getPosATL _x);
 					_objDir = round ((getDir _x) - (getDir _keyObj));
 					
+					_objPos = [_objPos#0, _objPos#1, _objPos#2];
+					
 					_pb = _x call BIS_fnc_getPitchBank;
 					_pitch = ((abs (_pb#0)) + 360) mod 360;
 					_bank = ((abs (_pb#1)) + 360) mod 360;
 					
 					// If the pitch/bank isn't significant, ignore it
 					if (_pitch + _bank < 5) then {
-						diag_log text format ["[""%1"", %2, %3]", _xType, _objPos, _objDir];
+						diag_log text format ["[""%1"", %2, %3],", _xType, _objPos, _objDir];
 						[_xType, _objPos, _objDir]
 					} else {
 						private _orgVec = [vectorDir _x, vectorUp _x];
 						_x setVectorDirAndUp [[0,1,0],[0,0,1]]; // Realign object direction to get correct worldToModel position.
 						_objPos = _keyObj worldToModel (getPosATL _x);
 						_x setVectorDirAndUp _orgVec;  // Revert to original orientation.
-						diag_log text format ["[""%1"", %2, %3, %4]", _xType, _objPos, _objDir, ((_x get3DENAttribute "Rotation") select 0)  apply { round _x }];
+						diag_log text format ["[""%1"", %2, %3, %4],", _xType, _objPos, _objDir, ((_x get3DENAttribute "Rotation") select 0)  apply { round _x }];
 						[_xType, _objPos, _objDir, ((_x get3DENAttribute "Rotation") select 0) apply { round _x }]
 					};
 				} else {

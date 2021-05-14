@@ -51,6 +51,19 @@ if (isClass(configFile >> 'CfgPatches' >> 'gm_core')) then {
 	_objectsList pushBack ["Land_Cargo40_blue_F","Land_Cargo40_brick_red_F","Land_Cargo40_grey_F","Land_Cargo40_light_blue_F","Land_Cargo40_light_green_F","Land_Cargo40_military_green_F","Land_Cargo40_orange_F","Land_Cargo40_red_F","Land_Cargo40_sand_F","Land_Cargo40_yellow_F","Land_Cargo40_white_F"];
 };
 
+// If SOG is active, OVERWRITE additional items (no futuristic items).
+if (isClass(configFile >> 'CfgPatches' >> 'vn_data_f')) then {
+	_objectsList pushBack ["vn_b_prop_cot_01","vn_b_prop_cot_02"];
+	_objectsList pushBack ["Land_vn_paperbox_01_small_closed_brown_f","Land_vn_paperbox_01_small_closed_brown_idap_f","Land_vn_paperbox_01_small_closed_brown_food_f","Land_vn_paperbox_01_small_closed_white_idap_f","Land_vn_paperbox_01_small_closed_white_med_f"];
+	_objectsList pushBack ["Land_vn_stretcher","Land_vn_b_prop_litter_01","Land_vn_b_prop_litter_01_02","Land_vn_b_prop_litter_body_01","Land_vn_b_prop_litter_body_01_02","Land_vn_b_prop_litter_body_02_02","Land_vn_b_prop_litter_body_02","Land_vn_b_prop_litter_02","Land_vn_b_prop_litter_02_02"];
+	_objectsList pushBack ["Land_vn_b_prop_footlocker_01_01","Land_vn_rubasicammo","Land_vn_us_ammo","Land_vn_pavn_ammo","Land_vn_pavn_weapons"];
+	_objectsList pushBack ["Land_vn_paperbox_closed_f","Land_vn_paperbox_01_open_boxes_f","Land_vn_paperbox_01_open_water_f","Land_vn_paperbox_01_open_empty_f"];	
+	_objectsList pushBack ["vn_b_ammobox_supply_01","vn_b_ammobox_supply_02","vn_b_ammobox_supply_06"];
+	_objectsList pushBack ["Land_vn_missile_trolley_02_02_f","Land_vn_missile_trolley_02_01_f","Land_vn_missile_trolley_02_f","Land_vn_missile_trolley_02_03_f","Land_vn_bomb_trolley_01_04_f","Land_vn_bomb_trolley_01_02_f","Land_vn_bomb_trolley_01_f","Land_vn_bomb_trolley_01_01_f","Land_vn_bomb_trolley_01_03_f"];
+	_objectsList pushBack ["Land_vn_ch_mod_c","Land_ChairWood_F","Land_CampingChair_V2_F"];
+	_objectsList pushBack ["vn_b_prop_riflerack_02","vn_b_prop_riflerack_03","vn_b_prop_riflerack_04","vn_b_prop_riflerack_05","vn_b_prop_riflerack_06"];
+};
+
 // If item is present, replace it with a random variant.
 {
 	if (_item in _x && {_doRandom}) exitWith {_item = selectRandom _x};

@@ -19,7 +19,7 @@ class CfgPatches {
 			"ZEI_ObjectSwitch",
 			"ZEI_ObjectFill",
 			"ZEI_FindBPos",
-			"ZEI_GetBuildingScheme"
+			"ZEI_SaveBuildingScheme"
 		};
 		weapons[] = {};
       	worlds[] = {};

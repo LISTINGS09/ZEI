@@ -1,9 +1,9 @@
 // Called from ZEI_fnc_createTemplate. Finds a suitable '_templates' array according to the passed '_tempType'.
 params ["_bld", ["_tempType", "mil"], ["_infoOnly", FALSE]];
 
-private _bld = typeOf _bld;
+private _bldType = typeOf _bld;
 
-[format ["Passed - B: %1 T: %2 I: %3", _bld, _tempType, _infoOnly], "DEBUG"] call ZEI_fnc_misc_logMsg;
+[format ["Passed - B: %1 T: %2 I: %3", _bldType, _tempType, _infoOnly], "DEBUG"] call ZEI_fnc_misc_logMsg;
 
 // Fix Case
 _tempType = toLower _tempType;
@@ -15,7 +15,7 @@ private _templates = [];
 private _customTemplate = missionNamespace getVariable [format["ZEI_%1_customBuildings", _tempType], []];
 
 if !(_customTemplate isEqualTo []) then {
-	private _path = [_customTemplate, _bld] call BIS_fnc_findNestedElement;
+	private _path = [_customTemplate, _bldType] call BIS_fnc_findNestedElement;
 	
 	if !(_path isEqualTo []) then {
 		(_customTemplate # (_path # 0)) params ["", ["_values", [], [[]]]];
@@ -24,7 +24,7 @@ if !(_customTemplate isEqualTo []) then {
 };
 
 if (_tempType isEqualTo "mil") then {
-	_templates append (switch (_bld) do {
+	_templates append (switch (_bldType) do {
 		// Vanilla
 		#include "..\templates\mil_vanilla.sqf"
 		
@@ -34,13 +34,16 @@ if (_tempType isEqualTo "mil") then {
 		// GM
 		#include "..\templates\mil_gm.sqf"
 		
+		// SOG
+		#include "..\templates\mil_sog.sqf"
+		
 		// OTHER
 		#include "..\templates\mil_other.sqf"
 		
 		default {[]};
 	});
 } else {
-	_templates append (switch (_bld) do {
+	_templates append (switch (_bldType) do {
 		// Vanilla
 		#include "..\templates\civ_vanilla.sqf"
 		
@@ -65,8 +68,8 @@ if !(_before isEqualTo count _templates) then {
 };
 
 // Don't spam messages if there is an area to fill
-if (!_infoOnly && {_templates isEqualTo []}) then {
-	[format ["Building Not Found: %1 (%2) - We need your help to get a template/scheme for this building!", _bld,  getText (configFile >> "CfgVehicles" >> _bld >> "displayName")], "INFO"] call ZEI_fnc_misc_logMsg;
+if (!_infoOnly && {_templates isEqualTo []} && sizeOf _bldType > 2) then {
+	[format ["Building Not Found: %1 (%2) - We need your help to get a template/scheme for this building!", _bldType,  getText (configFile >> "CfgVehicles" >> _bldType >> "displayName")], "INFO"] call ZEI_fnc_misc_logMsg;
 }; 
 
 _templates;
