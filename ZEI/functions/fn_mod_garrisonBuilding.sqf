@@ -15,10 +15,13 @@ switch _mode do {
 			if (is3DEN) then { delete3DENEntities [_logic] } else { deleteVehicle _logic };
 		};
 		
-		// Find nearest building
-		ZEI_UiLastBuilding = nearestBuilding (screenToWorld getMousePosition);
+		ZEI_UiLastBuilding = objNull;
 		
-		if ((screenToWorld getMousePosition) distance2D ZEI_UiLastBuilding > 25) exitWith { ["No valid buildings within 25m", "ERROR"] call ZEI_fnc_misc_logMsg };
+		// Find nearest building
+		private _nearArr = (nearestObjects [(screenToWorld getMousePosition), ["building"], 25, true]) select { count (_x buildingPos -1) > 0 };
+		if (count _nearArr > 0) then { ZEI_UiLastBuilding = _nearArr select 0 };
+		
+		if (isNull ZEI_UiLastBuilding) then { ["No valid buildings within 25m", "ERROR"] call ZEI_fnc_misc_logMsg };
 		
 		if ((inputAction "lookAround") isEqualTo 1) then {
 			if (isNil "ZEI_UiGarrisonFaction" || isNil "ZEI_UiGarrisonCategory" || isNil "ZEI_UiGarrisonDynamic") exitWith { ["Select your faction in the GUI first!", "ERROR"] call ZEI_fnc_misc_logMsg };

@@ -61,7 +61,6 @@ if (isClass(configFile >> 'CfgPatches' >> 'vn_data_f')) then {
 	_objectsList pushBack ["vn_b_ammobox_supply_01","vn_b_ammobox_supply_02","vn_b_ammobox_supply_06"];
 	_objectsList pushBack ["Land_vn_missile_trolley_02_02_f","Land_vn_missile_trolley_02_01_f","Land_vn_missile_trolley_02_f","Land_vn_missile_trolley_02_03_f","Land_vn_bomb_trolley_01_04_f","Land_vn_bomb_trolley_01_02_f","Land_vn_bomb_trolley_01_f","Land_vn_bomb_trolley_01_01_f","Land_vn_bomb_trolley_01_03_f"];
 	_objectsList pushBack ["Land_vn_ch_mod_c","Land_ChairWood_F","Land_CampingChair_V2_F"];
-	_objectsList pushBack ["vn_b_prop_riflerack_02","vn_b_prop_riflerack_03","vn_b_prop_riflerack_04","vn_b_prop_riflerack_05","vn_b_prop_riflerack_06"];
 };
 
 // If item is present, replace it with a random variant.
