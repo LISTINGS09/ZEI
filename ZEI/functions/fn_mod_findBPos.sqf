@@ -12,10 +12,11 @@ switch _mode do {
 		// In MP only run for local client.
 		if (!local _logic) exitWith {};
 								
-		private _bldArr = nearestObjects [_logic, ["building"], 50, true]; 
+		private _bldArr = nearestObjects [_logic, ["building"], 25, true]; 
 		
 		_bldArr = _bldArr select { str (_x buildingPos 0) != "[0,0,0]" };
 		
+		if (count _bldArr  == 0) exitWith { ["No valid buildings within 25m", "ERROR"] call ZEI_fnc_misc_logMsg };
 		if (count _bldArr > 1) then { _bldArr resize 1 };
 	
 		// Delete the module to prevent any dependencies.
@@ -31,6 +32,7 @@ switch _mode do {
 					{		
 						private _obj = create3DENEntity ["Object", if (surfaceIsWater _x) then {"Sign_Arrow_Large_Blue_F"} else {"Sign_Arrow_Large_Green_F"}, [0, 0, 0]];
 						_obj set3DENAttribute ["rotation", [ 0, 0, 0]];
+						_obj set3DENAttribute ["description", format["Building Position: %1", _bPos find _x]];
 						if (surfaceIsWater _x) then {
 							_obj set3DENAttribute ["position", ASLToATL _x]							
 						} else {

@@ -21,7 +21,7 @@ switch _mode do {
 		private _nearArr = (nearestObjects [(screenToWorld getMousePosition), ["building"], 25, true]) select { count (_x buildingPos -1) > 0 };
 		if (count _nearArr > 0) then { ZEI_UiLastBuilding = _nearArr select 0 };
 		
-		if (isNull ZEI_UiLastBuilding) then { ["No valid buildings within 25m", "ERROR"] call ZEI_fnc_misc_logMsg };
+		if (isNull ZEI_UiLastBuilding) exitWith { ["No valid buildings within 25m", "ERROR"] call ZEI_fnc_misc_logMsg };
 		
 		if ((inputAction "lookAround") isEqualTo 1) then {
 			if (isNil "ZEI_UiGarrisonFaction" || isNil "ZEI_UiGarrisonCategory" || isNil "ZEI_UiGarrisonDynamic") exitWith { ["Select your faction in the GUI first!", "ERROR"] call ZEI_fnc_misc_logMsg };
