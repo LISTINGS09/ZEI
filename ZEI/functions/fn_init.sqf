@@ -1,10 +1,10 @@
 if (hasInterface) then {
     if (isServer || {!(isClass (configFile >> "CfgPatches" >> "zen_common"))}) then {
         [] spawn {
-         // Wait until logic is present.
-         waitUntil {sleep 1; !isNull (getAssignedCuratorLogic player)};
-         // Add EH to spawn ZEI Modules.
-         (getAssignedCuratorLogic player) addEventHandler ["CuratorObjectRegistered", { [] spawn ZEI_fnc_zeus_addModules }];
+            // Wait until logic is present.
+            waitUntil {sleep 1; !isNull (getAssignedCuratorLogic player)};
+            // Add EH to spawn ZEI Modules.
+            (getAssignedCuratorLogic player) addEventHandler ["CuratorObjectRegistered", { [] spawn ZEI_fnc_zeus_addModules }];
         };
     } else {
         // Only add separate ZEN modules if ZEN is loaded and if not server (to avoid duplicate modules in curator list)
