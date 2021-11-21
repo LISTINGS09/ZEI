@@ -37,6 +37,9 @@ if (_tempType isEqualTo "mil") then {
 		// SOG
 		#include "..\templates\mil_sog.sqf"
 		
+		// WS
+		#include "..\templates\mil_ws.sqf"
+		
 		// OTHER
 		#include "..\templates\mil_other.sqf"
 		
