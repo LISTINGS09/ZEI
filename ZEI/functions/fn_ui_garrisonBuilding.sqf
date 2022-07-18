@@ -1,10 +1,11 @@
 params [
 		["_gType", ""],
 		["_units", 4],
-		["_forceDS", missionNamespace getVariable ["ZEI_UiGarrisonDynamic", true]]
+		["_forceDS", missionNamespace getVariable ["ZEI_UiGarrisonDynamic", true]],
+		["_createTR", missionNamespace getVariable ["ZEI_UiCreateTrigger", false]]
 	];
 
-[format["Passed - F: %1 U: %2 DS: %2", _gType, _units, _forceDS], "DEBUG"] call ZEI_fnc_misc_logMsg;
+[format["Passed - F: %1 U: %2 DS: %2", _gType, _units, _forceDS, _createTR], "DEBUG"] call ZEI_fnc_misc_logMsg;
 	
 private _bld = missionNamespace getVariable ["ZEI_UiLastBuilding", objNull];
 
@@ -41,6 +42,7 @@ if (count _menList == 0) exitWith {
 ZEI_UiGarrisonFaction = _factClass;
 ZEI_UiGarrisonCategory = _catClass;
 ZEI_UiGarrisonDynamic = _forceDS;
+ZEI_UiCreateTrigger = _createTR;
 
 private _bldPos = _bld buildingPos -1;
 
@@ -68,6 +70,18 @@ if (is3DEN) then {
 				(group _tempUnit) set3DENAttribute ["dynamicSimulation", TRUE];
 		};
 		delete3DENEntities [_tempUnit];
+		
+		if (_createTR) then {
+			private _trg = create3DENEntity ["Trigger", "EmptyDetector", getPos _bld];
+			_trg set3DENAttribute ["Size2", [round (sizeOf typeOf _bld), round (sizeOf typeOf _bld)]];
+			_trg set3DENAttribute ["Size3", [round (sizeOf typeOf _bld), round (sizeOf typeOf _bld), 15]];
+			_trg set3DENAttribute ["IsRectangle", false];
+			_trg set3DENAttribute ["ActivationBy", "AnyPlayer"];
+			_trg set3DENAttribute ["activationType", "Present"];
+			_trg set3DENAttribute ["triggerInterval", 5];
+			_trg set3DENAttribute ["onActivation", "{ if (local _x) then { if (!(_x checkAIFeature 'PATH') && random 1 < 0.2) then { doStop _x; _x enableAI 'PATH' }; }; } forEach (allUnits inAreaArray thisTrigger);"];
+			_trg set3DENAttribute ["onDeactivation", "{ if (local _x) then { if !(_x checkAIFeature 'PATH') then { _x doFollow leader _x; _x enableAI 'PATH' }; }; } forEach (allUnits inAreaArray thisTrigger);"];
+		};
 	};
 } else {
 	private _grp = switch (getNumber (configFile >> "CfgFactionClasses" >> _factClass >> "side")) do { 
@@ -84,4 +98,16 @@ if (is3DEN) then {
 	};
 	
 	if (_forceDS) then { _grp spawn { sleep 5; _this enableDynamicSimulation TRUE; }; };
+	
+	if (_createTR) then {
+		private _trg = createTrigger ["EmptyDetector", getPos _bld];
+		_trg setTriggerArea [round (sizeOf typeOf _bld), round (sizeOf typeOf _bld), 0, false, 15];
+		_trg setTriggerActivation ["ANYPLAYER", "PRESENT", false];
+		_trg setTriggerInterval 5;
+		_trg setTriggerStatements [
+			"this", 
+			"{ if (local _x) then { if (!(_x checkAIFeature 'PATH') && random 1 < 0.2) then { doStop _x; _x enableAI 'PATH' }; }; } forEach (allUnits inAreaArray thisTrigger);",
+			"{ if (local _x) then { if !(_x checkAIFeature 'PATH') then { _x doFollow leader _x; _x enableAI 'PATH' }; }; } forEach (allUnits inAreaArray thisTrigger);"
+		];
+	};
 };

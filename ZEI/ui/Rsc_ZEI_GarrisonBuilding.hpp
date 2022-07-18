@@ -9,13 +9,15 @@ class Rsc_ZEI_GarrisonBuilding
 		ZEI_GB_Text_Title,
 		ZEI_GB_Text_Type,
 		ZEI_GB_Text_Units,
-		ZEI_GB_Text_DSEnabled
+		ZEI_GB_Text_DSEnabled,
+		ZEI_GB_Text_TREnabled
 	};
 	
 	controls[]={
 		ZEI_GB_Combo_Type,
 		ZEI_GB_Slider_Units,
 		ZEI_GB_CheckBox_DSEnabled,
+		ZEI_GB_CheckBox_TREnabled,
 		ZEI_GB_Button_OK,
 		ZEI_GB_Button_Cancel
 	};
@@ -26,7 +28,7 @@ class Rsc_ZEI_GarrisonBuilding
 		x = 0.335 * safezoneW + safezoneX;
 		y = 0.324 * safezoneH + safezoneY;
 		w = 0.2475 * safezoneW;
-		h = 0.232 * safezoneH;
+		h = 0.252 * safezoneH;
 	};
 	class ZEI_GB_Frame: ZEI_RscFrame
 	{
@@ -34,7 +36,7 @@ class Rsc_ZEI_GarrisonBuilding
 		x = 0.335 * safezoneW + safezoneX;
 		y = 0.324 * safezoneH + safezoneY;
 		w = 0.2475 * safezoneW;
-		h = 0.232 * safezoneH;
+		h = 0.252 * safezoneH;
 	};
 	class ZEI_GB_Text_Title: ZEI_RscText
 	{
@@ -112,6 +114,28 @@ class Rsc_ZEI_GarrisonBuilding
 			(findDisplay 1702 displayCtrl 30) cbSetChecked (missionNamespace getVariable ['ZEI_UiGarrisonDynamic', FALSE]);\
 		};";
 	};
+	class ZEI_GB_Text_TREnabled: ZEI_RscText
+	{
+		idc = -1;
+		text = "Move AI Trigger"; //--- ToDo: Localize;
+		x = 0.340156 * safezoneW + safezoneX;
+		y = 0.486 * safezoneH + safezoneY;
+		w = 0.0825 * safezoneW;
+		h = 0.022 * safezoneH;
+	};
+	class ZEI_GB_CheckBox_TREnabled: ZEI_RscCheckBox
+	{
+		idc = 40;
+		x = 0.422656 * safezoneW + safezoneX;
+		y = 0.486 * safezoneH + safezoneY;
+		w = 0.020625 * safezoneW;
+		h = 0.033 * safezoneH;
+		tooltip = "Creates a Trigger to allow AI movement when a player is near.";
+		onLoad= "_this spawn {\
+			waitUntil { !isNull (_this select 0) };\
+			(findDisplay 1702 displayCtrl 40) cbSetChecked (missionNamespace getVariable ['ZEI_UiCreateTrigger', FALSE]);\
+		};";
+	};
 	class ZEI_GB_Button_OK: ZEI_RscButton
 	{
 		idc = -1;
@@ -120,7 +144,12 @@ class Rsc_ZEI_GarrisonBuilding
 		y = 0.522 * safezoneH + safezoneY;
 		w = 0.04125 * safezoneW;
 		h = 0.022 * safezoneH;
-		onButtonClick  = "[ (findDisplay 1702 displayCtrl 10) lbData (lbCurSel (findDisplay 1702 displayCtrl 10)), round (sliderPosition (findDisplay 1702 displayCtrl 20)), cbChecked (findDisplay 1702 displayCtrl 30) ] spawn ZEI_fnc_ui_garrisonBuilding; (findDisplay 1702) closeDisplay 1;";
+		onButtonClick  = "[\
+			(findDisplay 1702 displayCtrl 10) lbData (lbCurSel (findDisplay 1702 displayCtrl 10)),\
+			round (sliderPosition (findDisplay 1702 displayCtrl 20)),\
+			cbChecked (findDisplay 1702 displayCtrl 30),\
+			cbChecked (findDisplay 1702 displayCtrl 40)\
+			] spawn ZEI_fnc_ui_garrisonBuilding; (findDisplay 1702) closeDisplay 1;";
 	};
 	class ZEI_GB_Button_Cancel: ZEI_RscButton
 	{
