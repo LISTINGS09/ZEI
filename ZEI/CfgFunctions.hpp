@@ -4,6 +4,7 @@ class CfgFunctions {
 			file = "\zei\functions";
 			class addCustomHouse {};
 			class addCustomTemplate {};
+			class checkDetailLevel {};		// InteriorFill
 			class createTemplate {};		// InteriorFill
 			class garrisonUnit {};			// garrisonBuilding
 			class findTemplates {};			// InteriorFill
