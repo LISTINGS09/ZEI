@@ -4,10 +4,11 @@ params [
 		["_fillType", "mil"],
 		["_fillArea", FALSE],
 		["_addZeus", TRUE],
-		["_allowDamage", FALSE]
+		["_allowDamage", FALSE],
+		["_detail", 1]
 	];
 
-[format ["Passed - B: %1 T: %2 A: %3 Z: %4 D: %5", _bld, _fillType, _fillArea, _addZeus, _allowDamage], "DEBUG"] call ZEI_fnc_misc_logMsg;
+[format ["Passed - B: %1 T: %2 A: %3 Z: %4 D: %5 M: %6", _bld, _fillType, _fillArea, _addZeus, _allowDamage, _detail], "DEBUG"] call ZEI_fnc_misc_logMsg;
 	
 // Skip previously processed houses
 if (isNull _bld || !isNull (_bld getVariable ["zei_furnished", objNull])) exitWith {};
@@ -38,8 +39,8 @@ if !(_templates isEqualTo []) then {
 		{ 
 			_x params ["_item", "_offset", ["_angle", 0], ["_rot", [0, 0, 0]]]; 
 			_item = [_item] call ZEI_fnc_randomiseObject;
-			
-			if (_item != "") then {
+
+			if (_item != "" && ([_item, _detail] call ZEI_fnc_checkDetailLevel) ) then {
 				_obj = create3DENEntity ["Object", _item, [0,0,0], TRUE]; 
 				_obj set3DENAttribute ["objectIsSimple", TRUE]; 
 				_obj setVectorDirAndUp [vectorDir _bld, vectorUp _bld];
@@ -72,7 +73,7 @@ if !(_templates isEqualTo []) then {
 			_x params ["_item", "_offset", ["_angle", 0], ["_rot", [0, 0, 0]]];
 			_item = [_item] call ZEI_fnc_randomiseObject;
 			
-			if (_item != "") then {
+			if (_item != "" && ([_item, _detail] call ZEI_fnc_checkDetailLevel) ) then {
 				if (_addZeus) then {
 					_obj = createVehicle [_item, (_bld modelToWorld _offset), [], 0, "CAN_COLLIDE"];
 					[_obj, FALSE] remoteExec ["enableSimulationGlobal", 2];
