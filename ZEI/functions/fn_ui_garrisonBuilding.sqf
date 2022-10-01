@@ -1,8 +1,8 @@
 params [
 		["_gType", ""],
 		["_units", 4],
-		["_forceDS", missionNamespace getVariable ["ZEI_UiGarrisonDynamic", true]],
-		["_createTR", missionNamespace getVariable ["ZEI_UiCreateTrigger", false]]
+		["_forceDS", true],
+		["_createTR", false]
 	];
 
 [format["Passed - F: %1 U: %2 DS: %2", _gType, _units, _forceDS, _createTR], "DEBUG"] call ZEI_fnc_misc_logMsg;
@@ -72,9 +72,10 @@ if (is3DEN) then {
 		delete3DENEntities [_tempUnit];
 		
 		if (_createTR) then {
+			private _rad = (round (sizeOf typeOf _bld)) max 40;
 			private _trg = create3DENEntity ["Trigger", "EmptyDetector", getPos _bld];
-			_trg set3DENAttribute ["Size2", [round (sizeOf typeOf _bld), round (sizeOf typeOf _bld)]];
-			_trg set3DENAttribute ["Size3", [round (sizeOf typeOf _bld), round (sizeOf typeOf _bld), 15]];
+			_trg set3DENAttribute ["Size2", [_rad, _rad]];
+			_trg set3DENAttribute ["Size3", [_rad, _rad, 15]];
 			_trg set3DENAttribute ["IsRectangle", false];
 			_trg set3DENAttribute ["ActivationBy", "AnyPlayer"];
 			_trg set3DENAttribute ["activationType", "Present"];
@@ -100,8 +101,9 @@ if (is3DEN) then {
 	if (_forceDS) then { _grp spawn { sleep 5; _this enableDynamicSimulation TRUE; }; };
 	
 	if (_createTR) then {
+		private _rad = (round (sizeOf typeOf _bld)) max 40;
 		private _trg = createTrigger ["EmptyDetector", getPos _bld];
-		_trg setTriggerArea [round (sizeOf typeOf _bld), round (sizeOf typeOf _bld), 0, false, 15];
+		_trg setTriggerArea [_rad, _rad, 0, false, 15];
 		_trg setTriggerActivation ["ANYPLAYER", "PRESENT", false];
 		_trg setTriggerInterval 5;
 		_trg setTriggerStatements [

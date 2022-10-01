@@ -32,7 +32,7 @@ class Rsc_ZEI_InteriorFill
 		x = 0.335 * safezoneW + safezoneX;
 		y = 0.324 * safezoneH + safezoneY;
 		w = 0.2475 * safezoneW;
-		h = 0.31 * safezoneH;
+		h = 0.252 * safezoneH;
 	};
 	class ZEI_IF_Frame: ZEI_RscFrame
 	{
@@ -40,7 +40,7 @@ class Rsc_ZEI_InteriorFill
 		x = 0.335 * safezoneW + safezoneX;
 		y = 0.324 * safezoneH + safezoneY;
 		w = 0.2475 * safezoneW;
-		h = 0.31 * safezoneH;
+		h = 0.252 * safezoneH;
 	};
 	class ZEI_IF_Text_Title: ZEI_RscText
 	{

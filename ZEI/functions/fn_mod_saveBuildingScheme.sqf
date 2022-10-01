@@ -1,3 +1,4 @@
+// Increase the default radius by setting 'ZEI_SaveRadius' to larger number.
 params [["_mode","",[""]],["_input",[],[[]]]];
 
 switch _mode do {
@@ -34,7 +35,7 @@ switch _mode do {
 			// Decorate building in Eden, select building then run code below in debug console to generate a template to clipboard.
 			private _keyObj = _bldArr select 0;
 			private _keyObjType = typeOf _keyObj;
-			private _nearObjects = _keyObj nearObjects ((sizeOf _keyObjType) + 2);
+			private _nearObjects = _keyObj nearObjects ((sizeOf _keyObjType) + (missionNamespace getVariable ["ZEI_SaveRadius",5]));
 			private _mod = "";
 			diag_log text format["********** [ZEI - BUILDING OUTPUT ""%1""] **********", _keyObjType];
 			

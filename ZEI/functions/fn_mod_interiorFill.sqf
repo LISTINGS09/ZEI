@@ -43,7 +43,13 @@ switch _mode do {
 		
 		// Skip UI and use default values.
 		if ((inputAction "lookAround") isEqualTo 1) then {
-			[] call ZEI_fnc_ui_interiorFill;
+			[
+				missionNamespace getVariable["ZEI_UiInteriorType", 0],
+				0,
+				missionNamespace getVariable["ZEI_UiInteriorEdit", true],
+				missionNamespace getVariable["ZEI_UiInteriorDamage", false],
+				missionNamespace getVariable["ZEI_UiInteriorDetail", 1]
+			] call ZEI_fnc_ui_interiorFill;
 		} else {
 			// Start Display 1705
 			if (_isCuratorPlaced) then { 
