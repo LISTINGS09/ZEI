@@ -21,7 +21,7 @@ _factionsFound = [];
 	};
 } forEach ("(configName _x iskindOf 'CAManBase') && (getNumber (_x >> 'side') in [0, 1, 2]) && getNumber(_x >> 'scope') == 2" configClasses (configFile >> "CfgVehicles"));
 
-_factionsFound sort TRUE;
+_factionsFound sort true;
 _factionIndex = 0;
 
 // Populate list.

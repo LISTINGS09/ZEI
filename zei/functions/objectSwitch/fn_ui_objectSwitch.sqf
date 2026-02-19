@@ -149,7 +149,7 @@ private _toReplace = [];
 				};
 		};
 	} forEach _searchType;
-} forEach (nearestObjects [_pos, [], _searchRadius, TRUE]);
+} forEach (nearestObjects [_pos, [], _searchRadius, true]);
 
 if (count _toReplace == 0) exitWith { 
 	["No objects to replace","INFO"] call ZEI_fnc_misc_logMsg;

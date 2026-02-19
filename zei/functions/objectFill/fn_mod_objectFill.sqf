@@ -21,14 +21,14 @@ switch _mode do {
 			if (get3DENMouseOver # 0 == "Object") then {
 				ZEI_UiLastObject = get3DENMouseOver # 1;
 			} else {
-				ZEI_UiLastObject = (nearestObjects [screenToWorld getMousePosition, ["Thing"], 10, TRUE]) param [0, ObjNull];
+				ZEI_UiLastObject = (nearestObjects [screenToWorld getMousePosition, ["Thing"], 10, true]) param [0, ObjNull];
 			};
 		} else {
 			//systemChat str curatorMouseOver;
 			if (curatorMouseOver # 0 == "Object") then {
 				ZEI_UiLastObject = curatorMouseOver # 1;
 			} else {
-				ZEI_UiLastObject = (nearestObjects [screenToWorld getMousePosition, ["Thing"], 10, TRUE]) param [0, ObjNull];
+				ZEI_UiLastObject = (nearestObjects [screenToWorld getMousePosition, ["Thing"], 10, true]) param [0, ObjNull];
 			};
 		};
 		

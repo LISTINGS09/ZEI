@@ -62,7 +62,7 @@ class Rsc_ZEI_InteriorFill
 		tooltip = "Type of interior to fill";
 		onLoad= "_this spawn {\
 			waitUntil { !isNull (_this select 0) };\
-			{ (findDisplay 1705 displayCtrl 10) lbAdd _x } forEach ['Military', 'Civilian'];\
+			{ (findDisplay 1705 displayCtrl 10) lbAdd _x } forEach ['Military', 'CBRN', 'Civilian'];\
 			(findDisplay 1705 displayCtrl 10) lbSetCurSel (missionNamespace getVariable ['ZEI_UiInteriorType', 0]);\
 		}";
 	};

@@ -1,7 +1,7 @@
 params [
 		["_type", 0],
 		["_pc", 30],
-		["_addZeus", TRUE]
+		["_addZeus", true]
 	];
 
 _object = missionNamespace getVariable ["ZEI_UiLastObject", objNull];
@@ -112,7 +112,7 @@ _fnc_attachItem = {
 	
 	// Spawn items depending on Zeus/Eden
 	if (is3DEN) then {
-		private _obj = create3DENEntity ["Object", _item, [0,0,0], TRUE];
+		private _obj = create3DENEntity ["Object", _item, [0,0,0], true];
 
 		if (surfaceIsWater _itemPos) then { 
 			_obj set3DENAttribute ["position", ASLToATL _itemPos];
@@ -121,14 +121,14 @@ _fnc_attachItem = {
 		};
 		
 		_obj set3DENAttribute ["rotation", [ _xRot, _yRot, _zRot + _forceDir]];
-		_obj set3DENAttribute ["enableSimulation", FALSE];
-		_obj set3DENAttribute ["objectIsSimple", TRUE];
+		_obj set3DENAttribute ["enableSimulation", false];
+		_obj set3DENAttribute ["objectIsSimple", true];
 	} else {	
 		private _obj = objNull;
 		
 		if (_addZeus) then {
 			_obj = createVehicle [_item, [0,0,0], [], 0, "CAN_COLLIDE"];
-			[_obj, FALSE] remoteExec ["enableSimulationGlobal", 2];
+			[_obj, false] remoteExec ["enableSimulationGlobal", 2];
 		} else {
 			_obj =  createSimpleObject [_item, [0,0,0]];
 		};
@@ -137,14 +137,14 @@ _fnc_attachItem = {
 		_obj setVectorDirAndUp [vectorDir _parent, vectorUp _parent];
 		[_obj, _forceDir] call ZEI_fnc_misc_rotateAroundOwnAxisZ;
 		
-		{ [_x, [ [_obj], TRUE]] remoteExec ["addCuratorEditableObjects",2] } forEach allCurators;
+		{ [_x, [ [_obj], true]] remoteExec ["addCuratorEditableObjects",2] } forEach allCurators;
 	};
 };
 
 if (is3DEN) then {
 	collect3DENHistory {
 		[_object, _type] call _fnc_checkObject;
-		(_object) set3DENAttribute ["enableSimulation", FALSE];
+		(_object) set3DENAttribute ["enableSimulation", false];
 	};
 } else {
 	[_object, _type] call _fnc_checkObject;

@@ -1,5 +1,5 @@
 class CfgPatches {
-	class ZEI {
+	class zei {
 		name = "Zeus Eden Interiors";
 
 		author = "LSD";

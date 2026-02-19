@@ -1,7 +1,7 @@
 params [
 		["_group", grpNull],
 		["_type", ""],
-		["_pos", FALSE],
+		["_pos", false],
 		["_bld", 0]
 	];
 	
@@ -53,7 +53,7 @@ private _setDirStance = {
 		};
 		
 		// Debug will output markers.
-		if (missionNamespace getVariable ["ZEI_DEBUG", FALSE]) then {
+		if (missionNamespace getVariable ["ZEI_DEBUG", false]) then {
 			private _obj = createSimpleObject [_helper, [_unitEyePos, 1, _dir] call BIS_fnc_relPos]; 
 			_obj setDir _dir;
 		};
@@ -114,9 +114,9 @@ if is3DEN then {
 	[_unit, _bld] call _setDirStance;
 	
 	//Add to Zeus
-	{ [_x, [ [_unit], TRUE]] remoteExec ["addCuratorEditableObjects",2] } forEach allCurators;
+	{ [_x, [ [_unit], true]] remoteExec ["addCuratorEditableObjects",2] } forEach allCurators;
 };
 
 [format["Created %1 [%2] at %3", typeOf _unit, _group, _pos], "DEBUG"] call ZEI_fnc_misc_logMsg;
 	
-TRUE
+true

@@ -1,13 +1,13 @@
 params [
 		["_type", 0],
 		["_area", 0],
-		["_addZeus", TRUE],
-		["_allowDamage", FALSE],
+		["_addZeus", true],
+		["_allowDamage", false],
 		["_detail", 1]
 	];
 
-private _fillType = if (_type isEqualTo 0) then { "mil" } else { "civ" };
-private _fillArea = if (_area isEqualTo 0) then { FALSE } else { TRUE };
+private _fillType = ["mil","cbrn","civ"] select _type;
+private _fillArea = if (_area isEqualTo 0) then { false } else { true };
 
 // Save UI Settings for next time
 ZEI_UiInteriorType = _type;
@@ -19,7 +19,7 @@ private _bldTmp = missionNamespace getVariable ["ZEI_UiLastBuilding", objNull];
 private _bldArr = [];
 
 if (isNull _bldTmp || _fillArea) then { 
-	_bldTmp = nearestObjects [screenToWorld getMousePosition, ["Building"], if (_area isEqualTo 0) then { 15 } else { _area }, TRUE]; 
+	_bldTmp = nearestObjects [screenToWorld getMousePosition, ["Building"], if (_area isEqualTo 0) then { 15 } else { _area }, true]; 
 	_bldArr = _bldTmp select { ((_x buildingPos 0) isNotEqualTo [0,0,0]) || typeOf _x in (missionNamespace getVariable ["ZEI_additionalBuildings", []]) };
 	
 	if !(_fillArea) then { _bldArr resize 1 };

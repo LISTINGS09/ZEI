@@ -2,7 +2,7 @@
 // Credit: Ian Banks @foxhound.international 
 params [
 		["_source", objNull],
-		["_xyOnly", FALSE]
+		["_xyOnly", false]
 	];
 	
 private _direction = vectorDir _source;

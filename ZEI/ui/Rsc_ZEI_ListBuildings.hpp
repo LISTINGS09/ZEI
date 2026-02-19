@@ -55,7 +55,7 @@ class Rsc_ZEI_ListBuildings
 		h = 0.022 * safezoneH;
 		onLoad= "_this spawn {\
 			waitUntil { !isNull (_this select 0) };\
-			{ (findDisplay 1703 displayCtrl 10) lbAdd _x } forEach ['All', 'Civilian', 'Military'];\
+			{ (findDisplay 1703 displayCtrl 10) lbAdd _x } forEach ['All', 'Military', 'CBRN', 'Civilian'];\
 			(findDisplay 1703 displayCtrl 10) lbSetCurSel 0;\
 		}";
 	};

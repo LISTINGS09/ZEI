@@ -1,7 +1,7 @@
 params [
 		["_filter", 0],
 		["_fCount", 15],
-		["_showBP", FALSE]
+		["_showBP", false]
 	];
 	
 _configs = "configName _x isKindof 'Building' && getNumber (_x >> 'scope') == 2" configClasses (configFile >> "CfgVehicles"); 
@@ -21,7 +21,7 @@ _fnc_createTemplateMarker = {
 		_tmpPos = [(getPos _building select 0) + (_i * 2), (getPos _building select 1) - (abs (((boundingBox _building) select 1) select 0)) - _offset, 0];
 		
 		if (is3DEN) then {
-			_tmp = create3DENEntity ["Object", _className, _tmpPos, TRUE];
+			_tmp = create3DENEntity ["Object", _className, _tmpPos, true];
 		} else {
 			_tmp = _className createVehicle _tmpPos; 
 		};
@@ -32,44 +32,59 @@ _fnc_createTemplateMarker = {
  
 { 
 	_bld = objNull;
-	_skip = FALSE;
+	_skip = false;
 	
 	if (is3DEN) then {
-		_bld = create3DENEntity ["Object", _x, [_posX, _posY, 0], TRUE];
+		_bld = create3DENEntity ["Object", _x, [_posX, _posY, 0], true];
 	} else {
 		_bld = _x createVehicle [_posX, _posY]; 
 	};
 	
 	// If building has positions check if it has got matching templates.
 	if (count (_bld buildingPos -1) > 0) then {
-		_civCount = count ([_bld, "civ", TRUE] call ZEI_fnc_findTemplates);
-		_milCount = count ([_bld, "mil", TRUE] call ZEI_fnc_findTemplates);
+		
+		private _type = ["all","mil","cbrn","civ"] select _filter;
+	
+		private _milCount = count ([_bld, "mil", true] call ZEI_fnc_findTemplates);
+		private _cbrCount = count ([_bld, "cbrn", true] call ZEI_fnc_findTemplates);
+		private _civCount = count ([_bld, "civ", true] call ZEI_fnc_findTemplates);
+		
 				
-		switch (_filter) do {
-			// Civilian Only
-			case 1: {
-				if (_civCount > _fCount) then { 
-					_skip = TRUE;
-				} else {
-					[_civCount, _bld, 10, "Sign_Arrow_Large_Pink_F"] spawn _fnc_createTemplateMarker
-				};
-			};
-						
+		switch (_type) do {
 			// Military Only
-			case 2: {
+			case "mil": {
 				if (_milCount > _fCount) then { 
-					_skip = TRUE;
+					_skip = true;
 				} else {
 					[_milCount, _bld, 15, "Sign_Arrow_Large_F"] spawn _fnc_createTemplateMarker
 				};
 			};
-			
+			// CBRN Only
+			case "cbrn": {
+				if (_cbrCount > _fCount) then { 
+					_skip = true;
+				} else {
+					[_cbrCount, _bld, 20, "Sign_Arrow_Large_Yellow_F"] spawn _fnc_createTemplateMarker
+				};
+			};
+			// Civilian Only
+			case "civ": {
+				if (_civCount > _fCount) then { 
+					_skip = true;
+				} else {
+					[_civCount, _bld, 10, "Sign_Arrow_Large_Pink_F"] spawn _fnc_createTemplateMarker
+				};
+			};
 			// All
 			default {
 				if (_civCount > _fCount || _milCount > _fCount) then {
-					_skip = TRUE;
+					_skip = true;
 				} else {
+				
+
+
 					if (_civCount > 0) then { [_civCount, _bld, 10, "Sign_Arrow_Large_Pink_F"] spawn _fnc_createTemplateMarker };
+					if (_cbrCount > 0) then { [_cbrCount, _bld, 20, "Sign_Arrow_Large_Yellow_F"] spawn _fnc_createTemplateMarker };
 					if (_milCount > 0) then { [_milCount, _bld, 15, "Sign_Arrow_Large_F"] spawn _fnc_createTemplateMarker };
 				};
 			};
@@ -95,7 +110,7 @@ _fnc_createTemplateMarker = {
 			};
 		};
 	} else {
-		_skip = TRUE;
+		_skip = true;
 	};
 	
 	if (_skip) then {

@@ -8,8 +8,8 @@ Informations
 - We are really happy when you send us your templates, because so this mod gets more awesome, but if you send us your template it needs
 		quite some time to release the next version
 	- if you want to test and use your own templates/schemes instantly use the function ZEI_fnc_addCustomTemplate
-		-> for example a civilian building: ['civ', 'Land_Dome_Small_F: [["Land_CampingChair_V2_white_F",[1.40308,-5.02515,-6.9708],-118]]'] call ZEI_fnc_addCustomHouse
-		-> or a military:					['mil', 'Land_Dome_Small_F: [["Land_CampingChair_V1_white_F",[3.10308,-7.02515,-1.9708],30]]'] call ZEI_fnc_addCustomHouse
+		-> for example a civilian building: ['civ', 'Land_Dome_Small_F: [["Land_CampingChair_V2_white_F",[1.40308,-5.02515,-6.9708],-118]]'] call ZEI_fnc_addCustomTemplate
+		-> or a military:					['mil', 'Land_Dome_Small_F: [["Land_CampingChair_V1_white_F",[3.10308,-7.02515,-1.9708],30]]'] call ZEI_fnc_addCustomTemplate
 		-> the first parameter is 'civ' or 'mil' to decide the type
 		-> the second parameter is the value you get from the "get building scheme" module
 			-> IMPORTANT: You MUST use ' around the value NOT " -> 'COPY_VALUE'

@@ -41,19 +41,14 @@ switch _mode do {
 			
 			private _tempArr = _nearObjects apply { 
 				private _xType = typeOf _x;
-				if !(_xType in ["Sign_Arrow_Large_Green_F", "Logic", "CamCurator", _keyObjType]) then {	
-					private ["_objPos","_objDir","_pb","_pitch","_bank"];
-					
+				if !(_xType in ["Sign_Arrow_Large_Green_F", "Logic", "CamCurator", _keyObjType]) then {
 					if !(_xType call ZEI_fnc_isVanillaObject) then {_mod = "[MOD] "};
+					private _objPos = ((getPosATL _x) apply { parseNumber (_x toFixed 3) }) vectorDiff ((getPosATL _keyObj) apply { parseNumber (_x toFixed 3) });
+					private _objDir = round ((getDir _x) - (getDir _keyObj));
 					
-					_objPos = _keyObj worldToModel (getPosATL _x);
-					_objDir = round ((getDir _x) - (getDir _keyObj));
-					
-					_objPos = [_objPos#0, _objPos#1, _objPos#2];
-					
-					_pb = _x call BIS_fnc_getPitchBank;
-					_pitch = ((abs (_pb#0)) + 360) mod 360;
-					_bank = ((abs (_pb#1)) + 360) mod 360;
+					private _pb = _x call BIS_fnc_getPitchBank;
+					private _pitch = ((abs (_pb#0)) + 360) mod 360;
+					private _bank = ((abs (_pb#1)) + 360) mod 360;
 					
 					// If the pitch/bank isn't significant, ignore it
 					if (_pitch + _bank < 5) then {
@@ -63,6 +58,7 @@ switch _mode do {
 						private _orgVec = [vectorDir _x, vectorUp _x];
 						_x setVectorDirAndUp [[0,1,0],[0,0,1]]; // Realign object direction to get correct worldToModel position.
 						_objPos = _keyObj worldToModel (getPosATL _x);
+						_objPos = ((getPosATL _x) apply { parseNumber (_x toFixed 3) }) vectorDiff ((getPosATL _keyObj) apply { parseNumber (_x toFixed 3) });
 						_x setVectorDirAndUp _orgVec;  // Revert to original orientation.
 						diag_log text format ["[""%1"", %2, %3, %4],", _xType, _objPos, _objDir, ((_x get3DENAttribute "Rotation") select 0)  apply { round _x }];
 						[_xType, _objPos, _objDir, ((_x get3DENAttribute "Rotation") select 0) apply { round _x }]

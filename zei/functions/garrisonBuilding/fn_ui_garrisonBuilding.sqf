@@ -21,7 +21,7 @@ _fnc_notInString = {
 	
 	private _notInString = true;
 	{
-		if (toLower _type find _x >= 0) exitWith { _notInString = FALSE };
+		if (toLower _type find _x >= 0) exitWith { _notInString = false };
 	} forEach [ "_story", "_vr", "competitor", "ghillie", "miller", "survivor", "crew", "diver", "pilot", "rangemaster", "uav", "unarmed", "officer" ];
 	
 	_notInString
@@ -63,17 +63,22 @@ if (is3DEN) then {
 		};
 		
 		// Set group to be deleted when empty.
-		(group _tempUnit) set3DENAttribute ["garbageCollectGroup", TRUE];
+		(group _tempUnit) set3DENAttribute ["garbageCollectGroup", true];
 		
 		// Set dynamicSimulation if forced or all units are inside a building.
 		if (({(count (lineIntersectsWith [eyePos _x, ((eyePos _x) vectorAdd [0, 0, 10])] select {_x isKindOf 'Building'}) < 1)} count (units _tempUnit)) == 0 || {_forceDS}) then { 
-				(group _tempUnit) set3DENAttribute ["dynamicSimulation", TRUE];
+				(group _tempUnit) set3DENAttribute ["dynamicSimulation", true];
 		};
 		delete3DENEntities [_tempUnit];
 		
 		if (_createTR) then {
 			private _rad = (round (sizeOf typeOf _bld)) max 40;
 			private _trg = create3DENEntity ["Trigger", "EmptyDetector", getPos _bld];
+			
+			private _uid = 1;
+			while {(((all3DENEntities#2) apply { (_x get3DENAttribute "name")#0 }) findIf { _x == format["TR_ZEI_AIPATH_%1",_uid] }) >= 0 }  do { _uid = _uid + 1 };
+			_trg set3DENAttribute ["Name", format["TR_ZEI_AIPATH_%1",_uid]];
+			
 			_trg set3DENAttribute ["Size2", [_rad, _rad]];
 			_trg set3DENAttribute ["Size3", [_rad, _rad, 15]];
 			_trg set3DENAttribute ["IsRectangle", false];
@@ -86,9 +91,9 @@ if (is3DEN) then {
 	};
 } else {
 	private _grp = switch (getNumber (configFile >> "CfgFactionClasses" >> _factClass >> "side")) do { 
-		case 0: { createGroup [EAST, TRUE] };
-		case 1: { createGroup [WEST, TRUE] };
-		default { createGroup [INDEPENDENT, TRUE] };
+		case 0: { createGroup [EAST, true] };
+		case 1: { createGroup [WEST, true] };
+		default { createGroup [INDEPENDENT, true] };
 	};
 
 	for "_i" from 1 to _units do {
@@ -98,7 +103,7 @@ if (is3DEN) then {
 		[_grp, configName (selectRandom _menList), _rndPos, _bld] call ZEI_fnc_garrisonUnit;
 	};
 	
-	if (_forceDS) then { _grp spawn { sleep 5; _this enableDynamicSimulation TRUE; }; };
+	if (_forceDS) then { _grp spawn { sleep 5; _this enableDynamicSimulation true; }; };
 	
 	if (_createTR) then {
 		private _rad = (round (sizeOf typeOf _bld)) max 40;
