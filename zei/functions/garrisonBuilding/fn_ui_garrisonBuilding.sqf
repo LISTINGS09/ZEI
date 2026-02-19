@@ -76,9 +76,9 @@ if (is3DEN) then {
 			private _trg = create3DENEntity ["Trigger", "EmptyDetector", getPos _bld];
 			
 			private _uid = 1;
+
 			while {(((all3DENEntities#2) apply { (_x get3DENAttribute "name")#0 }) findIf { _x == format["TR_ZEI_AIPATH_%1",_uid] }) >= 0 }  do { _uid = _uid + 1 };
-			_trg set3DENAttribute ["Name", format["TR_ZEI_AIPATH_%1",_uid]];
-			
+			_trg set3DENAttribute ["Name", format["TR_ZEI_AIPATH_%1",_uid]];			
 			_trg set3DENAttribute ["Size2", [_rad, _rad]];
 			_trg set3DENAttribute ["Size3", [_rad, _rad, 15]];
 			_trg set3DENAttribute ["IsRectangle", false];
