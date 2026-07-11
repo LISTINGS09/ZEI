@@ -38,13 +38,23 @@ switch _mode do {
 			private _nearObjects = _keyObj nearObjects ((sizeOf _keyObjType) + (missionNamespace getVariable ["ZEI_SaveRadius",5]));
 			private _mod = "";
 			diag_log text format["********** [ZEI - BUILDING OUTPUT ""%1""] **********", _keyObjType];
-			
+
 			private _tempArr = _nearObjects apply { 
 				private _xType = typeOf _x;
-				if !(_xType in ["Sign_Arrow_Large_Green_F", "Logic", "CamCurator", _keyObjType]) then {
+
+				private _blacklisted = switch (true) do {
+					case (_xType select [0,11] isEqualTo "Sign_Arrow_"): 	 { true };
+					case (_xType in [ "Logic", "CamCurator", _keyObjType ]): { true };
+					default { false };
+				};
+
+				if (!_blacklisted) then {					
 					if !(_xType call ZEI_fnc_isVanillaObject) then {_mod = "[MOD] "};
-					private _objPos = ((getPosATL _x) apply { parseNumber (_x toFixed 3) }) vectorDiff ((getPosATL _keyObj) apply { parseNumber (_x toFixed 3) });
+					
+					private _objPos = _keyObj worldToModel (getPosATL _x);
 					private _objDir = round ((getDir _x) - (getDir _keyObj));
+					
+					_objPos = [_objPos#0, _objPos#1, _objPos#2];
 					
 					private _pb = _x call BIS_fnc_getPitchBank;
 					private _pitch = ((abs (_pb#0)) + 360) mod 360;
@@ -58,7 +68,6 @@ switch _mode do {
 						private _orgVec = [vectorDir _x, vectorUp _x];
 						_x setVectorDirAndUp [[0,1,0],[0,0,1]]; // Realign object direction to get correct worldToModel position.
 						_objPos = _keyObj worldToModel (getPosATL _x);
-						_objPos = ((getPosATL _x) apply { parseNumber (_x toFixed 3) }) vectorDiff ((getPosATL _keyObj) apply { parseNumber (_x toFixed 3) });
 						_x setVectorDirAndUp _orgVec;  // Revert to original orientation.
 						diag_log text format ["[""%1"", %2, %3, %4],", _xType, _objPos, _objDir, ((_x get3DENAttribute "Rotation") select 0)  apply { round _x }];
 						[_xType, _objPos, _objDir, ((_x get3DENAttribute "Rotation") select 0) apply { round _x }]
