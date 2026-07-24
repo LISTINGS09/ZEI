@@ -74,6 +74,9 @@ switch (_tempType) do {
 			if (_hasCUP) then {
 				#include "..\..\templates\civ_cup.sqf"
 			};
+			if (_hasWS) then {
+				#include "..\..\templates\civ_ws.sqf"
+			};
 			if (_hasGM) then {
 				#include "..\..\templates\civ_gm.sqf"
 			};

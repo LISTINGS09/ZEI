@@ -41,9 +41,9 @@ case "Land_BagBunker_Small_F": {
 };
 case "Land_BagBunker_Tower_F": {
 	[
-		[["Land_BagFence_Corner_F",[-1.54199,2.77197,0.539976],90],["Land_BagFence_Corner_F",[1.20801,2.89697,0.539976],0],["Land_BagFence_Long_F",[0.0830078,3.14697,0.539977],180],["Land_BagFence_Long_F",[1.58301,1.02197,0.539977],90],["Land_BagFence_Long_F",[-1.79199,0.771973,0.539977],90],["Land_BagFence_End_F",[1.58301,-0.603027,0.539977],90]]
-		,[["Land_HBarrier_1_F",[1.10547,-0.666016,-2.21003],90],["Land_CanisterFuel_F",[-1.54883,2.27344,-2.21003],105],["Box_Syndicate_Ammo_F",[-1.02441,2.7876,-2.21003],165],["Land_BagFence_Short_F",[1.70215,2.30713,0.561017],90],["Land_BagFence_Short_F",[-1.63672,2.46777,0.569976],90],["Land_BagFence_Long_F",[0.0415039,3.09863,0.569975],180],["Land_BagFence_Long_F",[-1.68066,0.646484,0.588549],90],["Land_BagFence_Long_F",[1.67725,0.725586,0.569977],90]]
-		,[["Land_Sack_F",[-1.22266,2.5166,-2.21798],165],["Land_BagFence_Short_F",[1.70215,2.30713,0.561017],90],["Land_BagFence_Short_F",[-1.63672,2.46777,0.569976],90],["Land_BagFence_Long_F",[1.67725,0.725586,0.569977],90],["Land_BagFence_Long_F",[-1.68066,0.646484,0.588549],90],["Land_BagFence_Long_F",[0.842285,-0.339355,-2.25965],180]]
+		[["Land_HBarrier_1_F",[1.10547,-0.666016,-2.21003],90],["Land_CanisterFuel_Red_F",[-1.54883,2.27344,-2.21003],105],["Box_Syndicate_Ammo_F",[-1.02441,2.7876,-2.21003],165],["Land_BagFence_Short_F",[1.70215,2.30713,0.561017],90],["Land_BagFence_Short_F",[-1.63672,2.46777,0.569976],90],["Land_BagFence_Long_F",[0.0415039,3.09863,0.569974],180],["Land_BagFence_Long_F",[-1.68066,0.646484,0.588549],90],["Land_BagFence_Long_F",[1.67725,0.725586,0.569976],90]]
+		,[["Land_BarrelWater_grey_F",[-1.22266,2.5166,-2.21798],165],["Land_BagFence_Short_F",[1.70215,2.30713,0.561017],270],["Land_BagFence_Short_F",[-1.63672,2.46777,0.569976],270],["Land_BagFence_Long_F",[1.67725,0.725586,0.569976],90],["Land_BagFence_Long_F",[-1.68066,0.646484,0.588549],90],["Land_BagFence_Long_F",[0.842285,-0.339355,-2.25965],180]]
+		,[["Land_BagFence_Corner_F",[-1.54199,2.77197,0.539976],270],["Land_BagFence_Corner_F",[1.20801,2.89697,0.539976],0],["Land_BagFence_Long_F",[0.0830078,3.14697,0.539977],180],["Land_BagFence_Long_F",[1.58301,1.02197,0.539977],90],["Land_BagFence_Long_F",[-1.79199,0.771973,0.539977],90],["Land_BagFence_End_F",[1.58301,-0.603027,0.539977],90]]
 	];
 };
 case "Land_Cargo_HQ_V1_F";
@@ -2152,3 +2152,10 @@ case "Land_Destroyer_01_hull_03_F": {
 		[["B_Ship_MRLS_01_F",[0,-62.3789,10.523],180],["B_Ship_Gun_01_F",[0,-79,12.091],180],["B_AAA_System_01_F",[0,-48,15.088],180],["B_AAA_System_01_F",[0,35.875,19.217],0],["B_SAM_System_01_F",[0,50.75,15.785],0],["B_Heli_Transport_01_F",[0,75,8.76],180],["B_Slingload_01_Repair_F",[11.75,65.625,8.762],0],["B_Slingload_01_Fuel_F",[9.875,61.125,8.778],90],["Land_Destroyer_01_Boat_Rack_01_F",[-11.5,14.5,7.269],180],["Land_Destroyer_01_Boat_Rack_01_F",[11.5,14.5,7.269],180]]
 	];
 };
+// 2026
+case "Land_Canal_Wall_Stairs_F": {
+	[		
+		[["Land_BagFence_Short_F",[-2.14795,-2.22778,2.18071],180],["Land_BagFence_Short_F",[2.85205,-3.85278,2.15859],180],["Land_BagFence_Short_F",[4.35205,-1.97778,2.18071],270],["Land_BagFence_Long_F",[0.102051,-2.22778,2.18071],0],["Land_BagFence_Corner_F",[4.10205,-3.47778,2.15859],90]]
+	];
+};
+

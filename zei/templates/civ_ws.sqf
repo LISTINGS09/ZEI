@@ -64,3 +64,30 @@ case "Land_House_L_9_EP1_lxWS": {
 		[["Land_Garbage_square5_F",[-5.00342,0.997375,-0.715],0],["Land_Dates_01_lxWS",[-1.05029,1.2887,-0.626486],0],["Land_Garbage_line_F",[0.123535,0.226685,-0.625822],90],["Land_Sacks_goods_F",[3.64307,0.98175,-0.627089],267],["Land_Photoframe_01_F",[1.08838,2.40356,1.11013],91]]
 	]
 };
+case "Land_tent_desert_01_lxws";
+case "Land_tent_desert_02_lxws";
+case "Land_tent_desert_03_lxws";
+case "Land_tent_desert_04_lxws": {
+	[
+		[["Land_CratesWooden_F",[-4.5,2.125,-1.05767],180],["Land_Pallets_stack_F",[7.125,-10,-1.05767],0],["Land_WaterBarrel_F",[7.375,-4,-1.05767],360],["Land_Sacks_goods_F",[-5.25,-4.75,-1.05767],225],["Land_Sacks_goods_F",[-4.125,-5.375,-1.05767],0],["Land_WoodenBox_F",[5.26123,1.75165,-1.05767],270],["Land_WoodenBox_F",[5.13623,-0.998352,-1.05767],285],["Land_Ground_sheet_folded_yellow_F",[-1.99805,1.61676,-1.05767],105],["Land_Ground_sheet_folded_yellow_F",[4.875,-2.125,-1.05767],195],["Land_PlasticBucket_01_open_F",[4,2.625,-1.05767],45],["Land_PlasticBucket_01_open_F",[-2.19678,2.20697,-1.05767],315],["Land_Pillow_F",[0.652832,2.31213,-1.03228],30],["Land_Pillow_F",[4.43359,-0.0756836,-1.03228],120],["Land_Pillow_F",[-5.24951,0.124634,-1.03228],315],["Land_Bucket_clean_F",[3.53418,2.5415,-1.05767],105],["Land_PlasticCase_01_small_F",[3,2.625,-1.05767],270],["Land_PaperBox_closed_F",[5.375,-8.75,-1.05767],240],["Land_PaperBox_closed_F",[7.1958,-8.2821,-1.05767],165],["Land_BarrelWater_F",[6.625,-4.75,-1.05767],360],["Land_tent_desert_floor_lxws",[0.125,0.25,-1.05767],0],["Land_Sleeping_bag_F",[1,1.5,-1.05767],345],["Land_Sleeping_bag_F",[-4.375,0.25,-1.05767],270],["Land_Sleeping_bag_F",[3.62109,-0.422424,-1.05767],75],["Land_Sleeping_bag_brown_F",[3.25,1.125,-1.05767],90],["Land_Sleeping_bag_brown_F",[-1.25,1.25,-1.05767],0],["Land_Pillow_grey_F",[-1.59814,2.17181,-1.02259],165],["Land_Pillow_grey_F",[4.17188,1.47308,-1.02259],255]]
+	]
+};
+case "Land_Tents_Refugee_lxWS";
+case "Land_Tents_Refugee_Blue_lxWS";
+case "Land_Tents_Refugee_DBrown_lxWS";
+case "Land_Tents_Refugee_Dirty_lxWS";
+case "Land_Tents_Refugee_Green_lxWS";
+case "Land_Tents_Refugee_Orange_lxWS";
+case "Land_Tents_Refugee_Pattern_lxWS";
+case "Land_Tents_Refugee_Red_lxWS": {
+	[
+		[["Land_Carpet_01_lxWS",[-0.125,-1.5,-2.35314],270],["Land_Wicker_basket_EP1_lxWS",[4,-6,-2.35448],210],["Land_Pottery_2_lxWS",[3,-5,-2.35448],0],["Land_Pottery_1_lxWS",[-3,-5,-2.35448],0],["Land_Pottery_4_lxWS",[4,-5,-2.35448],0],["Land_Pottery_7_lxWS",[3,-4,-2.35448],0],["Land_PalmFenceLeafPile_lxWS",[3,-5,-2.35448],0],["Land_Pottery_6_lxWS",[-3,-4,-2.35448],0],["Land_tent_desert_floor_small_lxws",[0,0,-2.35448],0],["Land_Table_small_EP1_lxWS",[0.125,0.875,-2.35314],0],["pillowV2_EP1_lxWS",[-1.125,1.75,-2.35314],195],["Land_Pillow_EP1_lxWS",[1.375,1.375,-2.35314],135],["Land_Pillow_03_lxWS",[1.125,2.00092,-2.35314],60],["Land_Pillow_02_lxWS",[-1.125,0.625916,-2.35314],0],["Land_Blankets_EP1_lxWS",[-2.875,1.75,-2.35314],195]]
+	]
+};
+case "Land_A_Mosque_small_2_EP1_lxWS": {
+	[
+		[["Land_Pillow_03_lxWS",[0,-1.12408,-2.4868],180],["Land_Pillow_02_lxWS",[-2.25,-2.12408,-2.48547],0],["Land_Pillow_EP1_lxWS",[0.125,-2.25,-2.4868],345],["pillowV2_EP1_lxWS",[-2.25,-1,-2.48547],195],["Land_Table_small_EP1_lxWS",[-1,-1.875,-2.4868],0],["Land_Pottery_1_lxWS",[1.875,-1,-2.4868],90],["Land_Pottery_4_lxWS",[3.625,-1.5,-2.8268],180],["Land_Pottery_6_lxWS",[2,-2.125,-2.4868],90],["Land_Pottery_7_lxWS",[3.875,-0.375,-2.8268],180],["Land_PalmFenceLeafPile_lxWS",[3.875,0.625,-2.8268],180],["Land_Wicker_basket_EP1_lxWS",[-3.375,-2.125,-2.4868],210],["Land_Wicker_basket_EP1_lxWS",[-3.75,-1.5,-2.4868],90],["Land_Blankets_EP1_lxWS",[-3.25,2.375,-2.4868],195],["Land_Pottery_2_lxWS",[3.625,3.75,-2.8268],180],["Land_Carpet_01_lxWS",[1.125,2.375,-2.4518],270]]
+	]
+};
+
+

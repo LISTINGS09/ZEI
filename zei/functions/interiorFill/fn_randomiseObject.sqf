@@ -53,7 +53,7 @@ if (isClass(configFile >> 'CfgPatches' >> 'gm_core')) then {
 
 // If SOG is active, OVERWRITE additional items (no futuristic items).
 if (isClass(configFile >> 'CfgPatches' >> 'vn_data_f')) then {
-	_objectsList pushBack ["vn_b_prop_cot_01","vn_b_prop_cot_02"];
+	_objectsList = ["vn_b_prop_cot_01","vn_b_prop_cot_02"];
 	_objectsList pushBack ["Land_vn_paperbox_01_small_closed_brown_f","Land_vn_paperbox_01_small_closed_brown_idap_f","Land_vn_paperbox_01_small_closed_brown_food_f","Land_vn_paperbox_01_small_closed_white_idap_f","Land_vn_paperbox_01_small_closed_white_med_f"];
 	_objectsList pushBack ["Land_vn_stretcher","Land_vn_b_prop_litter_01","Land_vn_b_prop_litter_01_02","Land_vn_b_prop_litter_body_01","Land_vn_b_prop_litter_body_01_02","Land_vn_b_prop_litter_body_02_02","Land_vn_b_prop_litter_body_02","Land_vn_b_prop_litter_02","Land_vn_b_prop_litter_02_02"];
 	_objectsList pushBack ["Land_vn_b_prop_footlocker_01_01","Land_vn_rubasicammo","Land_vn_us_ammo","Land_vn_pavn_ammo","Land_vn_pavn_weapons"];
@@ -61,6 +61,13 @@ if (isClass(configFile >> 'CfgPatches' >> 'vn_data_f')) then {
 	_objectsList pushBack ["vn_b_ammobox_supply_01","vn_b_ammobox_supply_02","vn_b_ammobox_supply_06"];
 	_objectsList pushBack ["Land_vn_missile_trolley_02_02_f","Land_vn_missile_trolley_02_01_f","Land_vn_missile_trolley_02_f","Land_vn_missile_trolley_02_03_f","Land_vn_bomb_trolley_01_04_f","Land_vn_bomb_trolley_01_02_f","Land_vn_bomb_trolley_01_f","Land_vn_bomb_trolley_01_01_f","Land_vn_bomb_trolley_01_03_f"];
 	_objectsList pushBack ["Land_vn_ch_mod_c","Land_ChairWood_F","Land_CampingChair_V2_F"];
+};
+
+// If WS is active, add additional items.
+if (isClass(configFile >> 'CfgPatches' >> 'data_f_lxws')) then {
+	_objectsList pushBack ["Land_Pillow_01_lxWS","Land_Pillow_03_lxWS","Land_Pillow_02_lxWS"];
+	_objectsList pushBack ["Land_Carpet_folded_01_lxWS","Land_Carpet_folded_02_lxWS","Land_Carpet_folded_03_lxWS"];
+	_objectsList pushBack ["pillowV2_EP1_lxWS","Land_Pillow_EP1_lxWS"];
 };
 
 // If item is present, replace it with a random variant.
